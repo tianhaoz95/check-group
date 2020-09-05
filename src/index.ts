@@ -1,13 +1,9 @@
-import { Application } from 'probot' // eslint-disable-line no-unused-vars
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { Application } from "probot";
+/* eslint-enable @typescript-eslint/no-unused-vars */
 
-export = (app: Application) => {
-  app.on('issues.opened', async (context) => {
-    const issueComment = context.issue({ body: 'Thanks for opening this issue!' })
-    await context.github.issues.createComment(issueComment)
-  })
-  // For more information on building apps:
-  // https://probot.github.io/docs/
-
-  // To get your app running against GitHub, see:
-  // https://probot.github.io/docs/development/
-}
+export = (app: Application): void => {
+  app.on("pull_request.opened", async (context) => {
+    context.log.info("Event received");
+  });
+};

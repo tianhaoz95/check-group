@@ -1,0 +1,15 @@
+{
+  "action": "opened",
+  "pull_request": {
+    "number": 1,
+    "user": {
+      "login": "tianhaoz95"
+    }
+  },
+  "repository": {
+    "name": "check-group-test",
+    "owner": {
+      "login": "tianhaoz95"
+    }
+  }
+}
