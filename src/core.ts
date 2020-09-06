@@ -1,37 +1,54 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import type { CheckGroupConfig, SubProjConfig } from "./types";
 /* eslint-enable @typescript-eslint/no-unused-vars */
-import { ProbotOctokit } from "probot";
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { Context } from "probot";
+/* eslint-enable @typescript-eslint/no-unused-vars */
 import minimatch from "minimatch";
 
-export class GroupChecker {
+export class CheckGroup {
   pullRequestNumber: number;
   config: CheckGroupConfig;
-  filenames: string[];
-  github: typeof ProbotOctokit;
+  context: Context;
+  sha: string;
 
   constructor(
     pullRequestNumber: number,
     config: CheckGroupConfig,
-    github: typeof ProbotOctokit,
+    context: Context,
+    sha: string,
   ) {
     this.pullRequestNumber = pullRequestNumber;
     this.config = config;
-    this.filenames = [];
-    this.github = github;
+    this.context = context;
+    this.sha = sha;
   }
 
   async process(): Promise<void> {
-    // TODO: process event
-    await this.files();
+    const filenames = await this.files();
+    const subprojs = this.subprojects(filenames);
+    const expected = this.checks(subprojs);
+    const finished = await this.finished(this.sha);
+    if (this.satisfy(expected, finished)) {
+      await this.pass();
+    } else {
+      await this.fail();
+    }
   }
 
   /**
    * Checks if all the sub-project
    * requirements are satisfied.
    */
-  satisfy(): boolean {
-    const result = true;
+  satisfy(expected: string[], finished: Record<string, string>): boolean {
+    let result = true;
+    expected.forEach((checkName) => {
+      /* eslint-disable security/detect-object-injection */
+      if (!finished[checkName]) {
+        result = false;
+      }
+      /* eslint-enable security/detect-object-injection */
+    });
     return result;
   }
 
@@ -76,15 +93,37 @@ export class GroupChecker {
   /**
    * Fetches a list of already finished
    * checks.
-   * 
+   *
    * @param sha The sha of the commit to check
    */
-  async finished(sha: string): Promise<string[]> {
-    return [];
+  async finished(sha: string): Promise<Record<string, string>> {
+    const response = await this.context.github.checks.listForRef(
+      this.context.repo({
+        ref: sha,
+      }),
+    );
+    const checkNames: Record<string, string> = {};
+    response.data.check_runs.forEach((checkRun) => {
+      checkNames[checkRun.name] = checkRun.conclusion;
+    });
+    return checkNames;
   }
 
-  async files(): Promise<void> {
-    // TODO: fetch a list of files from pull request
+  /**
+   * Gets a list of files that are modified in
+   * a pull request.
+   */
+  async files(): Promise<string[]> {
+    const response = await this.context.github.pulls.listFiles(
+      this.context.repo({
+        "pull_number": this.pullRequestNumber,
+      }),
+    );
+    const filenames: string[] = [];
+    response.data.forEach((pullRequestFile) => {
+      filenames.push(pullRequestFile.filename);
+    });
+    return filenames;
   }
 
   async pass(): Promise<void> {

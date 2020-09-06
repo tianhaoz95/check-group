@@ -34,7 +34,6 @@ describe("My Probot app", () => {
 
       privateKey,
     });
-    // Load our app into probot
     probot.load(myProbotApp);
   });
 
