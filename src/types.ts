@@ -23,3 +23,8 @@ export interface CheckGroupConfig {
    */
   subProjects: SubProjConfig[];
 }
+
+/**
+ * The result of the processing pipeline.
+ */
+export type CheckResult = "all_passing" | "has_failure" | "pending";

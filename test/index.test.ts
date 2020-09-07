@@ -1,18 +1,30 @@
+import {
+  BASIC_PULL_REQUEST_FILES,
+  DEFAULT_PULL_REQUEST_NUMBER,
+  DEFAULT_SHA,
+} from "./helpers/consts";
 import { Probot, ProbotOctokit } from "probot";
+import {
+  expectStartingCheck,
+  expectSuccessCheck,
+  setChecksForSha,
+  setConfigToNotFound,
+  setPullRequestFiles,
+} from "./helpers/mocked_apis";
+import { BASIC_PULL_REQUEST_OPENED_EVENT } from "./helpers/events/pull_request/opened";
 import fs from "fs";
 import myProbotApp from "../src";
 import nock from "nock";
 import path from "path";
-import payload from "./fixtures/pull_request.opened.json";
 
 /* eslint-disable security/detect-non-literal-fs-filename */
 const privateKey = fs.readFileSync(
-  path.join(__dirname, "fixtures/mock-cert.pem"),
+  path.join(__dirname, "./mock-cert.pem"),
   "utf-8",
 );
 /* eslint-enable security/detect-non-literal-fs-filename */
 
-describe("My Probot app", () => {
+describe("integration tests", () => {
   /* eslint-disable @typescript-eslint/no-explicit-any */
   /**
    * The Probot infra. It is of any type here because constructing
@@ -24,21 +36,27 @@ describe("My Probot app", () => {
   beforeEach(() => {
     nock.disableNetConnect();
     probot = new Probot({
-      // disable request throttling and retries for testing
       Octokit: ProbotOctokit.defaults({
         retry: { enabled: false },
         throttle: { enabled: false },
       }),
-
+      githubToken: "test_github_token",
       id: 123,
-
       privateKey,
     });
     probot.load(myProbotApp);
   });
 
-  test("creates a comment when an issue is opened", async () => {
-    await probot.receive({ name: "pull_request", payload });
+  test("empty subproject should succeed", async () => {
+    setConfigToNotFound();
+    setPullRequestFiles(BASIC_PULL_REQUEST_FILES, DEFAULT_PULL_REQUEST_NUMBER);
+    setChecksForSha(["check_0"], DEFAULT_SHA);
+    expectStartingCheck();
+    expectSuccessCheck();
+    await probot.receive({
+      name: "pull_request",
+      payload: BASIC_PULL_REQUEST_OPENED_EVENT,
+    });
   });
 
   afterEach(() => {

@@ -9,6 +9,6 @@ then
 else
     "$LINUX_HELPER_SCRIPT_DIR/fetch_credential_repository.sh"
     "$LINUX_HELPER_SCRIPT_DIR/maybe_clean_local_env.sh"
-    cp "$CRED_LOCATION/dev/.env" "$PROJ_ROOT/.env"
-    echo "Development credentials copied!"
+    cp "$CRED_LOCATION/prod/.env" "$PROJ_ROOT/.env"
+    echo "Production credentials copied!"
 fi
