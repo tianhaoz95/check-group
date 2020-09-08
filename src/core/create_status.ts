@@ -30,6 +30,7 @@ export const createStatus = async (
   summary: string,
   details: string,
   startTime: string,
+  sha: string,
 ): Promise<void> => {
   /* eslint-disable */
   const completedAt: string | undefined = conclusion
@@ -41,7 +42,7 @@ export const createStatus = async (
   const statusOptions = context.repo({
     "completed_at": completedAt,
     conclusion,
-    "head_sha": context.payload.pull_request.head.sha,
+    "head_sha": sha,
     "name": CheckId,
     "output": {
       summary,
@@ -55,10 +56,11 @@ export const createStatus = async (
     "started_at": startedAt,
     status,
   });
-  const response = await context.github.checks.create(statusOptions);
   context.log.info(
-    `Create passing status finished with status ${response.status}`,
+    `Create ${status} status with conclusion ${conclusion} for sha ${sha}`,
   );
+  const response = await context.github.checks.create(statusOptions);
+  context.log.info(`Create status finished with status ${response.status}`);
   if (response.status !== StatusCodes.CREATED) {
     context.log.error(
       `Create passing status failed with status ${

@@ -15,6 +15,7 @@ import type { Context } from "probot";
 /* eslint-enable @typescript-eslint/no-unused-vars */
 import { collectExpectedChecks } from "../utils/collect_expected_checks";
 import { createStatus } from "./create_status";
+import { extractPullRequestsFromCheckRunContext } from "./pull_getter";
 import { fetchConfig } from "./config_getter";
 import { matchFilenamesToSubprojects } from "../utils/subproj_matching";
 import { satisfyExpectedChecks } from "../utils/satisfy_expected_checks";
@@ -44,32 +45,39 @@ export class CheckGroup {
   }
 
   async run(): Promise<void> {
-    const filenames = await this.files();
-    this.context.log.info(`Files are: ${JSON.stringify(filenames)}`);
-    const subprojs = matchFilenamesToSubprojects(
-      filenames,
-      this.config.subProjects,
-    );
-    const expectedChecks = collectExpectedChecks(subprojs);
-    this.context.log.info(
-      `Expected checks are: ${JSON.stringify(expectedChecks)}`,
-    );
-    const postedChecks = await this.getPostedChecks(this.sha);
-    this.context.log.info(`Posted checks are: ${JSON.stringify(postedChecks)}`);
-    const conclusion = satisfyExpectedChecks(expectedChecks, postedChecks);
-    if (!(CheckId in postedChecks)) {
-      this.context.log.info("First time run. Post starting check.");
-      await this.postStartingCheck();
-    }
-    if (conclusion === "all_passing") {
-      this.context.log.info("All expected checks passed.");
-      await this.postPassingCheck();
-    } else if (conclusion === "has_failure") {
-      this.context.log.info("Some of the expected checks failed.");
+    try {
+      const filenames = await this.files();
+      this.context.log.info(`Files are: ${JSON.stringify(filenames)}`);
+      const subprojs = matchFilenamesToSubprojects(
+        filenames,
+        this.config.subProjects,
+      );
+      const expectedChecks = collectExpectedChecks(subprojs);
+      this.context.log.info(
+        `Expected checks are: ${JSON.stringify(expectedChecks)}`,
+      );
+      const postedChecks = await this.getPostedChecks(this.sha);
+      this.context.log.info(
+        `Posted checks are: ${JSON.stringify(postedChecks)}`,
+      );
+      const conclusion = satisfyExpectedChecks(expectedChecks, postedChecks);
+      if (!(CheckId in postedChecks)) {
+        this.context.log.info("First time run. Post starting check.");
+        await this.postStartingCheck();
+      }
+      if (conclusion === "all_passing") {
+        this.context.log.info("All expected checks passed.");
+        await this.postPassingCheck();
+      } else if (conclusion === "has_failure") {
+        this.context.log.info("Some of the expected checks failed.");
+        await this.postFailingCheck();
+      } else {
+        this.context.log.info("Expected checks are still pending.");
+        await this.postUpdatingCheck();
+      }
+    } catch {
+      this.context.log.info("The app crashed.");
       await this.postFailingCheck();
-    } else {
-      this.context.log.info("Expected checks are still pending.");
-      await this.postUpdatingCheck();
     }
   }
 
@@ -80,6 +88,7 @@ export class CheckGroup {
    * @param sha The sha of the commit to check
    */
   async getPostedChecks(sha: string): Promise<Record<string, string>> {
+    this.context.log.info(`Fetch posted check runs for ${sha}`);
     const response = await this.context.github.checks.listForRef(
       this.context.repo({
         ref: sha,
@@ -123,6 +132,7 @@ export class CheckGroup {
       "test",
       "test",
       this.startTime,
+      this.sha,
     );
     /* eslint-enable */
   }
@@ -137,6 +147,7 @@ export class CheckGroup {
       "test",
       "test",
       this.startTime,
+      this.sha,
     );
     /* eslint-enable */
   }
@@ -151,6 +162,7 @@ export class CheckGroup {
       "test",
       "test",
       this.startTime,
+      this.sha,
     );
     /* eslint-enable */
   }
@@ -165,6 +177,7 @@ export class CheckGroup {
       "test",
       "test",
       this.startTime,
+      this.sha,
     );
     /* eslint-enable */
   }
@@ -176,4 +189,5 @@ export {
   parsePullRequestNumberFromPullRequestContext,
   parsePullRequestNumbersFromCheckRunContext,
   extractShaFromCheckRunContext,
+  extractPullRequestsFromCheckRunContext,
 };

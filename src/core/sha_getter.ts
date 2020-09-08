@@ -19,11 +19,11 @@ export const extractShaFromPullRequestContext = (
 ): string => {
   const payload = context.payload;
   if ("pull_request" in payload) {
-    const pullRequest = payload["pull_request"];
+    const pullRequest = payload["pull_request"] as Record<string, unknown>;
     if ("head" in pullRequest) {
-      const head = pullRequest["head"];
+      const head = pullRequest["head"] as Record<string, unknown>;
       if ("sha" in head) {
-        return head["sha"];
+        return head["sha"] as string;
       } else {
         throw Error("sha not found in the head attibute");
       }

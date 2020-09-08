@@ -28,3 +28,18 @@ export interface CheckGroupConfig {
  * The result of the processing pipeline.
  */
 export type CheckResult = "all_passing" | "has_failure" | "pending";
+
+/**
+ * Abstract the pull request information that
+ * are needed for this app.
+ */
+export interface PullRequestData {
+  number: number;
+  sha: string;
+}
+
+export interface CheckRunData {
+  name: string;
+  status: string;
+  conclusion: string | undefined;
+}

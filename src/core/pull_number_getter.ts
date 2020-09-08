@@ -24,9 +24,14 @@ export const parsePullRequestNumberFromPullRequestContext = (
   }
 };
 
+/* istanbul ignore next */
 /**
  * Parses the numbers for all pull requests that are associated
  * with a check run.
+ *
+ * Since the function is currently not used in favor of the one
+ * that extracts the pull number together with the sha, it is
+ * ignored for coverage calculation for now.
  *
  * @param context The check run version of Probot context
  * @returns The pull request numbers that are associated with
