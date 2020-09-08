@@ -1,72 +1,131 @@
-// You can import your modules
-// import index from '../src/index'
+import {
+  BASIC_CHECK_RUN_CREATED_EVENT_MULTIPLE_PULL_REQUEST,
+  BASIC_CHECK_RUN_CREATED_EVENT_SINGLE_PULL_REQUEST,
+} from "./helpers/events/check_run/created";
+import {
+  BASIC_PULL_REQUEST_FILES,
+  DEFAULT_PULL_REQUEST_NUMBER,
+  DEFAULT_SECONDARY_PULL_REQUEST_NUMBER,
+  DEFAULT_SECONDARY_SHA,
+  DEFAULT_SHA,
+} from "./helpers/consts";
+import {
+  expectStartingCheck,
+  expectSuccessCheck,
+  setChecksForSha,
+  setConfigToBasic,
+  setConfigToNotFound,
+  setPullRequestFiles,
+} from "./helpers/mocked_apis";
+import { BASIC_PULL_REQUEST_OPENED_EVENT } from "./helpers/events/pull_request/opened";
+import { CheckId } from "../src/config";
+import { getProbotApp } from "./helpers/init";
+import nock from "nock";
 
-import nock from 'nock'
-// Requiring our app implementation
-import myProbotApp from '../src'
-import { Probot, ProbotOctokit } from 'probot'
-// Requiring our fixtures
-import payload from './fixtures/issues.opened.json'
-const issueCreatedBody = { body: 'Thanks for opening this issue!' }
-const fs = require('fs')
-const path = require('path')
-
-const privateKey = fs.readFileSync(path.join(__dirname, 'fixtures/mock-cert.pem'), 'utf-8')
-
-describe('My Probot app', () => {
-  let probot: any
+describe("integration tests", () => {
+  /* eslint-disable @typescript-eslint/no-explicit-any */
+  /**
+   * The Probot infra. It is of any type here because constructing
+   * an uninitialized Probot object can cause crash in some versions.
+   */
+  let probot: any;
+  /* eslint-disable @typescript-eslint/no-explicit-any */
 
   beforeEach(() => {
-    nock.disableNetConnect()
-    probot = new Probot({
-      id: 123,
-      privateKey,
-      // disable request throttling and retries for testing
-      Octokit: ProbotOctokit.defaults({
-        retry: { enabled: false },
-        throttle: { enabled: false },
-      })
-    })
-    // Load our app into probot
-    probot.load(myProbotApp)
-  })
+    nock.disableNetConnect();
+    probot = getProbotApp();
+  });
 
-  test('creates a comment when an issue is opened', async (done) => {
-    const mock = nock('https://api.github.com')
+  test("pull request sanity check", async () => {
+    setConfigToNotFound();
+    setPullRequestFiles(BASIC_PULL_REQUEST_FILES, DEFAULT_PULL_REQUEST_NUMBER);
+    setChecksForSha(
+      [
+        {
+          conclusion: undefined,
+          name: "check_0",
+          status: "queued",
+        },
+      ],
+      DEFAULT_SHA,
+    );
+    expectStartingCheck(DEFAULT_SHA);
+    expectSuccessCheck(DEFAULT_SHA);
+    await probot.receive({
+      name: "pull_request",
+      payload: BASIC_PULL_REQUEST_OPENED_EVENT,
+    });
+  });
 
-      // Test that we correctly return a test token
-      .post('/app/installations/2/access_tokens')
-      .reply(200, { 
-        token: 'test',
-        permissions: {
-          issues: "write"
-        }
-      })
+  test("check run sanity check", async () => {
+    setConfigToNotFound();
+    setPullRequestFiles(BASIC_PULL_REQUEST_FILES, DEFAULT_PULL_REQUEST_NUMBER);
+    setPullRequestFiles(
+      BASIC_PULL_REQUEST_FILES,
+      DEFAULT_SECONDARY_PULL_REQUEST_NUMBER,
+    );
+    setChecksForSha(
+      [
+        {
+          conclusion: undefined,
+          name: "check_0",
+          status: "queued",
+        },
+      ],
+      DEFAULT_SHA,
+    );
+    setChecksForSha(
+      [
+        {
+          conclusion: undefined,
+          name: "check_0",
+          status: "queued",
+        },
+      ],
+      DEFAULT_SECONDARY_SHA,
+    );
+    expectStartingCheck(DEFAULT_SHA);
+    expectSuccessCheck(DEFAULT_SHA);
+    expectStartingCheck(DEFAULT_SECONDARY_SHA);
+    expectSuccessCheck(DEFAULT_SECONDARY_SHA);
+    await probot.receive({
+      name: "check_run",
+      payload: BASIC_CHECK_RUN_CREATED_EVENT_MULTIPLE_PULL_REQUEST,
+    });
+  });
 
-      // Test that a comment is posted
-      .post('/repos/hiimbex/testing-things/issues/1/comments', (body: any) => {
-        done(expect(body).toMatchObject(issueCreatedBody))
-        return true
-      })
-      .reply(200)
-
-    // Receive a webhook event
-    await probot.receive({ name: 'issues', payload })
-
-    expect(mock.pendingMocks()).toStrictEqual([])
-  })
+  test("check run pass correctly", async () => {
+    setConfigToBasic("basic");
+    setPullRequestFiles(BASIC_PULL_REQUEST_FILES, DEFAULT_PULL_REQUEST_NUMBER);
+    setChecksForSha(
+      [
+        {
+          conclusion: "success",
+          name: "project_0_check",
+          status: "completed",
+        },
+        {
+          conclusion: "success",
+          name: "common_check",
+          status: "completed",
+        },
+        {
+          conclusion: undefined,
+          name: CheckId,
+          status: "queued",
+        },
+      ],
+      DEFAULT_SHA,
+    );
+    expectSuccessCheck(DEFAULT_SHA);
+    await probot.receive({
+      name: "check_run",
+      payload: BASIC_CHECK_RUN_CREATED_EVENT_SINGLE_PULL_REQUEST,
+    });
+  });
 
   afterEach(() => {
-    nock.cleanAll()
-    nock.enableNetConnect()
-  })
-})
-
-// For more information about testing with Jest see:
-// https://facebook.github.io/jest/
-
-// For more information about using TypeScript in your tests, Jest recommends:
-// https://github.com/kulshekhar/ts-jest
-
-// For more information about testing with Nock see:
-// https://github.com/nock/nock
+    nock.cleanAll();
+    nock.enableNetConnect();
+  });
+});
