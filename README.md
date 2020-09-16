@@ -2,6 +2,8 @@
 
 > A GitHub App built with [Probot](https://github.com/probot/probot) that A app to group checks based on subprojects.
 
+https://github.com/tianhaoz95/check-group-test
+
 ## Setup
 
 ```sh
