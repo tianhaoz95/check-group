@@ -8,6 +8,7 @@ import {
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { EventPayloads, WebhookEvent } from "@octokit/webhooks";
 /* eslint-enable @typescript-eslint/no-unused-vars */
+import { CheckId } from "./config";
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Context } from "probot";
 /* eslint-enable @typescript-eslint/no-unused-vars */
@@ -43,6 +44,9 @@ export const checkRunEventHandler = async (
   /* eslint-enable @typescript-eslint/no-explicit-any */
 ): Promise<void> => {
   context.log.info("Check run event detected.");
+  if (context.payload["check_run"]["name"] == CheckId) {
+    return;
+  }
   const pullRequests: PullRequestData[] = extractPullRequestsFromCheckRunContext(
     context,
   );

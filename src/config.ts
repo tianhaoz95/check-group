@@ -1,2 +1,2 @@
 export const CheckId = "Check Group";
-export const ConfigPath = ".github/checkgroup.yml";
+export const ConfigPath = "checkgroup.yml";
