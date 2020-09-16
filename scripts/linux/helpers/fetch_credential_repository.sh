@@ -4,7 +4,7 @@ set -o pipefail
 
 if [ -d "$CRED_LOCATION" ]
 then
-  echo "$CRED_LOCATION exists, remove first"
+  echo "$CRED_LOCATION exists, remove first."
   rm -rf "$CRED_LOCATION"
 fi
 
