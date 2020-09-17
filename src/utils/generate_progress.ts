@@ -26,7 +26,7 @@ export const generateProgressDetails = (
 ): string => {
   let progress = "";
   subprojects.forEach((subproject) => {
-    progress += `Summary for sub-project ${subproject.id}\n`;
+    progress += `Summary for sub-project ${subproject.id}\n\n`;
     subproject.checks.forEach((check) => {
       let mark = " ";
       /* eslint-disable security/detect-object-injection */
@@ -39,6 +39,14 @@ export const generateProgressDetails = (
       progress += `- [${mark}] ${check} with status ${checksStatusLookup[check]}\n`;
       /* eslint-enable security/detect-object-injection */
     });
+    progress += "\n";
   });
+  progress += "Currently received checks are:\n\n";
+  /* eslint-disable security/detect-object-injection */
+  for (const avaiableCheck in checksStatusLookup) {
+    progress += `- ${avaiableCheck} with status ${checksStatusLookup[avaiableCheck]}\n`;
+  }
+  progress += "\n";
+  /* eslint-enable security/detect-object-injection */
   return progress;
 };
