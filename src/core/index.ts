@@ -3,6 +3,11 @@ import {
   extractShaFromPullRequestContext,
 } from "./sha_getter";
 import {
+  generateProgressDetails,
+  generateProgressSummary,
+  generateProgressTitle,
+} from "../utils/generate_progress";
+import {
   parsePullRequestNumberFromPullRequestContext,
   parsePullRequestNumbersFromCheckRunContext,
 } from "./pull_number_getter";
@@ -73,7 +78,11 @@ export class CheckGroup {
         await this.postFailingCheck();
       } else {
         this.context.log.info("Expected checks are still pending.");
-        await this.postUpdatingCheck();
+        await this.postUpdatingCheck(
+          generateProgressTitle(),
+          generateProgressSummary(),
+          generateProgressDetails(subprojs, postedChecks),
+        );
       }
     } catch {
       this.context.log.info("The app crashed.");
@@ -137,15 +146,19 @@ export class CheckGroup {
     /* eslint-enable */
   }
 
-  async postUpdatingCheck(): Promise<void> {
+  async postUpdatingCheck(
+    title: string,
+    summary: string,
+    details: string,
+  ): Promise<void> {
     /* eslint-disable */
     await createStatus(
       this.context,
       undefined,
       "in_progress",
-      "test",
-      "test",
-      "test",
+      title,
+      summary,
+      details,
       this.startTime,
       this.sha,
     );
