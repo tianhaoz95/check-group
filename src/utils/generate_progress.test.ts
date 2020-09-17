@@ -40,6 +40,12 @@ describe("generate progress tests", () => {
     expect(progress).toContain("proj1");
   });
 
+  test("should include avaialbe checks", () => {
+    const progress = generateProgressDetails(subprojects, checksStatusLookup);
+    expect(progress).toContain("received checks are");
+    expect(progress).toContain("with status");
+  });
+
   test("should include marks", () => {
     const progress = generateProgressDetails(subprojects, checksStatusLookup);
     expect(progress).toContain("- [x] ");
