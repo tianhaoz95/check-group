@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { SubProjConfig } from "../types";
+import { SubProjConfig, SubProjPath } from "../types";
 /* eslint-enable @typescript-eslint/no-unused-vars */
 import minimatch from "minimatch";
 
@@ -13,21 +13,31 @@ export const matchFilenamesToSubprojects = (
   filenames: string[],
   subprojConfigs: SubProjConfig[],
 ): SubProjConfig[] => {
-  const subprojs: SubProjConfig[] = [];
-  const subprojLookup: Record<string, number> = {};
-  filenames.forEach((filename) => {
-    subprojConfigs.forEach((subproj) => {
-      subproj.paths.forEach((path) => {
+  const matchingSubProjs: SubProjConfig[] = [];
+  subprojConfigs.forEach((subproj) => {
+    let hasMatching = false;
+    const updatedSubProj = subproj;
+    const updatedPaths: SubProjPath[] = [];
+    subproj.paths.forEach((path) => {
+      const updatedPath = path;
+      if (!updatedPath.matches) {
+        updatedPath.matches = [];
+      }
+      filenames.forEach((filename) => {
         if (minimatch(filename, path.location)) {
-          if (subproj.id in subprojLookup) {
-            subprojLookup[subproj.id] += 1;
-          } else {
-            subprojLookup[subproj.id] = 0;
-            subprojs.push(subproj);
+          hasMatching = true;
+          updatedPath.hit = true;
+          if (updatedPath.matches) {
+            updatedPath.matches.push(filename);
           }
         }
       });
+      updatedPaths.push(updatedPath);
     });
+    if (hasMatching) {
+      updatedSubProj.paths = updatedPaths;
+      matchingSubProjs.push(updatedSubProj);
+    }
   });
-  return subprojs;
+  return matchingSubProjs;
 };
