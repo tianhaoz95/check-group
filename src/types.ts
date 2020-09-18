@@ -1,3 +1,8 @@
+export interface SubProjPath {
+  location?: string;
+  hit?: boolean;
+}
+
 export interface SubProjConfig {
   /**
    * The ID for the sub-project
@@ -8,7 +13,7 @@ export interface SubProjConfig {
    * this sub-project within
    * the repository.
    */
-  paths: string[];
+  paths: SubProjPath[];
   /**
    * A list of check IDs that
    * are expected to pass for

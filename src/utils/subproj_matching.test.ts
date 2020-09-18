@@ -19,12 +19,20 @@ describe("subproject matching tests", () => {
       {
         checks: ["project_1_check"],
         id: "project1",
-        paths: ["projects/project_1/**"],
+        paths: [
+          {
+            location: "projects/project_1/**",
+          },
+        ],
       },
       {
         checks: ["project_5_check"],
         id: "project5",
-        paths: ["projects/project_5/**"],
+        paths: [
+          {
+            location: "projects/project_5/**",
+          },
+        ],
       },
     ];
     const matchingConfigs = matchFilenamesToSubprojects(
@@ -36,7 +44,11 @@ describe("subproject matching tests", () => {
     expect(matchingConfigs[0]).toMatchObject({
       checks: ["project_1_check"],
       id: "project1",
-      paths: ["projects/project_1/**"],
+      paths: [
+        {
+          location: "projects/project_1/**",
+        },
+      ],
     });
     /* eslint-enable no-magic-numbers */
   });

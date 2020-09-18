@@ -18,7 +18,7 @@ export const matchFilenamesToSubprojects = (
   filenames.forEach((filename) => {
     subprojConfigs.forEach((subproj) => {
       subproj.paths.forEach((path) => {
-        if (minimatch(filename, path)) {
+        if (path.location && minimatch(filename, path.location)) {
           if (subproj.id in subprojLookup) {
             subprojLookup[subproj.id] += 1;
           } else {

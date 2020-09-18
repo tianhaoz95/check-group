@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { CheckGroupConfig, SubProjConfig } from "../types";
+import { CheckGroupConfig, SubProjConfig, SubProjPath } from "../types";
 /* eslint-enable @typescript-eslint/no-unused-vars */
 
 /**
@@ -29,10 +29,17 @@ export const parseUserConfig = (
           "paths" in subprojData &&
           "checks" in subprojData
         ) {
+          const projPaths: SubProjPath[] = [];
+          const locations: string[] = subprojData["paths"] as string[];
+          locations.forEach((loc) => {
+            projPaths.push({
+              location: loc,
+            });
+          });
           const subprojConfig: SubProjConfig = {
             checks: subprojData["checks"] as string[],
             id: subprojData["id"] as string,
-            paths: subprojData["paths"] as string[],
+            paths: projPaths,
           };
           config.subProjects.push(subprojConfig);
         } else {

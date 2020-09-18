@@ -45,7 +45,9 @@ describe("user config parser tests", () => {
     /* eslint-disable no-magic-numbers */
     expect(config.subProjects.length).toEqual(2);
     expect(config.subProjects[0].id).toMatch("project_0");
-    expect(config.subProjects[1].paths[0]).toMatch("projects/project_1/**");
+    expect(config.subProjects[1].paths[0].location).toMatch(
+      "projects/project_1/**",
+    );
     /* eslint-enable no-magic-numbers */
   });
 });
