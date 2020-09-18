@@ -17,14 +17,30 @@ describe("subproject matching tests", () => {
     ];
     const subprojConfigs: SubProjConfig[] = [
       {
-        checks: ["project_1_check"],
+        checks: [
+          {
+            id: "project_1_check",
+          },
+        ],
         id: "project1",
-        paths: ["projects/project_1/**"],
+        paths: [
+          {
+            location: "projects/project_1/**",
+          },
+        ],
       },
       {
-        checks: ["project_5_check"],
+        checks: [
+          {
+            id: "project_5_check",
+          },
+        ],
         id: "project5",
-        paths: ["projects/project_5/**"],
+        paths: [
+          {
+            location: "projects/project_5/**",
+          },
+        ],
       },
     ];
     const matchingConfigs = matchFilenamesToSubprojects(
@@ -34,9 +50,17 @@ describe("subproject matching tests", () => {
     /* eslint-disable no-magic-numbers */
     expect(matchingConfigs.length).toEqual(1);
     expect(matchingConfigs[0]).toMatchObject({
-      checks: ["project_1_check"],
+      checks: [
+        {
+          id: "project_1_check",
+        },
+      ],
       id: "project1",
-      paths: ["projects/project_1/**"],
+      paths: [
+        {
+          location: "projects/project_1/**",
+        },
+      ],
     });
     /* eslint-enable no-magic-numbers */
   });

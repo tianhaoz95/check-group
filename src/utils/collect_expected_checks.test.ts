@@ -12,14 +12,30 @@ describe("collect expected checks tests", () => {
   test("collect checks", () => {
     const configs: SubProjConfig[] = [
       {
-        checks: ["project_1_check"],
+        checks: [
+          {
+            id: "project_1_check",
+          },
+        ],
         id: "project1",
-        paths: ["projects/project_1/**"],
+        paths: [
+          {
+            location: "projects/project_1/**",
+          },
+        ],
       },
       {
-        checks: ["project_2_check"],
+        checks: [
+          {
+            id: "project_2_check",
+          },
+        ],
         id: "project2",
-        paths: ["projects/project_2/**"],
+        paths: [
+          {
+            location: "projects/project_2/**",
+          },
+        ],
       },
     ];
     const checks = collectExpectedChecks(configs);
@@ -33,14 +49,36 @@ describe("collect expected checks tests", () => {
   test("should remove dup", () => {
     const configs: SubProjConfig[] = [
       {
-        checks: ["project_1_check", "common_check"],
+        checks: [
+          {
+            id: "project_1_check",
+          },
+          {
+            id: "common_check",
+          },
+        ],
         id: "project1",
-        paths: ["projects/project_1/**"],
+        paths: [
+          {
+            location: "projects/project_1/**",
+          },
+        ],
       },
       {
-        checks: ["project_2_check", "common_check"],
+        checks: [
+          {
+            id: "project_2_check",
+          },
+          {
+            id: "common_check",
+          },
+        ],
         id: "project2",
-        paths: ["projects/project_2/**"],
+        paths: [
+          {
+            location: "projects/project_2/**",
+          },
+        ],
       },
     ];
     const checks = collectExpectedChecks(configs);

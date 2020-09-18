@@ -1,3 +1,28 @@
+export interface SubProjPath {
+  location: string;
+  hit?: boolean;
+  matches?: string[];
+}
+
+export interface SubProjCheck {
+  /**
+   * The ID of the check which should
+   * match how they are posted on GitHub.
+   */
+  id: string;
+  /**
+   * If the check has been satified.
+   *
+   * Note: This field should get filled when the
+   * app is analyzing the pull requests.
+   */
+  satisfied?: boolean;
+  /**
+   * The currently posted status of the check.
+   */
+  status?: string;
+}
+
 export interface SubProjConfig {
   /**
    * The ID for the sub-project
@@ -8,13 +33,13 @@ export interface SubProjConfig {
    * this sub-project within
    * the repository.
    */
-  paths: string[];
+  paths: SubProjPath[];
   /**
    * A list of check IDs that
    * are expected to pass for
    * the sub-project.
    */
-  checks: string[];
+  checks: SubProjCheck[];
 }
 
 export interface CheckGroupConfig {

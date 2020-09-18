@@ -31,12 +31,14 @@ export const generateProgressDetails = (
       let mark = " ";
       /* eslint-disable security/detect-object-injection */
       if (
-        check in checksStatusLookup &&
-        checksStatusLookup[check] == "success"
+        check.id in checksStatusLookup &&
+        checksStatusLookup[check.id] == "success"
       ) {
         mark = "x";
       }
-      progress += `- [${mark}] ${check} with status ${checksStatusLookup[check]}\n`;
+      progress += `- [${mark}] ${check.id} with status ${
+        checksStatusLookup[check.id]
+      }\n`;
       /* eslint-enable security/detect-object-injection */
     });
     progress += "\n";

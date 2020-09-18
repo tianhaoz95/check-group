@@ -18,11 +18,11 @@ export const collectExpectedChecks = (configs: SubProjConfig[]): string[] => {
   configs.forEach((config) => {
     config.checks.forEach((check) => {
       /* eslint-disable security/detect-object-injection */
-      if (check in checksLookup) {
-        checksLookup[check] += 1;
+      if (check.id in checksLookup) {
+        checksLookup[check.id] += 1;
       } else {
-        checksLookup[check] = 0;
-        requiredChecks.push(check);
+        checksLookup[check.id] = 0;
+        requiredChecks.push(check.id);
       }
       /* eslint-enable security/detect-object-injection */
     });

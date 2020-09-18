@@ -6,14 +6,22 @@ import { generateProgressDetails } from "./generate_progress";
 describe("generate progress tests", () => {
   const subprojects: SubProjConfig[] = [
     {
-      checks: ["p1_check"],
+      checks: [{ id: "p1_check" }],
       id: "proj1",
-      paths: ["projects/p1/**"],
+      paths: [
+        {
+          location: "projects/p1/**",
+        },
+      ],
     },
     {
-      checks: ["p2_check"],
+      checks: [{ id: "p2_check" }],
       id: "proj2",
-      paths: ["projects/p2/**"],
+      paths: [
+        {
+          location: "projects/p2/**",
+        },
+      ],
     },
   ];
 
