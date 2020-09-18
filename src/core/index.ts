@@ -57,15 +57,21 @@ export class CheckGroup {
         filenames,
         this.config.subProjects,
       );
+      /**
+       * This is for debugging purposes only
+       */
       const expectedChecks = collectExpectedChecks(subprojs);
       this.context.log.info(
         `Expected checks are: ${JSON.stringify(expectedChecks)}`,
       );
+      /**
+       * Debugging only code ends
+       */
       const postedChecks = await this.getPostedChecks(this.sha);
       this.context.log.info(
         `Posted checks are: ${JSON.stringify(postedChecks)}`,
       );
-      const conclusion = satisfyExpectedChecks(expectedChecks, postedChecks);
+      const conclusion = satisfyExpectedChecks(subprojs, postedChecks);
       if (!(CheckId in postedChecks)) {
         this.context.log.info("First time run. Post starting check.");
         await this.postStartingCheck();

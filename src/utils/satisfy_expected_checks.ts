@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { CheckResult } from "../types";
+import { CheckResult, SubProjConfig } from "../types";
 /* eslint-enable @typescript-eslint/no-unused-vars */
 
 /**
  * Checks if all the sub-project requirements are satisfied.
  *
- * @param expectedChecks The checks that are expected, most
- * likely for a certain pull requets.
+ * @param subProjs The sub-projects a certain pull request
+ * mateches.
  *
  * @param checksStatusLookup The checks that has already
  * posted progesses. The key is the check ID and the value
@@ -21,27 +21,30 @@ import { CheckResult } from "../types";
  *   checks are pending or missing.
  */
 export const satisfyExpectedChecks = (
-  expectedChecks: string[],
+  subProjs: SubProjConfig[],
   checksStatusLookup: Record<string, string>,
 ): CheckResult => {
   let result: CheckResult = "all_passing";
-  expectedChecks.forEach((checkName) => {
-    /* eslint-disable security/detect-object-injection */
-    if (
-      checkName in checksStatusLookup &&
-      checksStatusLookup[checkName] !== "success" &&
-      checksStatusLookup[checkName] !== "pending"
-    ) {
-      result = "has_failure";
-    }
-    if (
-      (!(checkName in checksStatusLookup) ||
-        checksStatusLookup[checkName] === "pending") &&
-      result !== "has_failure"
-    ) {
-      result = "pending";
-    }
-    /* eslint-enable security/detect-object-injection */
+  subProjs.forEach((subProj) => {
+    subProj.checks.forEach((check) => {
+      const checkName = check.id;
+      /* eslint-disable security/detect-object-injection */
+      if (
+        checkName in checksStatusLookup &&
+        checksStatusLookup[checkName] !== "success" &&
+        checksStatusLookup[checkName] !== "pending"
+      ) {
+        result = "has_failure";
+      }
+      if (
+        (!(checkName in checksStatusLookup) ||
+          checksStatusLookup[checkName] === "pending") &&
+        result !== "has_failure"
+      ) {
+        result = "pending";
+      }
+      /* eslint-enable security/detect-object-injection */
+    });
   });
   return result;
 };
