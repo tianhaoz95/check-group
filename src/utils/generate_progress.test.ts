@@ -1,12 +1,15 @@
+import {
+  generateProgressDetails,
+  generateProgressTitle,
+} from "./generate_progress";
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { SubProjConfig } from "../types";
 /* eslint-enable @typescript-eslint/no-unused-vars */
-import { generateProgressDetails } from "./generate_progress";
 
 describe("generate progress tests", () => {
   const subprojects: SubProjConfig[] = [
     {
-      checks: [{ id: "p1_check" }],
+      checks: [{ id: "p1_check", satisfied: true }],
       id: "proj1",
       paths: [
         {
@@ -15,7 +18,7 @@ describe("generate progress tests", () => {
       ],
     },
     {
-      checks: [{ id: "p2_check" }],
+      checks: [{ id: "p2_check", satisfied: false }],
       id: "proj2",
       paths: [
         {
@@ -82,5 +85,15 @@ describe("generate progress tests", () => {
     );
     expect(progress).toContain("- [x] ");
     expect(progress).toContain("- [ ] ");
+  });
+
+  test("title generation should not crash", () => {
+    expect(() => {
+      generateProgressTitle(subprojects);
+    }).not.toThrow();
+  });
+
+  test("title should have correct amount", () => {
+    expect(generateProgressTitle(subprojects)).toMatch("Pending (1/2)");
   });
 });

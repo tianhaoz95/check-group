@@ -85,7 +85,7 @@ export class CheckGroup {
       } else {
         this.context.log.info("Expected checks are still pending.");
         await this.postUpdatingCheck(
-          generateProgressTitle(),
+          generateProgressTitle(subprojs),
           generateProgressSummary(),
           generateProgressDetails(subprojs, postedChecks),
         );
