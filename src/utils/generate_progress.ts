@@ -5,8 +5,25 @@ import { SubProjConfig } from "../types";
 /**
  * Generate the title for the status check.
  */
-export const generateProgressTitle = (): string => {
-  return "Pending";
+export const generateProgressTitle = (subprojects: SubProjConfig[]): string => {
+  let totalCheckCnt = 0;
+  let completedCheckCnt = 0;
+  const lookup: Record<string, boolean> = {};
+  subprojects.forEach((subproject) => {
+    subproject.checks.forEach((check) => {
+      /* eslint-disable no-magic-numbers */
+      if (!(check.id in lookup)) {
+        totalCheckCnt += 1;
+        if (check.satisfied) {
+          completedCheckCnt += 1;
+        }
+        lookup[check.id] = true;
+      }
+      /* eslint-enable no-magic-numbers */
+    });
+  });
+  const msg = `Pending (${completedCheckCnt}/${totalCheckCnt})`;
+  return msg;
 };
 
 export const generateProgressSummary = (): string => {
