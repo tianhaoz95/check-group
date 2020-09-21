@@ -76,12 +76,12 @@ describe("generate progress tests", () => {
   });
 
   test("should treat undefined as not finished", () => {
-    const checksStatusLookupWithFailure: Record<string, string> = {
+    const checksStatusLookupWithMissing: Record<string, string> = {
       "p1_check": "success",
     };
     const progress = generateProgressDetails(
       subprojects,
-      checksStatusLookupWithFailure,
+      checksStatusLookupWithMissing,
     );
     expect(progress).toContain("- [x] ");
     expect(progress).toContain("- [ ] ");
@@ -89,11 +89,16 @@ describe("generate progress tests", () => {
 
   test("title generation should not crash", () => {
     expect(() => {
-      generateProgressTitle(subprojects);
+      generateProgressTitle(subprojects, checksStatusLookup);
     }).not.toThrow();
   });
 
   test("title should have correct amount", () => {
-    expect(generateProgressTitle(subprojects)).toMatch("Pending (1/2)");
+    const checksStatusLookupWithMissing: Record<string, string> = {
+      "p1_check": "success",
+    };
+    expect(
+      generateProgressTitle(subprojects, checksStatusLookupWithMissing),
+    ).toMatch("Pending (1/2)");
   });
 });

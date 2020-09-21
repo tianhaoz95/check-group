@@ -1,33 +1,67 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { SubProjConfig } from "../types";
+import { ProgressReport, SubProjConfig } from "../types";
 /* eslint-enable @typescript-eslint/no-unused-vars */
+
+export const generateProgressReport = (
+  subprojects: SubProjConfig[],
+  checksStatusLookup: Record<string, string>,
+): ProgressReport => {
+  const report: ProgressReport = {
+    completed: [],
+    expected: [],
+    failed: [],
+    missing: [],
+    needAction: [],
+    running: [],
+    succeeded: [],
+  };
+  const lookup: Record<string, boolean> = {};
+  subprojects.forEach((proj) => {
+    proj.checks.forEach((check) => {
+      /* eslint-disable security/detect-object-injection */
+      if (!(check.id in lookup)) {
+        lookup[check.id] = true;
+        report.expected?.push(check.id);
+        if (check.id in checksStatusLookup) {
+          const status = checksStatusLookup[check.id];
+          if (status === "success") {
+            report.completed?.push(check.id);
+            report.succeeded?.push(check.id);
+          }
+          if (status === "failure") {
+            report.completed?.push(check.id);
+            report.failed?.push(check.id);
+          }
+          if (status === "pending") {
+            report.running?.push(check.id);
+          }
+        }
+      }
+      /* eslint-enable security/detect-object-injection */
+    });
+  });
+  return report;
+};
 
 /**
  * Generate the title for the status check.
  */
-export const generateProgressTitle = (subprojects: SubProjConfig[]): string => {
-  let totalCheckCnt = 0;
-  let completedCheckCnt = 0;
-  const lookup: Record<string, boolean> = {};
-  subprojects.forEach((subproject) => {
-    subproject.checks.forEach((check) => {
-      /* eslint-disable no-magic-numbers */
-      if (!(check.id in lookup)) {
-        totalCheckCnt += 1;
-        if (check.satisfied) {
-          completedCheckCnt += 1;
-        }
-        lookup[check.id] = true;
-      }
-      /* eslint-enable no-magic-numbers */
-    });
-  });
-  const msg = `Pending (${completedCheckCnt}/${totalCheckCnt})`;
-  return msg;
+export const generateProgressTitle = (
+  subprojects: SubProjConfig[],
+  checksStatusLookup: Record<string, string>,
+): string => {
+  const report = generateProgressReport(subprojects, checksStatusLookup);
+  const message = `Pending (${report.completed?.length}/${report.expected?.length})`;
+  return message;
 };
 
-export const generateProgressSummary = (): string => {
-  return "Some checks are pending";
+export const generateProgressSummary = (
+  subprojects: SubProjConfig[],
+  checksStatusLookup: Record<string, string>,
+): string => {
+  const report = generateProgressReport(subprojects, checksStatusLookup);
+  const message = `Progress: ${report.completed?.length} completed, ${report.running?.length} pending`;
+  return message;
 };
 
 /**
