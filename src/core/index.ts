@@ -3,9 +3,11 @@ import {
   extractShaFromPullRequestContext,
 } from "./sha_getter";
 import {
+  generateFailingTitle,
   generateProgressDetails,
   generateProgressSummary,
   generateProgressTitle,
+  generateSuccessTitle,
 } from "../utils/generate_progress";
 import {
   parsePullRequestNumberFromPullRequestContext,
@@ -78,10 +80,18 @@ export class CheckGroup {
       }
       if (conclusion === "all_passing") {
         this.context.log.info("All expected checks passed.");
-        await this.postPassingCheck();
+        await this.postPassingCheck(
+          generateSuccessTitle(subprojs, postedChecks),
+          generateProgressSummary(subprojs, postedChecks),
+          generateProgressDetails(subprojs, postedChecks),
+        );
       } else if (conclusion === "has_failure") {
         this.context.log.info("Some of the expected checks failed.");
-        await this.postFailingCheck();
+        await this.postFailingCheck(
+          generateFailingTitle(subprojs, postedChecks),
+          generateProgressSummary(subprojs, postedChecks),
+          generateProgressDetails(subprojs, postedChecks),
+        );
       } else {
         this.context.log.info("Expected checks are still pending.");
         await this.postUpdatingCheck(
@@ -92,7 +102,7 @@ export class CheckGroup {
       }
     } catch {
       this.context.log.info("The app crashed.");
-      await this.postFailingCheck();
+      await this.postFailingCheck("Unknown Error", "test", "test");
     }
   }
 
@@ -171,30 +181,38 @@ export class CheckGroup {
     /* eslint-enable */
   }
 
-  async postPassingCheck(): Promise<void> {
+  async postPassingCheck(
+    title: string,
+    summary: string,
+    details: string,
+  ): Promise<void> {
     /* eslint-disable */
     await createStatus(
       this.context,
       "success",
       "completed",
-      "test",
-      "test",
-      "test",
+      title,
+      summary,
+      details,
       this.startTime,
       this.sha,
     );
     /* eslint-enable */
   }
 
-  async postFailingCheck(): Promise<void> {
+  async postFailingCheck(
+    title: string,
+    summary: string,
+    details: string,
+  ): Promise<void> {
     /* eslint-disable */
     await createStatus(
       this.context,
       "failure",
       "completed",
-      "test",
-      "test",
-      "test",
+      title,
+      summary,
+      details,
       this.startTime,
       this.sha,
     );

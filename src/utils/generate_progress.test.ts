@@ -1,6 +1,8 @@
 import {
+  generateFailingTitle,
   generateProgressDetails,
   generateProgressTitle,
+  generateSuccessTitle,
 } from "./generate_progress";
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { SubProjConfig } from "../types";
@@ -45,6 +47,21 @@ describe("generate progress tests", () => {
     expect(progress).toContain("p2_check");
   });
 
+  test("in progress title content", () => {
+    const progress = generateProgressTitle(subprojects, checksStatusLookup);
+    expect(progress).toContain("Pending");
+  });
+
+  test("success title content", () => {
+    const progress = generateFailingTitle(subprojects, checksStatusLookup);
+    expect(progress).toContain("Failed");
+  });
+
+  test("failing title content", () => {
+    const progress = generateSuccessTitle(subprojects, checksStatusLookup);
+    expect(progress).toContain("Completed");
+  });
+
   test("should include project names", () => {
     const progress = generateProgressDetails(subprojects, checksStatusLookup);
     expect(progress).toContain("proj2");
@@ -53,13 +70,12 @@ describe("generate progress tests", () => {
 
   test("should include avaialbe checks", () => {
     const progress = generateProgressDetails(subprojects, checksStatusLookup);
-    expect(progress).toContain("received checks are");
-    expect(progress).toContain("with status");
+    expect(progress).toContain("Currently received checks");
   });
 
   test("should include marks", () => {
     const progress = generateProgressDetails(subprojects, checksStatusLookup);
-    expect(progress).toContain("- [x] ");
+    expect(progress).toContain(":heavy_check_mark:");
   });
 
   test("should include correct marks", () => {
@@ -71,8 +87,8 @@ describe("generate progress tests", () => {
       subprojects,
       checksStatusLookupWithFailure,
     );
-    expect(progress).toContain("- [x] ");
-    expect(progress).toContain("- [ ] ");
+    expect(progress).toContain(":heavy_check_mark:");
+    expect(progress).toContain(":x:");
   });
 
   test("should treat undefined as not finished", () => {
@@ -83,8 +99,8 @@ describe("generate progress tests", () => {
       subprojects,
       checksStatusLookupWithMissing,
     );
-    expect(progress).toContain("- [x] ");
-    expect(progress).toContain("- [ ] ");
+    expect(progress).toContain(":heavy_check_mark:");
+    expect(progress).toContain(":hourglass:");
   });
 
   test("title generation should not crash", () => {

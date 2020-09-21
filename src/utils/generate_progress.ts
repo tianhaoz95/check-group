@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { ProgressReport, SubProjConfig } from "../types";
 /* eslint-enable @typescript-eslint/no-unused-vars */
+import { CheckId } from "../config";
 
 export const generateProgressReport = (
   subprojects: SubProjConfig[],
@@ -45,6 +46,9 @@ export const generateProgressReport = (
 
 /**
  * Generate the title for the status check.
+ *
+ * @param subprojects The matching subprojects.
+ * @param checksStatusLookup The posted check status.
  */
 export const generateProgressTitle = (
   subprojects: SubProjConfig[],
@@ -55,6 +59,36 @@ export const generateProgressTitle = (
   return message;
 };
 
+/**
+ * Generate the title for the status check.
+ *
+ * @param subprojects The matching subprojects.
+ * @param checksStatusLookup The posted check status.
+ */
+export const generateFailingTitle = (
+  subprojects: SubProjConfig[],
+  checksStatusLookup: Record<string, string>,
+): string => {
+  const report = generateProgressReport(subprojects, checksStatusLookup);
+  const message = `Failed (${report.completed?.length}/${report.expected?.length})`;
+  return message;
+};
+
+/**
+ * Generate the title for the successful check.
+ *
+ * @param subprojects The matching subprojects.
+ * @param checksStatusLookup The posted check status.
+ */
+export const generateSuccessTitle = (
+  subprojects: SubProjConfig[],
+  checksStatusLookup: Record<string, string>,
+): string => {
+  const report = generateProgressReport(subprojects, checksStatusLookup);
+  const message = `Completed (${report.completed?.length}/${report.expected?.length})`;
+  return message;
+};
+
 export const generateProgressSummary = (
   subprojects: SubProjConfig[],
   checksStatusLookup: Record<string, string>,
@@ -62,6 +96,28 @@ export const generateProgressSummary = (
   const report = generateProgressReport(subprojects, checksStatusLookup);
   const message = `Progress: ${report.completed?.length} completed, ${report.running?.length} pending`;
   return message;
+};
+
+export const statusToMark = (
+  check: string,
+  checksStatusLookup: Record<string, string>,
+): string => {
+  /* eslint-disable security/detect-object-injection */
+  if (check === CheckId) {
+    return ":cat:";
+  }
+  if (check in checksStatusLookup) {
+    if (checksStatusLookup[check] == "success") {
+      return ":heavy_check_mark:";
+    }
+    if (checksStatusLookup[check] == "failure") {
+      return ":x:";
+    }
+  } else {
+    return ":hourglass:";
+  }
+  return ":interrobang:";
+  /* eslint-enable security/detect-object-injection */
 };
 
 /**
@@ -76,28 +132,26 @@ export const generateProgressDetails = (
   checksStatusLookup: Record<string, string>,
 ): string => {
   let progress = "";
+  progress += "## Progress by sub-projects\n\n";
   subprojects.forEach((subproject) => {
-    progress += `Summary for sub-project ${subproject.id}\n\n`;
+    progress += `### Summary for sub-project ${subproject.id}\n\n`;
+    progress += "| Project Name | Current Status |\n";
+    progress += "| ------------ | -------------- |\n";
     subproject.checks.forEach((check) => {
-      let mark = " ";
-      /* eslint-disable security/detect-object-injection */
-      if (
-        check.id in checksStatusLookup &&
-        checksStatusLookup[check.id] == "success"
-      ) {
-        mark = "x";
-      }
-      progress += `- [${mark}] ${check.id} with status ${
-        checksStatusLookup[check.id]
-      }\n`;
-      /* eslint-enable security/detect-object-injection */
+      const mark = statusToMark(check.id, checksStatusLookup);
+      progress += `| ${check.id} | ${mark} |\n`;
     });
     progress += "\n";
   });
-  progress += "Currently received checks are:\n\n";
+  progress += "## Currently received checks\n\n";
+  progress += "| Project Name | Current Status |\n";
+  progress += "| ------------ | -------------- |\n";
   /* eslint-disable security/detect-object-injection */
   for (const avaiableCheck in checksStatusLookup) {
-    progress += `- ${avaiableCheck} with status ${checksStatusLookup[avaiableCheck]}\n`;
+    progress += `| ${avaiableCheck} | ${statusToMark(
+      avaiableCheck,
+      checksStatusLookup,
+    )} |\n`;
   }
   progress += "\n";
   /* eslint-enable security/detect-object-injection */
