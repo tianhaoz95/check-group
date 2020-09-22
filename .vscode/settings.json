@@ -1,4 +1,24 @@
 {
+  "emeraldwalk.runonsave": {
+    "commands": [
+      {
+        "match": "README.md",
+        "cmd": "cp README.md docs/README.md"
+      },
+      {
+        "match": "CODE_OF_CONDUCT.md",
+        "cmd": "cp CODE_OF_CONDUCT.md docs/code.md"
+      },
+      {
+        "match": "CONTRIBUTING.md",
+        "cmd": "cp CONTRIBUTING.md docs/development.md"
+      },
+      {
+        "match": "PRIVACY.md",
+        "cmd": "cp PRIVACY.md docs/privacy.md"
+      }
+    ]
+  },
   "cSpell.words": [
     "Codacy",
     "Codecov",
@@ -14,6 +34,7 @@
     "prismjs",
     "probot",
     "smee",
-    "socio"
+    "socio",
+    "subprojects"
   ]
 }
