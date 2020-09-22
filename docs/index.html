@@ -1,45 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Document</title>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <meta name="description" content="Description" />
-    <meta
-      name="viewport"
-      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
-    />
-    <link
-      rel="stylesheet"
-      href="//cdn.jsdelivr.net/npm/docsify/lib/themes/vue.css"
-    />
-    <link
-      rel="shortcut icon"
-      type="image/x-icon"
-      href="/check-group/assets/logo/favicon.ico?"
-    />
-  </head>
-  <body>
-    <div id="app"></div>
-    <script>
-      window.$docsify = {
-        name: "Check Group",
-        repo: "tianhaoz95/check-group",
-        loadSidebar: true,
-        coverpage: true,
-        subMaxLevel: 4,
-        auto2top: true,
-        search: "auto",
-        logo: "/assets/logo/banner_square.png",
-      };
-    </script>
-    <script src="//cdn.jsdelivr.net/npm/docsify/lib/docsify.min.js"></script>
-    <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
-    <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/zoom-image.min.js"></script>
-    <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/external-script.min.js"></script>
-    <script src="//cdn.jsdelivr.net/npm/docsify-copy-code"></script>
-    <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js"></script>
-    <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-yml.min.js"></script>
-    <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-ts.min.js"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description" />
+  <meta name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify/lib/themes/vue.css" />
+  <link rel="shortcut icon" type="image/x-icon" href="/check-group/assets/logo/favicon.ico?" />
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk/dist/gitalk.css">
+</head>
+
+<body>
+  <div id="app"></div>
+  <script src="//cdn.jsdelivr.net/npm/docsify-edit-on-github"></script>
+  <script>
+    var gitalkConfig = {
+      clientID: '38d809d4e52f63193f4f',
+      clientSecret: 'a2c4db29836429a9b59d0edf21b6ad0779402c42',
+      repo: 'check-group',
+      owner: 'tianhaoz95',
+      admin: ['tianhaoz95'],
+      // facebook-like distraction free mode
+      distractionFreeMode: false,
+    }
+    window.$docsify = {
+      name: "Check Group",
+      repo: "tianhaoz95/check-group",
+      loadSidebar: true,
+      coverpage: true,
+      subMaxLevel: 4,
+      auto2top: true,
+      search: "auto",
+      logo: "/assets/logo/banner_square.png",
+      plugins: [
+        EditOnGithubPlugin.create(
+          'https://github.com/tianhaoz95/check-group/blob/master/docs/',
+          null, 'Edit on GitHub'
+        ),
+        function (hook, vm) {
+          hook.doneEach(function () {
+            var label, domObj, main, divEle, gitalk;
+            label = vm.route.path.split("/").pop();
+            domObj = Docsify.dom;
+            main = domObj.getNode("#main");
+            Array.apply(
+              null,
+              document.querySelectorAll("div.gitalk-container")
+            ).forEach(function (ele) {
+              ele.remove();
+            });
+            divEle = domObj.create("div");
+            divEle.id = "gitalk-container-" + label;
+            divEle.className = "gitalk-container";
+            divEle.style = "width: " + main.clientWidth + "px; margin: 0 auto 20px;";
+            domObj.appendTo(domObj.find(".content"), divEle);
+            gitalk = new Gitalk(
+              Object.assign(gitalkConfig, { id: !label ? "home" : label })
+            );
+            gitalk.render("gitalk-container-" + label);
+          });
+        },
+      ]
+    };
+  </script>
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/docsify.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/zoom-image.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/external-script.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify-copy-code"></script>
+  <script src="//unpkg.com/gitalk/dist/gitalk.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-yml.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-ts.min.js"></script>
+  <script>
+    // Should only register for modern browsers that supports
+    // offline service workers.
+    if (typeof navigator.serviceWorker !== 'undefined') {
+      navigator.serviceWorker.register('sw.js')
+    }
+  </script>
+</body>
+
 </html>

@@ -1,14 +1,9 @@
-<!-- _coverpage.md -->
+<img src="assets/logo/rounded.svg" width="10%"/>
 
-![logo](assets/logo/rounded.png)
+# Check Group
 
-# docsify <small>3.5</small>
-
-> A magical documentation site generator.
-
-- Simple and lightweight
-- No statically built html files
-- Multiple themes
+> A GitHub app to group CI checks based on sub-projects for monorepo projects.
 
 [GitHub](https://github.com/tianhaoz95/check-group)
+[Get the App](https://github.com/tianhaoz95/check-group)
 [Get Started](#getting-started)
