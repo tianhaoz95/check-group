@@ -10,3 +10,4 @@ exclude_paths:
     - "docs/privacy.md"
     - "docs/_sidebar.md"
     - ".github/ISSUE_TEMPLATE/*.md"
+    - "docs/_coverpage.md"
