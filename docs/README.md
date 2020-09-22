@@ -1,27 +1,53 @@
-# check-group
+# Check Group
 
-> A GitHub App built with [Probot](https://github.com/probot/probot) that A app to group checks based on subprojects.
+Groups CI checks based on the sub-projects a pull request touches for monorepo projects.
 
-<https://github.com/tianhaoz95/check-group-test>
+## Getting started
 
-## Setup
+### GitHub
 
-```sh
-# Install dependencies
-npm install
+The app is available on the GitHub Marketplace.
 
-# Compile
+The app can be configured with `.github/checkgroup.yml`. Here's an example:
+
+```yml
+subprojects:
+  - id: generic
+    paths:
+      - "**"
+    checks:
+      - "generic_checks"
+  - id: documentation
+    paths:
+      - "docs/**"
+    checks:
+      - "markdown_linter"
+      - "github_page"
+```
+
+The configuration above tells the app to look for check with name `generic_check` for all files (alternatively, global checks can be listed as protected branch requirements depending on preference) and checks with name `markdown_linter` and `github_page` if any file located in `docs` are modified.
+
+### GitHub Enterprise
+
+The following commands runs Check Group in self-host server for GitHub Enterprise:
+
+```bash
+# This is the GitHub Enterprise endpoint. You will
+# need to replace it with your host.
+export GHE_HOST=github.example.com
+
+# The following command builds the TypeScript source code
 npm run build
 
-# Run
+# The following command starts the server
 npm run start
 ```
 
-## Contributing
+Note: since I don't use GitHub Enterprise, the steps above might not fully reflect the setup process. Please open an issue [here](https://github.com/tianhaoz95/check-group/issues) if there is any problem while setting it up.
 
-If you have suggestions for how check-group could be improved, or want to report a bug, open an issue! We'd love all and any contributions.
+## Quick links
 
-For more, check out the [Contributing Guide](CONTRIBUTING.md).
+- [Repository for testing](https://github.com/tianhaoz95/check-group-test)
 
 ## License
 

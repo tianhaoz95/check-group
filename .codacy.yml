@@ -1,0 +1,12 @@
+---
+exclude_paths:
+    - "CODE_OF_CONDUCT.md"
+    - "docs/code.md"
+    - "README.md"
+    - "docs/README.md"
+    - "PRIVACY.md"
+    - "CONTRIBUTING.md"
+    - "docs/development.md"
+    - "docs/privacy.md"
+    - "docs/_sidebar.md"
+    - ".github/ISSUE_TEMPLATE/*.md"
