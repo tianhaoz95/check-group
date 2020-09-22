@@ -13,6 +13,7 @@
     "octokit",
     "prismjs",
     "probot",
-    "smee"
+    "smee",
+    "socio"
   ]
 }

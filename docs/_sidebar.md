@@ -1,2 +1,4 @@
--   [Home](/)
--   [Development](development.md)
+- [Home](/)
+- [Development](development.md)
+- [Privacy Policy](privacy.md)
+- [Code of Conduct](code.md)

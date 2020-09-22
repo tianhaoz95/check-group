@@ -6,11 +6,23 @@ jobs:
     steps:
       - name: checkout code
         uses: actions/checkout@v2
-      - uses: tianhaoz95/mirror-action@v1.0.1
+      - name: check README
+        uses: tianhaoz95/mirror-action@v1.0.1
         with:
           original: "README.md"
           mirror: "docs/README.md"
-      - uses: tianhaoz95/mirror-action@v1.0.1
+      - name: check contrib guide
+        uses: tianhaoz95/mirror-action@v1.0.1
         with:
           original: "CONTRIBUTING.md"
           mirror: "docs/development.md"
+      - name: check code of conduct
+        uses: tianhaoz95/mirror-action@v1.0.1
+        with:
+          original: "CODE_OF_CONDUCT.md"
+          mirror: "docs/code.md"
+      - name: check privacy policy
+        uses: tianhaoz95/mirror-action@v1.0.1
+        with:
+          original: "PRIVACY.md"
+          mirror: "docs/privacy.md"
