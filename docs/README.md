@@ -1,4 +1,4 @@
-# Check Group
+![logo banner](https://github.com/tianhaoz95/check-group/raw/master/docs/assets/logo/banner_rounded.png)
 
 Groups CI checks based on the sub-projects a pull request touches for monorepo projects.
 
