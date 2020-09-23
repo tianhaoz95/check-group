@@ -12,3 +12,4 @@ exclude_paths:
     - ".github/ISSUE_TEMPLATE/*.md"
     - "docs/_coverpage.md"
     - "docs/sw.js"
+    - "MARKETPLACE.md"
