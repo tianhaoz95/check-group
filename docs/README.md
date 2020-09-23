@@ -39,15 +39,11 @@ With the configuration above, Check Group collects the requirements that will se
 
 Here is an example of how it works in the [pull request](https://github.com/tianhaoz95/check-group-demo/pull/1):
 
-```
-screenshot after it's merged
-```
+![screenshot of the pr checks](https://github.com/tianhaoz95/check-group/raw/master/docs/assets/screenshot/example_pr_checks.png)
 
 A list of requirements and current fulfillment status is available in the "Details":
 
-```
-screenshot after it's merged
-```
+![screenshot of the details view](https://github.com/tianhaoz95/check-group/raw/master/docs/assets/screenshot/check_details.png)
 
 Note: since Check Group converts all required checks into a single check to make protected branch happy, the repository only needs to run the affected checks for pull requests. There are many ways to do on every CI/CD platform. Here's an example with GitHub Actions for the usecase above (for more details, check out the [example project](https://github.com/tianhaoz95/check-group-demo)):
 
