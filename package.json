@@ -30,7 +30,7 @@
   "dependencies": {
     "@octokit/rest": "^18.0.6",
     "@octokit/types": "^5.4.1",
-    "@octokit/webhooks": "^7.11.2",
+    "@octokit/webhooks": "^7.12.2",
     "@types/minimatch": "^3.0.3",
     "@types/prettyjson": "0.0.29",
     "http-status-codes": "^2.1.4",
