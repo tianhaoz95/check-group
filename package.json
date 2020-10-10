@@ -57,7 +57,7 @@
     "remark-lint": "^7.0.1",
     "remark-preset-lint-recommended": "^4.0.1",
     "smee-client": "^1.1.0",
-    "ts-jest": "^26.3.0",
+    "ts-jest": "^26.4.1",
     "ts-mockito": "^2.6.1",
     "typescript": "^4.0.3"
   },
