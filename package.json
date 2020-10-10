@@ -37,7 +37,7 @@
     "minimatch": "^3.0.4",
     "prettier": "^2.1.1",
     "prettyjson": "^1.2.1",
-    "probot": "^10.1.0"
+    "probot": "^10.9.3"
   },
   "devDependencies": {
     "@types/jest": "^26.0.14",
