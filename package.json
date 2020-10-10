@@ -49,7 +49,7 @@
     "eslint-plugin-security": "^1.4.0",
     "eslint-plugin-sort-keys-fix": "^1.1.1",
     "eslint-plugin-typescript": "^0.14.0",
-    "jest": "^26.4.0",
+    "jest": "^26.5.2",
     "nock": "^13.0.4",
     "nodemon": "^2.0.4",
     "remark": "^12.0.1",
