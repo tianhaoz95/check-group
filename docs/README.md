@@ -4,7 +4,7 @@ Groups CI checks based on the sub-projects for monorepo projects.
 
 ## Motivation
 
-For example, a monorepo project can define that changes checked into documentation (e.g. files in `docs/**.md`) should pass a set of checks (e.g. `markdown lint` and `github_pages_build`), and changes checked into mobile app source code (e.g. files in `clients/app/**.dart`) should pass another set of checks (e.g. `app_unit_tests` and  `app_integration_test`) before being merged. It's also possible that there is a set of checks to make sure related sub-projects are compatible (e.g. `compatibility_check`).
+For example, a monorepo project can define that changes checked into documentation (e.g. files in `docs/**.md`) should pass a set of checks (e.g. `markdown lint` and `github_pages_build`), and changes checked into mobile app source code (e.g. files in `clients/app/**.dart`) should pass another set of checks (e.g. `app_unit_tests` and `app_integration_test`) before being merged. It's also possible that there is a set of checks to make sure related sub-projects are compatible (e.g. `compatibility_check`).
 
 For the situation above, there is no easy way to guard the main branch with protected branch schema. The project has to either only define a subset of full CI checks as requirement leaving the main branch less secure or define and run a full list of CI checks for every pull request slowing down merging process.
 
