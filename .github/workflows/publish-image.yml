@@ -26,7 +26,7 @@ jobs:
           password: ${{ secrets.TIANHAOZ_GITHUB_TOKEN }}
       - name: get_tag
         id: get_tag
-        working-directory: scripts/bash
+        working-directory: scripts/linux
         env:
           USERNAME: ${{ github.repository_owner }}
         run: |
