@@ -37,14 +37,14 @@
     "minimatch": "^3.0.4",
     "prettier": "^2.2.1",
     "prettyjson": "^1.2.1",
-    "probot": "^10.17.2"
+    "probot": "^10.18.0"
   },
   "devDependencies": {
-    "@types/jest": "^26.0.15",
+    "@types/jest": "^26.0.17",
     "@types/nock": "^11.1.0",
     "@types/node": "^14.14.10",
     "@typescript-eslint/eslint-plugin": "^4.8.2",
-    "@typescript-eslint/parser": "^4.9.0",
+    "@typescript-eslint/parser": "^4.9.1",
     "eslint": "^7.14.0",
     "eslint-plugin-security": "^1.4.0",
     "eslint-plugin-sort-keys-fix": "^1.1.1",
