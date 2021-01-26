@@ -29,7 +29,7 @@
   },
   "dependencies": {
     "@octokit/rest": "^18.0.14",
-    "@octokit/types": "^6.5.0",
+    "@octokit/types": "^6.5.3",
     "@octokit/webhooks": "^7.21.0",
     "@types/minimatch": "^3.0.3",
     "@types/prettyjson": "0.0.29",
