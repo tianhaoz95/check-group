@@ -20,7 +20,6 @@ export const getProbotApp = (): Probot => {
       throttle: { enabled: false },
     }),
     githubToken: "test_github_token",
-    id: 123,
     privateKey: loadMockedCertificate(),
   });
   probot.load(CheckGroupApp);

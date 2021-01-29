@@ -59,7 +59,7 @@ export const createStatus = async (
   context.log.info(
     `Create ${status} status with conclusion ${conclusion} for sha ${sha}`,
   );
-  const response = await context.github.checks.create(statusOptions);
+  const response = await context.octokit.checks.create(statusOptions);
   context.log.info(`Create status finished with status ${response.status}`);
   if (response.status !== StatusCodes.CREATED) {
     context.log.error(

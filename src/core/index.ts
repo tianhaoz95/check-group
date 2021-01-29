@@ -114,7 +114,7 @@ export class CheckGroup {
    */
   async getPostedChecks(sha: string): Promise<Record<string, string>> {
     this.context.log.info(`Fetch posted check runs for ${sha}`);
-    const response = await this.context.github.checks.listForRef(
+    const response = await this.context.octokit.checks.listForRef(
       this.context.repo({
         ref: sha,
       }),
@@ -132,7 +132,7 @@ export class CheckGroup {
    * a pull request.
    */
   async files(): Promise<string[]> {
-    const response = await this.context.github.pulls.listFiles(
+    const response = await this.context.octokit.pulls.listFiles(
       this.context.repo({
         "pull_number": this.pullRequestNumber,
       }),
