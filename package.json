@@ -28,7 +28,7 @@
     "format": "npm run prettier:format && npm run eslint:format"
   },
   "dependencies": {
-    "@octokit/rest": "^18.0.15",
+    "@octokit/rest": "^18.1.0",
     "@octokit/types": "^6.8.1",
     "@octokit/webhooks": "^7.21.0",
     "@types/minimatch": "^3.0.3",
