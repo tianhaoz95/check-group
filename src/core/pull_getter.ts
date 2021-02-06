@@ -1,7 +1,4 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { EventPayloads, WebhookEvent } from "@octokit/webhooks";
-/* eslint-enable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Context } from "probot";
 /* eslint-enable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-unused-vars */
@@ -15,7 +12,7 @@ import { PullRequestData } from "../types";
  */
 export const extractPullRequestsFromCheckRunContext = (
   /* eslint-disable @typescript-eslint/no-explicit-any */
-  context: WebhookEvent<EventPayloads.WebhookPayloadCheckRun> & Context<any>,
+  context: Context<any>,
   /* eslint-enable @typescript-eslint/no-explicit-any */
 ): PullRequestData[] => {
   if ("check_run" in context.payload) {
