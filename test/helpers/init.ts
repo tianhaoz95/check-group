@@ -22,6 +22,6 @@ export const getProbotApp = (): Probot => {
     githubToken: "test_github_token",
     privateKey: loadMockedCertificate(),
   });
-  probot.load(CheckGroupApp);
+  CheckGroupApp(probot);
   return probot;
 };
