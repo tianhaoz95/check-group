@@ -5,9 +5,6 @@ import {
   fetchConfig,
   parsePullRequestNumberFromPullRequestContext,
 } from "./core";
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { EventPayloads, WebhookEvent } from "@octokit/webhooks";
-/* eslint-enable @typescript-eslint/no-unused-vars */
 import { CheckId } from "./config";
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Context } from "probot";
@@ -18,7 +15,7 @@ import { PullRequestData } from "./types";
 
 export const pullRequestEventHandler = async (
   /* eslint-disable @typescript-eslint/no-explicit-any */
-  context: WebhookEvent<EventPayloads.WebhookPayloadPullRequest> & Context<any>,
+  context: Context<any>,
   /* eslint-enable @typescript-eslint/no-explicit-any */
 ): Promise<void> => {
   context.log.info("Pull request open/reopen event detected");
@@ -40,7 +37,7 @@ export const pullRequestEventHandler = async (
 
 export const checkRunEventHandler = async (
   /* eslint-disable @typescript-eslint/no-explicit-any */
-  context: WebhookEvent<EventPayloads.WebhookPayloadCheckRun> & Context<any>,
+  context: Context<any>,
   /* eslint-enable @typescript-eslint/no-explicit-any */
 ): Promise<void> => {
   context.log.info("Check run event detected.");

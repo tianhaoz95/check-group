@@ -1,7 +1,4 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { EventPayloads, WebhookEvent } from "@octokit/webhooks";
-/* eslint-enable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Context } from "probot";
 /* eslint-enable @typescript-eslint/no-unused-vars */
 
@@ -14,7 +11,7 @@ import { Context } from "probot";
  */
 export const extractShaFromPullRequestContext = (
   /* eslint-disable @typescript-eslint/no-explicit-any */
-  context: WebhookEvent<EventPayloads.WebhookPayloadPullRequest> & Context<any>,
+  context: Context<any>,
   /* eslint-enable @typescript-eslint/no-explicit-any */
 ): string => {
   const payload = context.payload;
@@ -45,7 +42,7 @@ export const extractShaFromPullRequestContext = (
  */
 export const extractShaFromCheckRunContext = (
   /* eslint-disable @typescript-eslint/no-explicit-any */
-  context: WebhookEvent<EventPayloads.WebhookPayloadCheckRun> & Context<any>,
+  context: Context<any>,
   /* eslint-enable @typescript-eslint/no-explicit-any */
 ): string => {
   if ("check_run" in context.payload) {
