@@ -18,11 +18,17 @@ jobs:
         run: npm test
       - name: Report coverage to Codacy
         uses: codacy/codacy-coverage-reporter-action@master
+        if: >-
+          github.actor != 'dependabot[bot]' &&
+          github.actor != 'dependabot-preview[bot]'
         with:
           project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
           coverage-reports: coverage/lcov.info
       - name: Report coverage to Codecov
         uses: codecov/codecov-action@v1
+        if: >-
+          github.actor != 'dependabot[bot]' &&
+          github.actor != 'dependabot-preview[bot]'
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           file: coverage/lcov.info
