@@ -30,7 +30,7 @@
   "dependencies": {
     "@octokit/rest": "^18.5.2",
     "@octokit/types": "^6.13.0",
-    "@octokit/webhooks": "^8.12.0",
+    "@octokit/webhooks": "^8.12.2",
     "@types/minimatch": "^3.0.4",
     "@types/prettyjson": "0.0.29",
     "http-status-codes": "^2.1.4",
@@ -42,7 +42,7 @@
   "devDependencies": {
     "@types/jest": "^26.0.22",
     "@types/nock": "^11.1.0",
-    "@types/node": "^14.14.37",
+    "@types/node": "^14.14.39",
     "@typescript-eslint/eslint-plugin": "^4.22.0",
     "@typescript-eslint/parser": "^4.22.0",
     "eslint": "^7.24.0",
