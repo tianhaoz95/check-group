@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Approve Dependabot updates
-        uses: hmarr/auto-approve-action@v2.0.0
+        uses: hmarr/auto-approve-action@v2.1.0
         if: >-
           (github.actor == 'dependabot[bot]' || github.actor == 'dependabot-preview[bot]') 
           && contains(github.event.pull_request.labels.*.name, 'automated dependecy update')
