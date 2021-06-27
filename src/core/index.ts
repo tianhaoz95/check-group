@@ -33,14 +33,14 @@ import { satisfyExpectedChecks } from "../utils/satisfy_expected_checks";
 export class CheckGroup {
   pullRequestNumber: number;
   config: CheckGroupConfig;
-  context: Context;
+  context: Context<"check_run"> | Context<"pull_request">;
   sha: string;
   startTime: string;
 
   constructor(
     pullRequestNumber: number,
     config: CheckGroupConfig,
-    context: Context,
+    context: Context<"check_run"> | Context<"pull_request">,
     sha: string,
     startTime: string,
   ) {
@@ -120,7 +120,11 @@ export class CheckGroup {
       }),
     );
     const checkNames: Record<string, string> = {};
-    response.data.check_runs.forEach((checkRun) => {
+    response.data.check_runs.forEach((
+      /* eslint-disable */
+      checkRun: any
+      /* eslint-enable */
+    ) => {
       const conclusion = checkRun.conclusion ? checkRun.conclusion : "pending";
       checkNames[checkRun.name] = conclusion;
     });
@@ -138,7 +142,11 @@ export class CheckGroup {
       }),
     );
     const filenames: string[] = [];
-    response.data.forEach((pullRequestFile) => {
+    response.data.forEach((
+      /* eslint-disable */
+      pullRequestFile: any
+      /* eslint-enable */
+    ) => {
       filenames.push(pullRequestFile.filename);
     });
     return filenames;

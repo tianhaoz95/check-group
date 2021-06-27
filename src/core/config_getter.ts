@@ -17,7 +17,7 @@ import { parseUserConfig } from "../utils/user_config_parser";
  */
 export const fetchConfig = async (
   /* eslint-disable @typescript-eslint/no-explicit-any */
-  context: Context<any>,
+  context: Context<"check_run"> | Context<"pull_request">,
   /* eslint-enable @typescript-eslint/no-explicit-any */
 ): Promise<CheckGroupConfig> => {
   const configData: Record<string, unknown> = (await context.config(

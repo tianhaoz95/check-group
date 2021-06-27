@@ -11,12 +11,12 @@ import { Context } from "probot";
  */
 export const extractShaFromPullRequestContext = (
   /* eslint-disable @typescript-eslint/no-explicit-any */
-  context: Context<any>,
+  context: Context<"pull_request">,
   /* eslint-enable @typescript-eslint/no-explicit-any */
 ): string => {
   const payload = context.payload;
   if ("pull_request" in payload) {
-    const pullRequest = payload["pull_request"] as Record<string, unknown>;
+    const pullRequest = payload["pull_request"];
     if ("head" in pullRequest) {
       const head = pullRequest["head"] as Record<string, unknown>;
       if ("sha" in head) {

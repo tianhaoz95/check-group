@@ -16,7 +16,7 @@ import { StatusCodes } from "http-status-codes";
  * @param startTime The string time that the run started.
  */
 export const createStatus = async (
-  context: Context,
+  context: Context<"check_run"> | Context<"pull_request">,
   conclusion:
     | "success"
     | "failure"

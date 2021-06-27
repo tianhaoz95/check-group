@@ -15,7 +15,7 @@ import { PullRequestData } from "./types";
 
 export const pullRequestEventHandler = async (
   /* eslint-disable @typescript-eslint/no-explicit-any */
-  context: Context<any>,
+  context: Context<"pull_request">,
   /* eslint-enable @typescript-eslint/no-explicit-any */
 ): Promise<void> => {
   context.log.info("Pull request open/reopen event detected");
@@ -37,7 +37,7 @@ export const pullRequestEventHandler = async (
 
 export const checkRunEventHandler = async (
   /* eslint-disable @typescript-eslint/no-explicit-any */
-  context: Context<any>,
+  context: Context<"check_run">,
   /* eslint-enable @typescript-eslint/no-explicit-any */
 ): Promise<void> => {
   context.log.info("Check run event detected.");
