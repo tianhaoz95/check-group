@@ -35,7 +35,7 @@
     "@types/prettyjson": "0.0.29",
     "http-status-codes": "^2.1.4",
     "minimatch": "^3.0.4",
-    "prettier": "^2.3.1",
+    "prettier": "^2.3.2",
     "prettyjson": "^1.2.1",
     "probot": "^11.4.1"
   },
@@ -43,7 +43,7 @@
     "@types/jest": "^26.0.23",
     "@types/nock": "^11.1.0",
     "@types/node": "^15.12.4",
-    "@typescript-eslint/eslint-plugin": "^4.28.0",
+    "@typescript-eslint/eslint-plugin": "^4.28.1",
     "@typescript-eslint/parser": "^4.28.0",
     "eslint": "^7.29.0",
     "eslint-plugin-security": "^1.4.0",
