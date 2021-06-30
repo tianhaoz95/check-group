@@ -6,7 +6,7 @@ import prettyjson from "prettyjson";
 
 export = (app: Probot): void => {
   /* eslint-disable @typescript-eslint/no-explicit-any */
-  app.on("pull_request", async (context: Context<any>) => {
+  app.on("pull_request", async (context: Context<"pull_request">) => {
     try {
       await pullRequestEventHandler(context);
     } catch (err) {
@@ -16,7 +16,7 @@ export = (app: Probot): void => {
   /* eslint-enable @typescript-eslint/no-explicit-any */
 
   /* eslint-disable @typescript-eslint/no-explicit-any */
-  app.on("check_run", async (context: Context<any>) => {
+  app.on("check_run", async (context: Context<"check_run">) => {
     try {
       await checkRunEventHandler(context);
     } catch (err) {

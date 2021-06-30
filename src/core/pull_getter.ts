@@ -12,7 +12,7 @@ import { PullRequestData } from "../types";
  */
 export const extractPullRequestsFromCheckRunContext = (
   /* eslint-disable @typescript-eslint/no-explicit-any */
-  context: Context<any>,
+  context: Context<"check_run">,
   /* eslint-enable @typescript-eslint/no-explicit-any */
 ): PullRequestData[] => {
   if ("check_run" in context.payload) {

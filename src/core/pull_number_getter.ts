@@ -11,7 +11,7 @@ import { Context } from "probot";
  */
 export const parsePullRequestNumberFromPullRequestContext = (
   /* eslint-disable @typescript-eslint/no-explicit-any */
-  context: Context<any>,
+  context: Context<"pull_request">,
   /* eslint-enable @typescript-eslint/no-explicit-any */
 ): number => {
   if ("number" in context.payload) {
