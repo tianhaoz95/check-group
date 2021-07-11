@@ -62,6 +62,7 @@ export interface CheckGroupConfig {
    * The sub-project configurations.
    */
   subProjects: SubProjConfig[];
+  // TODO: add a field for custom service name
 }
 
 /**

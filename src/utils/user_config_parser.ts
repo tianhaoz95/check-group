@@ -23,6 +23,8 @@ export const parseUserConfig = (
   };
   try {
     const config = defaultConfig;
+    // TODO: make this a helper function since there are more
+    // config options to parse.
     if ("subprojects" in configData) {
       const subProjectsData = configData["subprojects"] as Record<
         string,
@@ -61,6 +63,7 @@ export const parseUserConfig = (
     } else {
       throw Error("subprojects not found in the user configuration file");
     }
+    // TODO: add another parser to get the custom ID
     return config;
   } catch {
     return defaultConfig;
