@@ -40,8 +40,8 @@ export const checkRunEventHandler = async (
   context: Context<"check_run">,
   /* eslint-enable @typescript-eslint/no-explicit-any */
 ): Promise<void> => {
-  context.log.info("Check run event detected.");
   const config = await fetchConfig(context);
+  context.log.info(`Check run event detected with ID ${config.customServiceName}`);
   if (isTriggeredBySelf(context, config)) {
     return;
   }

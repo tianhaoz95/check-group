@@ -1,5 +1,6 @@
 import { CheckGroupConfig } from "../types";
 import { Context } from "probot";
+import { DefaultCheckId } from "../config";
 
 /**
  * Checks if the run is triggered by the check status posted
@@ -14,7 +15,24 @@ import { Context } from "probot";
  * @param {CheckGroupConfig} config
  **/
 export const isTriggeredBySelf = (context: Context<"check_run">, config: CheckGroupConfig): boolean => {
-  if (context.payload["check_run"]["name"] == config.customServiceName) {
+  context.log.info(`
+    Compare check name ${context.payload["check_run"]["name"]}
+    and self service name ${config.customServiceName}.
+  `);
+  if (
+    context.payload["check_run"]["name"] == config.customServiceName
+    // TODO(@tianhaoz95): remove this check once there is a better approach.
+    // This is needed for now because in the test repository at
+    // https://github.com/tianhaoz95/check-group-test
+    // both the dev version and the prod version exist, and they
+    // might support different type of name customization meaning
+    // that they might post different names for the check. For now,
+    // this will prevent them from triggering each other infinitely,
+    // but for future name changes, this might now work. Need to come
+    // up with a more systematic approach to prevent cross triggering.
+    || context.payload["check_run"]["name"] == DefaultCheckId
+  ) {
+    context.log.info("Self triggering detected. Skip.");
     return true;
   }
   return false;
