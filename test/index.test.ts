@@ -12,6 +12,7 @@ import {
 import {
   expectStartingCheck,
   expectSuccessCheck,
+  expectSuccessCheckWithCustomServiceName,
   setChecksForSha,
   setConfigToBasic,
   setConfigToNotFound,
@@ -118,6 +119,37 @@ describe("integration tests", () => {
       DEFAULT_SHA,
     );
     expectSuccessCheck(DEFAULT_SHA);
+    await probot.receive({
+      name: "check_run",
+      payload: BASIC_CHECK_RUN_CREATED_EVENT_SINGLE_PULL_REQUEST,
+    });
+  });
+
+  test("check run pass correctly", async () => {
+    setConfigToBasic("custom_service_name");
+    setPullRequestFiles(BASIC_PULL_REQUEST_FILES, DEFAULT_PULL_REQUEST_NUMBER);
+    setChecksForSha(
+      [
+        {
+          conclusion: "success",
+          name: "project_0_check",
+          status: "completed",
+        },
+        {
+          conclusion: "success",
+          name: "common_check",
+          status: "completed",
+        },
+        {
+          conclusion: undefined,
+          name: DefaultCheckId,
+          status: "queued",
+        },
+      ],
+      DEFAULT_SHA,
+    );
+    const expectedServiceName = "awesome_name";
+    expectSuccessCheckWithCustomServiceName(expectedServiceName);
     await probot.receive({
       name: "check_run",
       payload: BASIC_CHECK_RUN_CREATED_EVENT_SINGLE_PULL_REQUEST,

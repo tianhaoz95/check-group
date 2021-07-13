@@ -76,11 +76,17 @@ export class CheckGroup {
       const conclusion = satisfyExpectedChecks(subprojs, postedChecks);
       if (!(DefaultCheckId in postedChecks)) {
         this.context.log.info("First time run. Post starting check.");
-        await this.postStartingCheck();
+        await this.postStartingCheck(
+          this.config.customServiceName,
+          "Started",
+          "Started",
+          "Started",
+        );
       }
       if (conclusion === "all_passing") {
         this.context.log.info("All expected checks passed.");
         await this.postPassingCheck(
+          this.config.customServiceName,
           generateSuccessTitle(subprojs, postedChecks),
           generateProgressSummary(subprojs, postedChecks),
           generateProgressDetails(subprojs, postedChecks),
@@ -88,6 +94,7 @@ export class CheckGroup {
       } else if (conclusion === "has_failure") {
         this.context.log.info("Some of the expected checks failed.");
         await this.postFailingCheck(
+          this.config.customServiceName,
           generateFailingTitle(subprojs, postedChecks),
           generateProgressSummary(subprojs, postedChecks),
           generateProgressDetails(subprojs, postedChecks),
@@ -95,6 +102,7 @@ export class CheckGroup {
       } else {
         this.context.log.info("Expected checks are still pending.");
         await this.postUpdatingCheck(
+          this.config.customServiceName,
           generateProgressTitle(subprojs, postedChecks),
           generateProgressSummary(subprojs, postedChecks),
           generateProgressDetails(subprojs, postedChecks),
@@ -102,7 +110,15 @@ export class CheckGroup {
       }
     } catch {
       this.context.log.info("The app crashed.");
-      await this.postFailingCheck("Unknown Error", "test", "test");
+      // TODO(@tianhaoz95): Add a better error message. Consider using
+      // markdown import suggested by
+      // https://stackoverflow.com/questions/44678315/how-to-import-markdown-md-file-in-typescript
+      await this.postFailingCheck(
+        this.config.customServiceName,
+        "Unknown Error",
+        "Unknown Error",
+        "Unknown Error",
+      );
     }
   }
 
@@ -155,15 +171,21 @@ export class CheckGroup {
   /**
    * Post a starting check
    */
-  async postStartingCheck(): Promise<void> {
+  async postStartingCheck(
+    name: string,
+    title: string,
+    summary: string,
+    details: string,
+  ): Promise<void> {
     /* eslint-disable */
     await createStatus(
       this.context,
       undefined,
       "queued",
-      "test",
-      "test",
-      "test",
+      name,
+      title,
+      summary,
+      details,
       this.startTime,
       this.sha,
     );
@@ -171,6 +193,7 @@ export class CheckGroup {
   }
 
   async postUpdatingCheck(
+    name: string,
     title: string,
     summary: string,
     details: string,
@@ -180,6 +203,7 @@ export class CheckGroup {
       this.context,
       undefined,
       "in_progress",
+      name,
       title,
       summary,
       details,
@@ -190,6 +214,7 @@ export class CheckGroup {
   }
 
   async postPassingCheck(
+    name: string,
     title: string,
     summary: string,
     details: string,
@@ -199,6 +224,7 @@ export class CheckGroup {
       this.context,
       "success",
       "completed",
+      name,
       title,
       summary,
       details,
@@ -209,6 +235,7 @@ export class CheckGroup {
   }
 
   async postFailingCheck(
+    name: string,
     title: string,
     summary: string,
     details: string,
@@ -218,6 +245,7 @@ export class CheckGroup {
       this.context,
       "failure",
       "completed",
+      name,
       title,
       summary,
       details,

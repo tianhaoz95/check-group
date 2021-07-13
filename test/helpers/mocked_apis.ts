@@ -124,6 +124,20 @@ export const expectSuccessCheck = (sha: string): void => {
     .reply(StatusCodes.CREATED);
 };
 
+export const expectSuccessCheckWithCustomServiceName = (name: string): void => {
+  nock("https://api.github.com")
+    .post(
+      "/repos/tianhaoz95/check-group-test/check-runs",
+      (body: Record<string, unknown>) => {
+        expect(body["status"]).toMatch("completed");
+        expect(body["conclusion"]).toMatch("success");
+        expect(body["name"]).toMatch(name);
+        return true;
+      },
+    )
+    .reply(StatusCodes.CREATED);
+};
+
 export const expectFailureCheck = (sha: string): void => {
   nock("https://api.github.com")
     .post(

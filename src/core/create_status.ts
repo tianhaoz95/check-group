@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import type { Context } from "probot";
 /* eslint-enable @typescript-eslint/no-unused-vars */
-import { DefaultCheckId } from "../config";
 import { StatusCodes } from "http-status-codes";
 
 /**
@@ -26,6 +25,7 @@ export const createStatus = async (
     | "action_required"
     | undefined,
   status: "in_progress" | "completed" | "queued",
+  name: string,
   title: string,
   summary: string,
   details: string,
@@ -43,7 +43,7 @@ export const createStatus = async (
     "completed_at": completedAt,
     conclusion,
     "head_sha": sha,
-    "name": DefaultCheckId,
+    "name": name,
     "output": {
       summary,
       "text": details,
