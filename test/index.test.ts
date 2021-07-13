@@ -156,6 +156,28 @@ describe("integration tests", () => {
     });
   });
 
+  test("skips self triggering event", async () => {
+    setConfigToBasic("custom_service_name");
+    setPullRequestFiles(BASIC_PULL_REQUEST_FILES, DEFAULT_PULL_REQUEST_NUMBER);
+    setChecksForSha(
+      [
+        {
+          conclusion: "neutral",
+          name: "awesome_name",
+          status: "in_progress",
+        },
+      ],
+      DEFAULT_SHA,
+    );
+    // Since the check run is triggered by the app itself, no request
+    // should be sent to GitHub API. If anything is sent, it will be a
+    // nock address resolution error here. 
+    await probot.receive({
+      name: "check_run",
+      payload: BASIC_CHECK_RUN_CREATED_EVENT_SINGLE_PULL_REQUEST,
+    });
+  });
+
   afterEach(() => {
     nock.cleanAll();
     nock.enableNetConnect();

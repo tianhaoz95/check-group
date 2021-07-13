@@ -8,10 +8,10 @@ import {
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Context } from "probot";
 /* eslint-enable @typescript-eslint/no-unused-vars */
-import { DefaultCheckId } from "./config";
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { PullRequestData } from "./types";
 /* eslint-enable @typescript-eslint/no-unused-vars */
+import { isTriggeredBySelf } from "./core/trigger_filter";
 
 export const pullRequestEventHandler = async (
   /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -41,13 +41,13 @@ export const checkRunEventHandler = async (
   /* eslint-enable @typescript-eslint/no-explicit-any */
 ): Promise<void> => {
   context.log.info("Check run event detected.");
-  if (context.payload["check_run"]["name"] == DefaultCheckId) {
+  const config = await fetchConfig(context);
+  if (isTriggeredBySelf(context, config)) {
     return;
   }
   const pullRequests: PullRequestData[] = extractPullRequestsFromCheckRunContext(
     context,
   );
-  const config = await fetchConfig(context);
   const startTime = new Date().toISOString();
   for (const pullRequest of pullRequests) {
     context.log.info(
