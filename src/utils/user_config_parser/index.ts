@@ -4,7 +4,7 @@ import {
   SubProjCheck,
   SubProjConfig,
   SubProjPath,
-} from "../types";
+} from "../../types";
 /* eslint-enable @typescript-eslint/no-unused-vars */
 
 /**

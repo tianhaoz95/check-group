@@ -1,4 +1,4 @@
-import { parseUserConfig } from "./user_config_parser";
+import { parseUserConfig } from ".";
 
 describe("user config parser tests", () => {
   test("sanity check", () => {
