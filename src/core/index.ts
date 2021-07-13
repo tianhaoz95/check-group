@@ -89,7 +89,7 @@ export class CheckGroup {
           this.config.customServiceName,
           generateSuccessTitle(subprojs, postedChecks),
           generateProgressSummary(subprojs, postedChecks),
-          generateProgressDetails(subprojs, postedChecks),
+          generateProgressDetails(subprojs, postedChecks, this.config),
         );
       } else if (conclusion === "has_failure") {
         this.context.log.info("Some of the expected checks failed.");
@@ -97,7 +97,7 @@ export class CheckGroup {
           this.config.customServiceName,
           generateFailingTitle(subprojs, postedChecks),
           generateProgressSummary(subprojs, postedChecks),
-          generateProgressDetails(subprojs, postedChecks),
+          generateProgressDetails(subprojs, postedChecks, this.config),
         );
       } else {
         this.context.log.info("Expected checks are still pending.");
@@ -105,7 +105,7 @@ export class CheckGroup {
           this.config.customServiceName,
           generateProgressTitle(subprojs, postedChecks),
           generateProgressSummary(subprojs, postedChecks),
-          generateProgressDetails(subprojs, postedChecks),
+          generateProgressDetails(subprojs, postedChecks, this.config),
         );
       }
     } catch {
