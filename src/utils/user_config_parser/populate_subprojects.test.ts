@@ -1,4 +1,5 @@
 import { CheckGroupConfig } from "../../types";
+import { getDefaultConfig } from "./default_config";
 import { populateSubprojects } from "./populate_subprojects";
 
 describe("Populate subprojects helper tests", () => {
@@ -6,9 +7,7 @@ describe("Populate subprojects helper tests", () => {
     const configData: Record<string, unknown> = {
       "subprojects": [],
     };
-    const config: CheckGroupConfig = {
-      subProjects: [],
-    };
+    const config: CheckGroupConfig = getDefaultConfig();
     populateSubprojects(configData, config);
     const expectedSubprojectCnt = 0;
     expect(config.subProjects.length).toEqual(expectedSubprojectCnt);
@@ -30,9 +29,7 @@ describe("Populate subprojects helper tests", () => {
         },
       ],
     };
-    const config: CheckGroupConfig = {
-      subProjects: [],
-    };
+    const config: CheckGroupConfig = getDefaultConfig();
     populateSubprojects(configData, config);
     const expectedSubprojectCnt = 1;
     const availableIndex = 0;

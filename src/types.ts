@@ -69,7 +69,7 @@ export interface CheckGroupConfig {
    * for developers that are less familiar with the
    * workflows.
    */
-  customServiceName?: string;
+  customServiceName: string;
 }
 
 /**

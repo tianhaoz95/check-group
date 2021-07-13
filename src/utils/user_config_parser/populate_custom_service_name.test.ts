@@ -1,5 +1,6 @@
 import { CheckGroupConfig } from "../../types";
 import { DefaultCheckId } from "../../config";
+import { getDefaultConfig } from "./default_config";
 import { populateCustomServiceName } from "./populate_custom_service_name";
 
 describe("Populate custom service name helper tests", () => {
@@ -8,9 +9,7 @@ describe("Populate custom service name helper tests", () => {
       "custom_service_name": "test_service",
       "subprojects": [],
     };
-    const config: CheckGroupConfig = {
-      subProjects: [],
-    };
+    const config: CheckGroupConfig = getDefaultConfig();
     populateCustomServiceName(configData, config);
     const expectedServiceName = "test_service";
     expect(configData.custom_service_name).toMatch(expectedServiceName);
@@ -20,9 +19,7 @@ describe("Populate custom service name helper tests", () => {
     const configData: Record<string, unknown> = {
       "subprojects": [],
     };
-    const config: CheckGroupConfig = {
-      subProjects: [],
-    };
+    const config: CheckGroupConfig = getDefaultConfig();
     expect(() => {
       populateCustomServiceName(configData, config);
     }).not.toThrow();
