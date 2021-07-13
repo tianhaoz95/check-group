@@ -16,10 +16,10 @@ import {
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import type { CheckGroupConfig } from "../types";
 /* eslint-enable @typescript-eslint/no-unused-vars */
-import { CheckId } from "../config";
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import type { Context } from "probot";
 /* eslint-enable @typescript-eslint/no-unused-vars */
+import { DefaultCheckId } from "../config";
 import { collectExpectedChecks } from "../utils/collect_expected_checks";
 import { createStatus } from "./create_status";
 import { extractPullRequestsFromCheckRunContext } from "./pull_getter";
@@ -74,7 +74,7 @@ export class CheckGroup {
         `Posted checks are: ${JSON.stringify(postedChecks)}`,
       );
       const conclusion = satisfyExpectedChecks(subprojs, postedChecks);
-      if (!(CheckId in postedChecks)) {
+      if (!(DefaultCheckId in postedChecks)) {
         this.context.log.info("First time run. Post starting check.");
         await this.postStartingCheck();
       }

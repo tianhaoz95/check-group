@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { ProgressReport, SubProjConfig } from "../types";
 /* eslint-enable @typescript-eslint/no-unused-vars */
-import { CheckId } from "../config";
+import { DefaultCheckId } from "../config";
 
 export const generateProgressReport = (
   subprojects: SubProjConfig[],
@@ -103,7 +103,7 @@ export const statusToMark = (
   checksStatusLookup: Record<string, string>,
 ): string => {
   /* eslint-disable security/detect-object-injection */
-  if (check === CheckId) {
+  if (check === DefaultCheckId) {
     return ":cat:";
   }
   if (check in checksStatusLookup) {

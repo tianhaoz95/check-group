@@ -5,10 +5,10 @@ import {
   fetchConfig,
   parsePullRequestNumberFromPullRequestContext,
 } from "./core";
-import { CheckId } from "./config";
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Context } from "probot";
 /* eslint-enable @typescript-eslint/no-unused-vars */
+import { DefaultCheckId } from "./config";
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { PullRequestData } from "./types";
 /* eslint-enable @typescript-eslint/no-unused-vars */
@@ -41,7 +41,7 @@ export const checkRunEventHandler = async (
   /* eslint-enable @typescript-eslint/no-explicit-any */
 ): Promise<void> => {
   context.log.info("Check run event detected.");
-  if (context.payload["check_run"]["name"] == CheckId) {
+  if (context.payload["check_run"]["name"] == DefaultCheckId) {
     return;
   }
   const pullRequests: PullRequestData[] = extractPullRequestsFromCheckRunContext(

@@ -1,7 +1,7 @@
-import { CheckId } from "../config";
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import type { Context } from "probot";
 /* eslint-enable @typescript-eslint/no-unused-vars */
+import { DefaultCheckId } from "../config";
 import { StatusCodes } from "http-status-codes";
 
 /**
@@ -43,7 +43,7 @@ export const createStatus = async (
     "completed_at": completedAt,
     conclusion,
     "head_sha": sha,
-    "name": CheckId,
+    "name": DefaultCheckId,
     "output": {
       summary,
       "text": details,

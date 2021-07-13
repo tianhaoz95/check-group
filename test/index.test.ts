@@ -18,7 +18,7 @@ import {
   setPullRequestFiles,
 } from "./helpers/mocked_apis";
 import { BASIC_PULL_REQUEST_OPENED_EVENT } from "./helpers/events/pull_request/opened";
-import { CheckId } from "../src/config";
+import { DefaultCheckId } from "../src/config";
 import { getProbotApp } from "./helpers/init";
 import nock from "nock";
 
@@ -111,7 +111,7 @@ describe("integration tests", () => {
         },
         {
           conclusion: undefined,
-          name: CheckId,
+          name: DefaultCheckId,
           status: "queued",
         },
       ],
