@@ -1,3 +1,4 @@
+import { DefaultCheckId } from "../../config";
 import { parseUserConfig } from ".";
 
 describe("user config parser tests", () => {
@@ -8,13 +9,12 @@ describe("user config parser tests", () => {
   });
 
   test("invalid config returns default config", () => {
-    /* eslint-disable no-magic-numbers */
-    expect(parseUserConfig({}).subProjects.length).toEqual(0);
-    /* eslint-enable no-magic-numbers */
+    const expectedSubprojectCnt = 0;
+    expect(parseUserConfig({}).subProjects.length).toEqual(expectedSubprojectCnt);
   });
 
   test("missing fields returns default config", () => {
-    /* eslint-disable no-magic-numbers */
+    const expectedSubprojectCnt = 0;
     expect(
       parseUserConfig({
         "subprojects": [
@@ -23,8 +23,14 @@ describe("user config parser tests", () => {
           },
         ],
       }).subProjects.length,
-    ).toEqual(0);
-    /* eslint-enable no-magic-numbers */
+    ).toEqual(expectedSubprojectCnt);
+  });
+
+  test("use default service name", () => {
+    const config = parseUserConfig({
+      "subprojects": [],
+    });
+    expect(config.customServiceName).toEqual(DefaultCheckId);
   });
 
   test("parse correct config", () => {
@@ -43,13 +49,22 @@ describe("user config parser tests", () => {
         },
       ],
     });
-    /* eslint-disable no-magic-numbers */
-    expect(config.subProjects.length).toEqual(2);
-    expect(config.subProjects[0].id).toMatch("project_0");
-    expect(config.subProjects[1].paths[0].location).toMatch(
-      "projects/project_1/**",
+    const expectedSubprojectCnt = 2;
+    const projectIndexForIdVerification = 0;
+    const projectIndexForPathVerification = 1;
+    const pathIndexForVerification = 0;
+    const expectedProjectName = "project_0";
+    const expectedProjectPath = "projects/project_1/**";
+    const expectedServiceName = "custom_name";
+    expect(config.subProjects.length).toEqual(expectedSubprojectCnt);
+    // eslint-disable-next-line security/detect-object-injection
+    expect(config.subProjects[projectIndexForIdVerification].id).toMatch(expectedProjectName);
+    expect(
+      // eslint-disable-next-line security/detect-object-injection
+      config.subProjects[projectIndexForPathVerification].paths[pathIndexForVerification].location,
+    ).toMatch(
+      expectedProjectPath,
     );
-    expect(config.customServiceName).toMatch("custom_name");
-    /* eslint-enable no-magic-numbers */
+    expect(config.customServiceName).toMatch(expectedServiceName);
   });
 });
