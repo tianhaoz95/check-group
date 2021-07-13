@@ -29,6 +29,7 @@ describe("user config parser tests", () => {
 
   test("parse correct config", () => {
     const config = parseUserConfig({
+      "custom_service_name": "custom_name",
       "subprojects": [
         {
           "checks": ["project_0_check_0", "project_0_check_1"],
@@ -48,6 +49,7 @@ describe("user config parser tests", () => {
     expect(config.subProjects[1].paths[0].location).toMatch(
       "projects/project_1/**",
     );
+    expect(config.customServiceName).toMatch("custom_name");
     /* eslint-enable no-magic-numbers */
   });
 });

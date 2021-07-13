@@ -2,8 +2,8 @@
 import { CheckGroupConfig } from "../../types";
 /* eslint-enable @typescript-eslint/no-unused-vars */
 import { getDefaultConfig } from "./default_config";
+import { populateCustomServiceName } from "./populate_custom_service_name";
 import { populateSubprojects } from "./populate_subprojects";
-
 
 /**
  * Parses the typed configuration from the raw
@@ -20,7 +20,7 @@ export const parseUserConfig = (
   try {
     const config = defaultConfig;
     populateSubprojects(configData, config);
-    // TODO: add another parser to get the custom ID
+    populateCustomServiceName(configData, config);
     return config;
   } catch {
     return defaultConfig;
