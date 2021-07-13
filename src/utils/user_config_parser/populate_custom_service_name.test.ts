@@ -1,4 +1,5 @@
 import { CheckGroupConfig } from "../../types";
+import { DefaultCheckId } from "../../config";
 import { populateCustomServiceName } from "./populate_custom_service_name";
 
 describe("Populate custom service name helper tests", () => {
@@ -25,6 +26,6 @@ describe("Populate custom service name helper tests", () => {
     expect(() => {
       populateCustomServiceName(configData, config);
     }).not.toThrow();
-    expect(config.customServiceName).toBeUndefined();
+    expect(config.customServiceName).toMatch(DefaultCheckId);
   });
 });
