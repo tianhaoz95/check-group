@@ -1,7 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { CheckGroupConfig } from "../../types";
 /* eslint-enable @typescript-eslint/no-unused-vars */
+import { getDefaultConfig } from "./default_config";
 import { populateSubprojects } from "./populate_subprojects";
+
 
 /**
  * Parses the typed configuration from the raw
@@ -14,9 +16,7 @@ import { populateSubprojects } from "./populate_subprojects";
 export const parseUserConfig = (
   configData: Record<string, unknown>,
 ): CheckGroupConfig => {
-  const defaultConfig: CheckGroupConfig = {
-    subProjects: [],
-  };
+  const defaultConfig: CheckGroupConfig = getDefaultConfig();
   try {
     const config = defaultConfig;
     populateSubprojects(configData, config);
