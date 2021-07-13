@@ -1,2 +1,2 @@
-export const CheckId = "Check Group";
+export const DefaultCheckId = "Check Group";
 export const ConfigPath = "checkgroup.yml";

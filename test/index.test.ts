@@ -12,13 +12,14 @@ import {
 import {
   expectStartingCheck,
   expectSuccessCheck,
+  expectSuccessCheckWithCustomServiceName,
   setChecksForSha,
   setConfigToBasic,
   setConfigToNotFound,
   setPullRequestFiles,
 } from "./helpers/mocked_apis";
 import { BASIC_PULL_REQUEST_OPENED_EVENT } from "./helpers/events/pull_request/opened";
-import { CheckId } from "../src/config";
+import { DefaultCheckId } from "../src/config";
 import { getProbotApp } from "./helpers/init";
 import nock from "nock";
 
@@ -111,13 +112,66 @@ describe("integration tests", () => {
         },
         {
           conclusion: undefined,
-          name: CheckId,
+          name: DefaultCheckId,
           status: "queued",
         },
       ],
       DEFAULT_SHA,
     );
     expectSuccessCheck(DEFAULT_SHA);
+    await probot.receive({
+      name: "check_run",
+      payload: BASIC_CHECK_RUN_CREATED_EVENT_SINGLE_PULL_REQUEST,
+    });
+  });
+
+  test("check run pass correctly", async () => {
+    setConfigToBasic("custom_service_name");
+    setPullRequestFiles(BASIC_PULL_REQUEST_FILES, DEFAULT_PULL_REQUEST_NUMBER);
+    setChecksForSha(
+      [
+        {
+          conclusion: "success",
+          name: "project_0_check",
+          status: "completed",
+        },
+        {
+          conclusion: "success",
+          name: "common_check",
+          status: "completed",
+        },
+        {
+          conclusion: undefined,
+          name: DefaultCheckId,
+          status: "queued",
+        },
+      ],
+      DEFAULT_SHA,
+    );
+    const expectedServiceName = "awesome_name";
+    expectSuccessCheckWithCustomServiceName(expectedServiceName);
+    await probot.receive({
+      name: "check_run",
+      payload: BASIC_CHECK_RUN_CREATED_EVENT_SINGLE_PULL_REQUEST,
+    });
+  });
+
+  test("skips self triggering event", async () => {
+    setConfigToBasic("custom_service_name");
+    setPullRequestFiles(BASIC_PULL_REQUEST_FILES, DEFAULT_PULL_REQUEST_NUMBER);
+    setChecksForSha(
+      [
+        {
+          conclusion: "neutral",
+          name: "awesome_name",
+          status: "in_progress",
+        },
+      ],
+      DEFAULT_SHA,
+    );
+    // Since the check run is triggered by the app itself, no request
+    // should be sent to GitHub API. If anything is sent, it will be a
+    // nock address resolution error here. 
     await probot.receive({
       name: "check_run",
       payload: BASIC_CHECK_RUN_CREATED_EVENT_SINGLE_PULL_REQUEST,

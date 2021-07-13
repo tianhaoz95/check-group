@@ -1,12 +1,12 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { CheckGroupConfig, SubProjConfig } from "../types";
+/* eslint-enable @typescript-eslint/no-unused-vars */
 import {
   generateFailingTitle,
   generateProgressDetails,
   generateProgressTitle,
   generateSuccessTitle,
 } from "./generate_progress";
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { SubProjConfig } from "../types";
-/* eslint-enable @typescript-eslint/no-unused-vars */
 
 describe("generate progress tests", () => {
   const subprojects: SubProjConfig[] = [
@@ -30,6 +30,11 @@ describe("generate progress tests", () => {
     },
   ];
 
+  const config: CheckGroupConfig = {
+    customServiceName: "awesome_name",
+    subProjects: subprojects,
+  };
+
   const checksStatusLookup: Record<string, string> = {
     "p1_check": "success",
     "p2_check": "success",
@@ -37,12 +42,12 @@ describe("generate progress tests", () => {
 
   test("sanity check", () => {
     expect(() => {
-      generateProgressDetails(subprojects, checksStatusLookup);
+      generateProgressDetails(config.subProjects, checksStatusLookup, config);
     }).not.toThrow();
   });
 
   test("should include correct checks", () => {
-    const progress = generateProgressDetails(subprojects, checksStatusLookup);
+    const progress = generateProgressDetails(config.subProjects, checksStatusLookup, config);
     expect(progress).toContain("p1_check");
     expect(progress).toContain("p2_check");
   });
@@ -63,18 +68,18 @@ describe("generate progress tests", () => {
   });
 
   test("should include project names", () => {
-    const progress = generateProgressDetails(subprojects, checksStatusLookup);
+    const progress = generateProgressDetails(config.subProjects, checksStatusLookup, config);
     expect(progress).toContain("proj2");
     expect(progress).toContain("proj1");
   });
 
   test("should include avaialbe checks", () => {
-    const progress = generateProgressDetails(subprojects, checksStatusLookup);
+    const progress = generateProgressDetails(config.subProjects, checksStatusLookup, config);
     expect(progress).toContain("Currently received checks");
   });
 
   test("should include marks", () => {
-    const progress = generateProgressDetails(subprojects, checksStatusLookup);
+    const progress = generateProgressDetails(config.subProjects, checksStatusLookup, config);
     expect(progress).toContain(":heavy_check_mark:");
   });
 
@@ -84,8 +89,9 @@ describe("generate progress tests", () => {
       "p2_check": "failure",
     };
     const progress = generateProgressDetails(
-      subprojects,
+      config.subProjects,
       checksStatusLookupWithFailure,
+      config,
     );
     expect(progress).toContain(":heavy_check_mark:");
     expect(progress).toContain(":x:");
@@ -96,8 +102,9 @@ describe("generate progress tests", () => {
       "p1_check": "success",
     };
     const progress = generateProgressDetails(
-      subprojects,
+      config.subProjects,
       checksStatusLookupWithMissing,
+      config,
     );
     expect(progress).toContain(":heavy_check_mark:");
     expect(progress).toContain(":hourglass:");

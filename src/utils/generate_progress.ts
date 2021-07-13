@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { ProgressReport, SubProjConfig } from "../types";
+import { CheckGroupConfig, ProgressReport, SubProjConfig } from "../types";
 /* eslint-enable @typescript-eslint/no-unused-vars */
-import { CheckId } from "../config";
+import { DefaultCheckId } from "../config";
 
 export const generateProgressReport = (
   subprojects: SubProjConfig[],
@@ -101,23 +101,26 @@ export const generateProgressSummary = (
 export const statusToMark = (
   check: string,
   checksStatusLookup: Record<string, string>,
+  config: CheckGroupConfig,
 ): string => {
-  /* eslint-disable security/detect-object-injection */
-  if (check === CheckId) {
+  // TODO(@tianhaoz95): come up with better way to deal with dev
+  // and prod discrepancies.
+  if (check === DefaultCheckId || check == config.customServiceName) {
     return ":cat:";
   }
   if (check in checksStatusLookup) {
+    /* eslint-disable security/detect-object-injection */
     if (checksStatusLookup[check] == "success") {
       return ":heavy_check_mark:";
     }
     if (checksStatusLookup[check] == "failure") {
       return ":x:";
     }
+    /* eslint-enable security/detect-object-injection */
   } else {
     return ":hourglass:";
   }
   return ":interrobang:";
-  /* eslint-enable security/detect-object-injection */
 };
 
 /**
@@ -130,6 +133,7 @@ export const statusToMark = (
 export const generateProgressDetails = (
   subprojects: SubProjConfig[],
   checksStatusLookup: Record<string, string>,
+  config: CheckGroupConfig,
 ): string => {
   let progress = "";
   progress += "## Progress by sub-projects\n\n";
@@ -138,7 +142,7 @@ export const generateProgressDetails = (
     progress += "| Project Name | Current Status |\n";
     progress += "| ------------ | -------------- |\n";
     subproject.checks.forEach((check) => {
-      const mark = statusToMark(check.id, checksStatusLookup);
+      const mark = statusToMark(check.id, checksStatusLookup, config);
       progress += `| ${check.id} | ${mark} |\n`;
     });
     progress += "\n";
@@ -151,6 +155,7 @@ export const generateProgressDetails = (
     progress += `| ${avaiableCheck} | ${statusToMark(
       avaiableCheck,
       checksStatusLookup,
+      config,
     )} |\n`;
   }
   progress += "\n";

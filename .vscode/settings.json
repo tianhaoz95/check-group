@@ -36,5 +36,6 @@
     "smee",
     "socio",
     "subprojects"
-  ]
+  ],
+  "editor.tabSize": 2
 }
