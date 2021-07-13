@@ -62,7 +62,14 @@ export interface CheckGroupConfig {
    * The sub-project configurations.
    */
   subProjects: SubProjConfig[];
-  // TODO: add a field for custom service name
+  /**
+   * The name that will be displayed on the GitHub
+   * pull request check list. This requested to be
+   * customizable in #457 to make it more informative
+   * for developers that are less familiar with the
+   * workflows.
+   */
+  customServiceName?: string;
 }
 
 /**
