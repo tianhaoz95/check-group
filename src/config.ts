@@ -48,6 +48,10 @@ export const ErrorCheckTitle = "Error";
  */
 export const ErrorCheckSummary = "Whoops, the app encountered an error";
 
+/**
+ * The detailed message that will be displayed to the user when an
+ * error happened during the app run.
+ */
 export const ErrorCheckDetails = `
   Something went wrong, please file a issue
   [here](https://github.com/tianhaoz95/check-group/issues/new?assignees=&labels=bug&template=bug_report.md&title=%5BBUG%5D).
