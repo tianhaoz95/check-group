@@ -1,3 +1,4 @@
+import { DefaultCheckId, ErrorCheckDetails, ErrorCheckSummary, ErrorCheckTitle, StartCheckDetails, StartCheckSummary, StartCheckTitle } from "../config";
 import {
   extractShaFromCheckRunContext,
   extractShaFromPullRequestContext,
@@ -19,7 +20,6 @@ import type { CheckGroupConfig } from "../types";
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import type { Context } from "probot";
 /* eslint-enable @typescript-eslint/no-unused-vars */
-import { DefaultCheckId } from "../config";
 import { collectExpectedChecks } from "../utils/collect_expected_checks";
 import { createStatus } from "./create_status";
 import { extractPullRequestsFromCheckRunContext } from "./pull_getter";
@@ -78,9 +78,9 @@ export class CheckGroup {
         this.context.log.info("First time run. Post starting check.");
         await this.postStartingCheck(
           this.config.customServiceName,
-          "Started",
-          "Started",
-          "Started",
+          StartCheckTitle,
+          StartCheckSummary,
+          StartCheckDetails,
         );
       }
       if (conclusion === "all_passing") {
@@ -115,9 +115,9 @@ export class CheckGroup {
       // https://stackoverflow.com/questions/44678315/how-to-import-markdown-md-file-in-typescript
       await this.postFailingCheck(
         this.config.customServiceName,
-        "Unknown Error",
-        "Unknown Error",
-        "Unknown Error",
+        ErrorCheckTitle,
+        ErrorCheckSummary,
+        ErrorCheckDetails,
       );
     }
   }
