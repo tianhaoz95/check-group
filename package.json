@@ -50,7 +50,7 @@
     "@typescript-eslint/parser": "^4.28.5",
     "eslint": "^7.31.0",
     "eslint-plugin-security": "^1.4.0",
-    "eslint-plugin-sort-keys-fix": "^1.1.1",
+    "eslint-plugin-sort-keys-fix": "^1.1.2",
     "eslint-plugin-typescript": "^0.14.0",
     "jest": "^27.0.6",
     "nock": "^13.1.1",
