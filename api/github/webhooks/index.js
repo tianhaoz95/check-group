@@ -1,13 +1,13 @@
-// This is used for Vercel deployment
+// api/github/webhooks/index.js
+// For more details on the suggested way to deploy to Vercel:
+//  https://probot.github.io/docs/deployment/#vercel
+const { createNodeMiddleware, createProbot } = require("probot");
 
-import { createNodeMiddleware, createProbot } from "probot";
-
-import app from "../../../lib/index";
-
+const app = require("../../../../lib/index");
 const probot = createProbot({
   defaults: {
     webhookPath: "/api/github/webhooks",
   },
 });
 
-export default createNodeMiddleware(app, { probot });
+module.exports = createNodeMiddleware(app, { probot });
