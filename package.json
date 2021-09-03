@@ -25,7 +25,8 @@
     "prettier:format": "prettier --write .",
     "eslint": "eslint src test --ext .ts",
     "eslint:format": "eslint --fix src test --ext .ts",
-    "format": "npm run prettier:format && npm run eslint:format"
+    "format": "npm run prettier:format && npm run eslint:format",
+    "vercel-dev": "vercel dev"
   },
   "dependencies": {
     "@octokit/rest": "^18.10.0",
@@ -40,7 +41,8 @@
     "minimatch": "^3.0.4",
     "prettier": "^2.3.2",
     "prettyjson": "^1.2.1",
-    "probot": "^12.1.1"
+    "probot": "^12.1.1",
+    "vercel": "^23.1.2"
   },
   "devDependencies": {
     "@types/jest": "^27.0.1",

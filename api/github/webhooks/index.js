@@ -1,13 +1,9 @@
-// api/github/webhooks/index.js
 // For more details on the suggested way to deploy to Vercel:
 //  https://probot.github.io/docs/deployment/#vercel
-const { createNodeMiddleware, createProbot } = require("probot");
+import { createNodeMiddleware, createProbot } from "probot";
+import app from "../../../lib";
 
-const app = require("../../lib/index");
-const probot = createProbot({
-  defaults: {
-    webhookPath: "/api/github/webhooks",
-  },
+module.exports = createNodeMiddleware(app, {
+  probot: createProbot(),
+  webhooksPath: "/api/github/webhooks",
 });
-
-module.exports = createNodeMiddleware(app, { probot });
