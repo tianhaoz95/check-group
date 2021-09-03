@@ -1,7 +1,7 @@
-import { createNodeMiddleware, createProbot } from "probot";
-import app from "../../lib/index";
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const { createNodeMiddleware, createProbot } = require("probot");
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const app = require("../../lib/index");
+const probot = createProbot();
 
-module.exports = createNodeMiddleware(app, {
-  probot: createProbot(),
-  webhooksPath: "/api/github/webhooks",
-});
+module.exports = createNodeMiddleware(app, { probot, webhooksPath: "/api/github/webhooks" });
