@@ -4,12 +4,4 @@ const { createNodeMiddleware, createProbot } = require("probot");
 const app = require("../../../lib/index");
 const probot = createProbot();
 
-const middleware = createNodeMiddleware(app, { probot, webhooksPath: "/api/github/webhooks" });
-
-module.exports = (request, response) => {
-  if (request.method !== "POST") {
-    response.redirect("/");
-  }
-
-  middleware(request, response);
-};
+module.exports = createNodeMiddleware(app, { probot, webhooksPath: "/api/github/webhooks" });
