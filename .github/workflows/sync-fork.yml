@@ -11,7 +11,7 @@ jobs:
     steps:
       - uses: tgymnich/fork-sync@v1.5
         with:
-          owner: GitHubSuperpower
+          owner: tianhaoz95
           token: ${{ secrets.REPO_ACCESS_TOKEN }}
           base: master
           head: master
