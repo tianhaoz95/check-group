@@ -12,6 +12,6 @@ jobs:
       - uses: tgymnich/fork-sync@v1.4
         with:
           owner: tianhaoz95
-          token: ${TIANHAOZ_GITHUB_TOKEN}
+          token: ${REPO_ACCESS_TOKEN}
           base: master
           head: master
