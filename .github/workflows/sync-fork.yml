@@ -12,6 +12,7 @@ jobs:
       - uses: tgymnich/fork-sync@v1.4
         with:
           owner: tianhaoz95
-          token: ${REPO_ACCESS_TOKEN}
+          token: ${{ secrets.REPO_ACCESS_TOKEN }}
+          auto_approve: true
           base: master
           head: master
