@@ -121,6 +121,12 @@ Note: since I don't use GitHub Enterprise, the steps above might not fully refle
 - [Repository for testing](https://github.com/tianhaoz95/check-group-test)
 - [Repository for deploying to Vercel](https://github.com/tianhaoz95/check-group/tree/master)
 
+## Help us host the service
+
+To make sure that the service is reliable, I will need to host it on a paid service.
+
+You can help us out by sponsoring the service at [Buy Me a Coffee](https://www.buymeacoffee.com/jacksonzhou666). Really appreciate your support!
+
 ## License
 
 [ISC](LICENSE) © 2020 Tianhao Zhou [tianhaoz@umich.edu](mailto:tianhaoz@umich.edu)
