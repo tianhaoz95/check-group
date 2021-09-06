@@ -1,11 +1,9 @@
 {
-  "name": "check-group",
-  "version": "1.0.0",
-  "private": true,
+  "name": "@GitHubSuperpower/check-group",
+  "version": "1.0.1",
   "description": "A app to group checks based on sub-projects.",
   "author": "Tianhao Zhou <tianhaoz@umich.edu>",
   "license": "ISC",
-  "repository": "https://github.com/tianhaoz95/check-group.git",
   "homepage": "https://github.com/tianhaoz95/check-group",
   "bugs": "https://github.com/tianhaoz95/check-group/issues",
   "keywords": [
@@ -13,10 +11,17 @@
     "github",
     "probot-app"
   ],
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "publishConfig": {
+    "registry":"https://npm.pkg.github.com"
+  },
+  "repository": "https://github.com/GitHubSuperpower/check-group",
   "scripts": {
     "build": "tsc",
     "start": "probot run ./lib/index.js",
     "start:watch": "tsc && (tsc -w --preserveWatchOutput & nodemon)",
+    "start:docs": "docsify serve docs",
     "test": "LOG_LEVEL=fatal jest",
     "test:debug": "jest",
     "remark": "remark .",
@@ -50,6 +55,7 @@
     "@types/node": "^16.7.10",
     "@typescript-eslint/eslint-plugin": "^4.30.0",
     "@typescript-eslint/parser": "^4.30.0",
+    "docsify-cli": "^4.4.2",
     "eslint": "^7.32.0",
     "eslint-plugin-security": "^1.4.0",
     "eslint-plugin-sort-keys-fix": "^1.1.2",
