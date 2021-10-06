@@ -41,4 +41,20 @@ describe("Populate subprojects helper tests", () => {
     // eslint-disable-next-line security/detect-object-injection
     expect(config.subProjects[availableIndex].paths.length).toEqual(expectedProjectPathsCnt);
   });
+
+  test("Misconfigured project missing checks should fail", () => {
+    const configData: Record<string, unknown> = {
+      "subprojects": [
+        {
+          "id": "test-proj",
+          "paths": [
+            "/example/path/1",
+            "/example/path/2",
+          ],
+        },
+      ],
+    };
+    const config: CheckGroupConfig = getDefaultConfig();
+    expect(() => populateSubprojects(configData, config)).toThrowError();
+  });
 });
