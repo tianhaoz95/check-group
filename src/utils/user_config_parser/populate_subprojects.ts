@@ -38,6 +38,7 @@ export function populateSubprojects(configData: Record<string, unknown>, config:
         };
         config.subProjects.push(subprojConfig);
       } else {
+        // TODO: make the debugging message more details (e.g., show what is missing).
         config.debugInfo = {
           configError: true,
           configErrorMsg: "Essential fields missing from config.",
