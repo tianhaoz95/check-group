@@ -160,5 +160,9 @@ export const generateProgressDetails = (
   }
   progress += "\n";
   /* eslint-enable security/detect-object-injection */
+  if (config.debugInfo) {
+    progress += "Found following issues:";
+    // TODO(@tianhaoz95): add the simplified debug info.
+  }
   return progress;
 };
