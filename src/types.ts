@@ -57,6 +57,20 @@ export interface SubProjConfig {
   checks: SubProjCheck[];
 }
 
+export interface DebugInfo {
+  /**
+   * A bit to indicate if there is an error in config
+   * parsing phase since this is not considered as a 
+   * fatal error.
+   */
+  configError?: boolean;
+  /**
+   * A message to indicate the error in config parsing
+   * which can be helpful for debugging.
+   */
+  configErrorMsg?: string;
+}
+
 export interface CheckGroupConfig {
   /**
    * The sub-project configurations.
@@ -70,6 +84,11 @@ export interface CheckGroupConfig {
    * workflows.
    */
   customServiceName: string;
+  /**
+   * Extra debug information that will be used to
+   * help developers to debug issues.
+   */
+  debugInfo?: DebugInfo;
 }
 
 /**

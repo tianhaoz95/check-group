@@ -38,6 +38,10 @@ export function populateSubprojects(configData: Record<string, unknown>, config:
         };
         config.subProjects.push(subprojConfig);
       } else {
+        config.debugInfo = {
+          configError: true,
+          configErrorMsg: "Essential fields missing from config.",
+        };
         throw Error("id, paths, checks not all found in subproject");
       }
     });
