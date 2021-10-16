@@ -37,5 +37,11 @@
     "socio",
     "subprojects"
   ],
-  "editor.tabSize": 2
+  "editor.tabSize": 2,
+  "markdownlint.config": {
+    "MD028": false,
+    "MD025": {
+      "front_matter_title": ""
+    }
+  }
 }
