@@ -34,7 +34,7 @@
     "vercel-dev": "vercel dev"
   },
   "dependencies": {
-    "@octokit/rest": "^18.10.0",
+    "@octokit/rest": "^18.12.0",
     "@octokit/types": "^6.34.0",
     "@octokit/webhooks": "^9.17.0",
     "@sentry/node": "^6.12.0",
