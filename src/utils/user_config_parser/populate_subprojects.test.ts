@@ -42,7 +42,7 @@ describe("Populate subprojects helper tests", () => {
     expect(config.subProjects[availableIndex].paths.length).toEqual(expectedProjectPathsCnt);
   });
 
-  test("Misconfigured project missing checks should fail", () => {
+  test("Misconfigured project missing checks should emit warnings", () => {
     const configData: Record<string, unknown> = {
       "subprojects": [
         {
@@ -55,6 +55,10 @@ describe("Populate subprojects helper tests", () => {
       ],
     };
     const config: CheckGroupConfig = getDefaultConfig();
-    expect(() => populateSubprojects(configData, config)).toThrowError();
+    populateSubprojects(configData, config);
+    const expectedSubprojectCnt = 1;
+    const expectedWarningCnt = 1;
+    expect(config.subProjects.length).toEqual(expectedSubprojectCnt);
+    expect(config.debugInfo.length).toEqual(expectedWarningCnt);
   });
 });

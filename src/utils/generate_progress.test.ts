@@ -32,6 +32,7 @@ describe("generate progress tests", () => {
 
   const config: CheckGroupConfig = {
     customServiceName: "awesome_name",
+    debugInfo: [],
     subProjects: subprojects,
   };
 

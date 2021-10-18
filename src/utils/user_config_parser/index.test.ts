@@ -13,17 +13,18 @@ describe("user config parser tests", () => {
     expect(parseUserConfig({}).subProjects.length).toEqual(expectedSubprojectCnt);
   });
 
-  test("missing fields returns default config", () => {
-    const expectedSubprojectCnt = 0;
-    expect(
-      parseUserConfig({
-        "subprojects": [
-          {
-            "id": "partially_broken_project",
-          },
-        ],
-      }).subProjects.length,
-    ).toEqual(expectedSubprojectCnt);
+  test("missing fields returns default config with warning", () => {
+    const expectedSubprojectCnt = 1;
+    const expectedWarningCnt = 2; // Missing fields: checks and paths
+    const parsedUserConfig = parseUserConfig({
+      "subprojects": [
+        {
+          "id": "partially_broken_project",
+        },
+      ],
+    });
+    expect(parsedUserConfig.subProjects.length).toEqual(expectedSubprojectCnt);
+    expect(parsedUserConfig.debugInfo.length).toEqual(expectedWarningCnt);
   });
 
   test("use default service name", () => {

@@ -88,7 +88,7 @@ export interface CheckGroupConfig {
    * Extra debug information that will be used to
    * help developers to debug issues.
    */
-  debugInfo?: DebugInfo;
+  debugInfo: DebugInfo[];
 }
 
 /**
