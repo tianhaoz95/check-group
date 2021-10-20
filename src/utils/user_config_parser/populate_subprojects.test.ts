@@ -1,8 +1,21 @@
-import { CheckGroupConfig } from "../../types";
+import { CheckGroupConfig, SubProjConfig } from "../../types";
 import { getDefaultConfig } from "./default_config";
 import { populateSubprojects } from "./populate_subprojects";
 
 describe("Populate subprojects helper tests", () => {
+  test("Missing ID should fail", () => {
+    const rawConfig: Record<string, unknown> =  {
+      "checks": [],
+      "paths": [],
+    };
+    const config: SubProjConfig = {
+      checks: [],
+      id: "Unknown",
+      paths: [],
+    };
+    expect(() => parseProjectId(rawConfig, config)).toThrow();
+  });
+
   test("Sanity check with empty config", () => {
     const configData: Record<string, unknown> = {
       "subprojects": [],
@@ -62,3 +75,7 @@ describe("Populate subprojects helper tests", () => {
     expect(config.debugInfo.length).toEqual(expectedWarningCnt);
   });
 });
+function parseProjectId(rawConfig: Record<string, unknown>, config: SubProjConfig): any {
+  throw new Error("Function not implemented.");
+}
+

@@ -1,13 +1,20 @@
 import { CheckGroupConfig, SubProjCheck, SubProjConfig, SubProjPath } from "../../types";
 
-function parseProjectId(subprojData: Record<string, unknown>, subprojConfig: SubProjConfig, config: CheckGroupConfig): void {
+/**
+ * Parses the structured ID into sub-project data from the raw user config.
+ * 
+ * The ID is required for the sub-project since it is hard to give the user
+ * any useful information for debugging if the ID that is used to identify the
+ * location of the issue is missing. In this case, it will be better to bail.
+ * 
+ * @param subprojData The raw data from the config file.
+ * @param subprojConfig The structured data for the sub-project.
+ */
+function parseProjectId(subprojData: Record<string, unknown>, subprojConfig: SubProjConfig): void {
   if ("id" in subprojData) {
     subprojConfig.id = subprojData["id"] as string;
   } else {
-    config.debugInfo.push({
-      configError: true,
-      configErrorMsg: "Essential fields missing from config.",
-    });
+    throw new Error("Essential field (id) missing from config.");
   }
 }
 
@@ -64,7 +71,7 @@ export function populateSubprojects(configData: Record<string, unknown>, config:
         id: "Unknown",
         paths: [],
       };
-      parseProjectId(subprojData, subprojConfig, config);
+      parseProjectId(subprojData, subprojConfig);
       parseProjectPaths(subprojData, subprojConfig, config);
       parseProjectChecks(subprojData, subprojConfig, config);
       config.subProjects.push(subprojConfig);
