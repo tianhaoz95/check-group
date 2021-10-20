@@ -20,12 +20,9 @@
     ]
   },
   "cSpell.words": [
+    "checkgroup",
     "Codacy",
     "Codecov",
-    "TIANHAOZ",
-    "Tianhao",
-    "Zhou",
-    "checkgroup",
     "docsify",
     "jsdelivr",
     "lcov",
@@ -35,7 +32,11 @@
     "probot",
     "smee",
     "socio",
-    "subprojects"
+    "subproj",
+    "subprojects",
+    "Tianhao",
+    "TIANHAOZ",
+    "Zhou"
   ],
   "editor.tabSize": 2,
   "markdownlint.config": {
