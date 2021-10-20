@@ -171,7 +171,7 @@ describe("integration tests", () => {
     );
     // Since the check run is triggered by the app itself, no request
     // should be sent to GitHub API. If anything is sent, it will be a
-    // nock address resolution error here. 
+    // nock address resolution error here.
     await probot.receive({
       name: "check_run",
       payload: BASIC_CHECK_RUN_CREATED_EVENT_SINGLE_PULL_REQUEST,

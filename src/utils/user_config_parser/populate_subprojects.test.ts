@@ -1,10 +1,10 @@
 import { CheckGroupConfig, SubProjConfig } from "../../types";
+import { parseProjectId, populateSubprojects } from "./populate_subprojects";
 import { getDefaultConfig } from "./default_config";
-import { populateSubprojects } from "./populate_subprojects";
 
 describe("Populate subprojects helper tests", () => {
   test("Missing ID should fail", () => {
-    const rawConfig: Record<string, unknown> =  {
+    const rawConfig: Record<string, unknown> = {
       "checks": [],
       "paths": [],
     };
@@ -14,6 +14,21 @@ describe("Populate subprojects helper tests", () => {
       paths: [],
     };
     expect(() => parseProjectId(rawConfig, config)).toThrow();
+  });
+
+  test("Correctly parse project ID", () => {
+    const rawConfig: Record<string, unknown> = {
+      "checks": [],
+      "id": "foo",
+      "paths": [],
+    };
+    const config: SubProjConfig = {
+      checks: [],
+      id: "Unknown",
+      paths: [],
+    };
+    parseProjectId(rawConfig, config);
+    expect(config.id).toMatch("foo");
   });
 
   test("Sanity check with empty config", () => {
@@ -30,15 +45,9 @@ describe("Populate subprojects helper tests", () => {
     const configData: Record<string, unknown> = {
       "subprojects": [
         {
-          "checks": [
-            "test-check-1",
-            "test-check-2",
-          ],
+          "checks": ["test-check-1", "test-check-2"],
           "id": "test-proj",
-          "paths": [
-            "/example/path/1",
-            "/example/path/2",
-          ],
+          "paths": ["/example/path/1", "/example/path/2"],
         },
       ],
     };
@@ -50,9 +59,13 @@ describe("Populate subprojects helper tests", () => {
     const expectedProjectPathsCnt = 2;
     expect(config.subProjects.length).toEqual(expectedSubprojectCnt);
     // eslint-disable-next-line security/detect-object-injection
-    expect(config.subProjects[availableIndex].checks.length).toEqual(expectedProjectChecksCnt);
+    expect(config.subProjects[availableIndex].checks.length).toEqual(
+      expectedProjectChecksCnt,
+    );
     // eslint-disable-next-line security/detect-object-injection
-    expect(config.subProjects[availableIndex].paths.length).toEqual(expectedProjectPathsCnt);
+    expect(config.subProjects[availableIndex].paths.length).toEqual(
+      expectedProjectPathsCnt,
+    );
   });
 
   test("Misconfigured project missing checks should emit warnings", () => {
@@ -60,10 +73,7 @@ describe("Populate subprojects helper tests", () => {
       "subprojects": [
         {
           "id": "test-proj",
-          "paths": [
-            "/example/path/1",
-            "/example/path/2",
-          ],
+          "paths": ["/example/path/1", "/example/path/2"],
         },
       ],
     };
@@ -75,7 +85,3 @@ describe("Populate subprojects helper tests", () => {
     expect(config.debugInfo.length).toEqual(expectedWarningCnt);
   });
 });
-function parseProjectId(rawConfig: Record<string, unknown>, config: SubProjConfig): any {
-  throw new Error("Function not implemented.");
-}
-

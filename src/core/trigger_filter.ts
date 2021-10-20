@@ -14,13 +14,16 @@ import { DefaultCheckId } from "../config";
  * @param {Context<"check_run">} context
  * @param {CheckGroupConfig} config
  **/
-export const isTriggeredBySelf = (context: Context<"check_run">, config: CheckGroupConfig): boolean => {
+export const isTriggeredBySelf = (
+  context: Context<"check_run">,
+  config: CheckGroupConfig,
+): boolean => {
   context.log.info(`
     Compare check name ${context.payload["check_run"]["name"]}
     and self service name ${config.customServiceName}.
   `);
   if (
-    context.payload["check_run"]["name"] == config.customServiceName
+    context.payload["check_run"]["name"] == config.customServiceName ||
     // TODO(@tianhaoz95): remove this check once there is a better approach.
     // This is needed for now because in the test repository at
     // https://github.com/tianhaoz95/check-group-test
@@ -30,7 +33,7 @@ export const isTriggeredBySelf = (context: Context<"check_run">, config: CheckGr
     // this will prevent them from triggering each other infinitely,
     // but for future name changes, this might now work. Need to come
     // up with a more systematic approach to prevent cross triggering.
-    || context.payload["check_run"]["name"] == DefaultCheckId
+    context.payload["check_run"]["name"] == DefaultCheckId
   ) {
     context.log.info("Self triggering detected. Skip.");
     return true;

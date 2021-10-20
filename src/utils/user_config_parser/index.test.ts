@@ -10,7 +10,9 @@ describe("user config parser tests", () => {
 
   test("invalid config returns default config", () => {
     const expectedSubprojectCnt = 0;
-    expect(parseUserConfig({}).subProjects.length).toEqual(expectedSubprojectCnt);
+    expect(parseUserConfig({}).subProjects.length).toEqual(
+      expectedSubprojectCnt,
+    );
   });
 
   test("missing fields returns default config with warning", () => {
@@ -59,13 +61,15 @@ describe("user config parser tests", () => {
     const expectedServiceName = "custom_name";
     expect(config.subProjects.length).toEqual(expectedSubprojectCnt);
     // eslint-disable-next-line security/detect-object-injection
-    expect(config.subProjects[projectIndexForIdVerification].id).toMatch(expectedProjectName);
+    expect(config.subProjects[projectIndexForIdVerification].id).toMatch(
+      expectedProjectName,
+    );
     expect(
       // eslint-disable-next-line security/detect-object-injection
-      config.subProjects[projectIndexForPathVerification].paths[pathIndexForVerification].location,
-    ).toMatch(
-      expectedProjectPath,
-    );
+      config.subProjects[projectIndexForPathVerification].paths[
+        pathIndexForVerification
+      ].location,
+    ).toMatch(expectedProjectPath);
     expect(config.customServiceName).toMatch(expectedServiceName);
   });
 });

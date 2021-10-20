@@ -60,7 +60,7 @@ export interface SubProjConfig {
 export interface DebugInfo {
   /**
    * A bit to indicate if there is an error in config
-   * parsing phase since this is not considered as a 
+   * parsing phase since this is not considered as a
    * fatal error.
    */
   configError?: boolean;

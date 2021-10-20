@@ -23,7 +23,8 @@ export const StartCheckTitle = "Started";
  * service status is "started". The user will see this after
  * clicking on the detail button next to the check.
  */
-export const StartCheckSummary = "The service has started gathering required statuses";
+export const StartCheckSummary =
+  "The service has started gathering required statuses";
 
 /**
  * The message that will be displayed as the details when the

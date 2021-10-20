@@ -1,24 +1,36 @@
-import { CheckGroupConfig, SubProjCheck, SubProjConfig, SubProjPath } from "../../types";
+import {
+  CheckGroupConfig,
+  SubProjCheck,
+  SubProjConfig,
+  SubProjPath,
+} from "../../types";
 
 /**
  * Parses the structured ID into sub-project data from the raw user config.
- * 
+ *
  * The ID is required for the sub-project since it is hard to give the user
  * any useful information for debugging if the ID that is used to identify the
  * location of the issue is missing. In this case, it will be better to bail.
- * 
+ *
  * @param subprojData The raw data from the config file.
  * @param subprojConfig The structured data for the sub-project.
  */
-function parseProjectId(subprojData: Record<string, unknown>, subprojConfig: SubProjConfig): void {
+export function parseProjectId(
+  subprojData: Record<string, unknown>,
+  subprojConfig: SubProjConfig,
+): void {
   if ("id" in subprojData) {
     subprojConfig.id = subprojData["id"] as string;
   } else {
-    throw new Error("Essential field (id) missing from config.");
+    throw Error("Essential field (id) missing from config.");
   }
 }
 
-function parseProjectPaths(subprojData: Record<string, unknown>, subprojConfig: SubProjConfig, config: CheckGroupConfig): void {
+export function parseProjectPaths(
+  subprojData: Record<string, unknown>,
+  subprojConfig: SubProjConfig,
+  config: CheckGroupConfig,
+): void {
   if ("paths" in subprojData) {
     const projPaths: SubProjPath[] = [];
     const locations: string[] = subprojData["paths"] as string[];
@@ -36,7 +48,11 @@ function parseProjectPaths(subprojData: Record<string, unknown>, subprojConfig: 
   }
 }
 
-function parseProjectChecks(subprojData: Record<string, unknown>, subprojConfig: SubProjConfig, config: CheckGroupConfig): void {
+export function parseProjectChecks(
+  subprojData: Record<string, unknown>,
+  subprojConfig: SubProjConfig,
+  config: CheckGroupConfig,
+): void {
   if ("checks" in subprojData) {
     const projChecks: SubProjCheck[] = [];
     const checksData: string[] = subprojData["checks"] as string[];
@@ -59,12 +75,15 @@ function parseProjectChecks(subprojData: Record<string, unknown>, subprojConfig:
  * @param {Record<string, unknown>} configData
  * @param {CheckGroupConfig} config
  **/
-export function populateSubprojects(configData: Record<string, unknown>, config: CheckGroupConfig): void {
+export function populateSubprojects(
+  configData: Record<string, unknown>,
+  config: CheckGroupConfig,
+): void {
   if ("subprojects" in configData) {
     const subProjectsData = configData["subprojects"] as Record<
-            string,
-            unknown
-        >[];
+      string,
+      unknown
+    >[];
     subProjectsData.forEach((subprojData) => {
       const subprojConfig: SubProjConfig = {
         checks: [],

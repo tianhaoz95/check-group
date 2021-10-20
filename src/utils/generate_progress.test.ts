@@ -48,7 +48,11 @@ describe("generate progress tests", () => {
   });
 
   test("should include correct checks", () => {
-    const progress = generateProgressDetails(config.subProjects, checksStatusLookup, config);
+    const progress = generateProgressDetails(
+      config.subProjects,
+      checksStatusLookup,
+      config,
+    );
     expect(progress).toContain("p1_check");
     expect(progress).toContain("p2_check");
   });
@@ -69,18 +73,30 @@ describe("generate progress tests", () => {
   });
 
   test("should include project names", () => {
-    const progress = generateProgressDetails(config.subProjects, checksStatusLookup, config);
+    const progress = generateProgressDetails(
+      config.subProjects,
+      checksStatusLookup,
+      config,
+    );
     expect(progress).toContain("proj2");
     expect(progress).toContain("proj1");
   });
 
   test("should include avaialbe checks", () => {
-    const progress = generateProgressDetails(config.subProjects, checksStatusLookup, config);
+    const progress = generateProgressDetails(
+      config.subProjects,
+      checksStatusLookup,
+      config,
+    );
     expect(progress).toContain("Currently received checks");
   });
 
   test("should include marks", () => {
-    const progress = generateProgressDetails(config.subProjects, checksStatusLookup, config);
+    const progress = generateProgressDetails(
+      config.subProjects,
+      checksStatusLookup,
+      config,
+    );
     expect(progress).toContain(":heavy_check_mark:");
   });
 
