@@ -1,12 +1,12 @@
+import { DefaultCheckId, DefaultDevCheckId } from "../config";
 import { CheckGroupConfig } from "../types";
 import { Context } from "probot";
-import { DefaultCheckId } from "../config";
 
 /**
  * Checks if the run is triggered by the check status posted
  * by the check itself.
  * For example, when the app bundles the checks snapshot at
- * a givem moment, it will post a new check status to indicate
+ * a given moment, it will post a new check status to indicate
  * the bundled status of other checks, which will then trigger
  * a new run since it is a check status change as well. To
  * prevent a infinite triggering loop, we should bail if we find
@@ -33,7 +33,8 @@ export const isTriggeredBySelf = (
     // this will prevent them from triggering each other infinitely,
     // but for future name changes, this might now work. Need to come
     // up with a more systematic approach to prevent cross triggering.
-    context.payload["check_run"]["name"] == DefaultCheckId
+    context.payload["check_run"]["name"] == DefaultCheckId ||
+    context.payload["check_run"]["name"] == DefaultDevCheckId
   ) {
     context.log.info("Self triggering detected. Skip.");
     return true;

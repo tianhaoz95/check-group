@@ -1,5 +1,10 @@
 import { CheckGroupConfig, SubProjConfig } from "../../types";
-import { parseProjectChecks, parseProjectId, parseProjectPaths, populateSubprojects } from "./populate_subprojects";
+import {
+  parseProjectChecks,
+  parseProjectId,
+  parseProjectPaths,
+  populateSubprojects,
+} from "./populate_subprojects";
 import { getDefaultConfig } from "./default_config";
 
 describe("Populate subprojects helper tests", () => {

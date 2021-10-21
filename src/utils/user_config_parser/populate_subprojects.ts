@@ -22,7 +22,7 @@ export function parseProjectId(
   if ("id" in subprojData) {
     subprojConfig.id = subprojData["id"] as string;
   } else {
-    throw Error("Essential field (id) missing from config.");
+    throw Error("Essential field missing from config: sub-project ID");
   }
 }
 
@@ -31,7 +31,7 @@ export function parseProjectPaths(
   subprojConfig: SubProjConfig,
   config: CheckGroupConfig,
 ): void {
-  if ("paths" in subprojData) {
+  if ("paths" in subprojData && subprojData["paths"] !== null) {
     const projPaths: SubProjPath[] = [];
     const locations: string[] = subprojData["paths"] as string[];
     locations.forEach((loc) => {
@@ -51,7 +51,7 @@ export function parseProjectPaths(
   } else {
     config.debugInfo.push({
       configError: true,
-      configErrorMsg: "Essential fields missing from config.",
+      configErrorMsg: `Essential fields missing from config for project ${subprojConfig.id}: paths`,
     });
   }
 }
@@ -61,7 +61,7 @@ export function parseProjectChecks(
   subprojConfig: SubProjConfig,
   config: CheckGroupConfig,
 ): void {
-  if ("checks" in subprojData) {
+  if ("checks" in subprojData && subprojData["checks"] !== null) {
     const projChecks: SubProjCheck[] = [];
     const checksData: string[] = subprojData["checks"] as string[];
     checksData.forEach((checkId) => {
@@ -81,7 +81,7 @@ export function parseProjectChecks(
   } else {
     config.debugInfo.push({
       configError: true,
-      configErrorMsg: "Essential fields missing from config.",
+      configErrorMsg: `Essential fields missing from config for project ${subprojConfig.id}: checks`,
     });
   }
 }
@@ -106,10 +106,19 @@ export function populateSubprojects(
         id: "Unknown",
         paths: [],
       };
-      parseProjectId(subprojData, subprojConfig);
-      parseProjectPaths(subprojData, subprojConfig, config);
-      parseProjectChecks(subprojData, subprojConfig, config);
-      config.subProjects.push(subprojConfig);
+      try {
+        parseProjectId(subprojData, subprojConfig);
+        parseProjectPaths(subprojData, subprojConfig, config);
+        parseProjectChecks(subprojData, subprojConfig, config);
+        config.subProjects.push(subprojConfig);
+      } catch (err) {
+        config.debugInfo.push({
+          configError: true,
+          configErrorMsg: `Error adding sub-project from data:\n ${JSON.stringify(
+            subprojData,
+          )}`,
+        });
+      }
     });
   } else {
     throw Error("subprojects not found in the user configuration file");

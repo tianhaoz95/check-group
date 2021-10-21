@@ -106,7 +106,7 @@ export const statusToMark = (
   // TODO(@tianhaoz95): come up with better way to deal with dev
   // and prod discrepancies.
   if (check === DefaultCheckId || check == config.customServiceName) {
-    return ":cat:";
+    return "Yep, that's me :cat:";
   }
   if (check in checksStatusLookup) {
     /* eslint-disable security/detect-object-injection */
