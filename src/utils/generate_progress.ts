@@ -151,18 +151,22 @@ export const generateProgressDetails = (
   progress += "| Project Name | Current Status |\n";
   progress += "| ------------ | -------------- |\n";
   /* eslint-disable security/detect-object-injection */
-  for (const avaiableCheck in checksStatusLookup) {
-    progress += `| ${avaiableCheck} | ${statusToMark(
-      avaiableCheck,
+  for (const availableCheck in checksStatusLookup) {
+    progress += `| ${availableCheck} | ${statusToMark(
+      availableCheck,
       checksStatusLookup,
       config,
     )} |\n`;
   }
   progress += "\n";
+  const minimumWarningCnt = 0;
   /* eslint-enable security/detect-object-injection */
-  if (config.debugInfo) {
-    progress += "Found following issues:";
+  if (config.debugInfo.length > minimumWarningCnt) {
+    progress += "Found following issues:\n\n";
     // TODO(@tianhaoz95): add the simplified debug info.
+    for (const debugInfo of config.debugInfo) {
+      progress += `* ${debugInfo.configErrorMsg}\n`;
+    }
   }
   return progress;
 };

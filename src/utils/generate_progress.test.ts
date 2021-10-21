@@ -82,7 +82,7 @@ describe("generate progress tests", () => {
     expect(progress).toContain("proj1");
   });
 
-  test("should include avaialbe checks", () => {
+  test("should include available checks", () => {
     const progress = generateProgressDetails(
       config.subProjects,
       checksStatusLookup,
