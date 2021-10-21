@@ -1,5 +1,5 @@
 import { CheckGroupConfig, SubProjConfig } from "../../types";
-import { parseProjectId, populateSubprojects } from "./populate_subprojects";
+import { parseProjectChecks, parseProjectId, parseProjectPaths, populateSubprojects } from "./populate_subprojects";
 import { getDefaultConfig } from "./default_config";
 
 describe("Populate subprojects helper tests", () => {
@@ -29,6 +29,96 @@ describe("Populate subprojects helper tests", () => {
     };
     parseProjectId(rawConfig, config);
     expect(config.id).toMatch("foo");
+  });
+
+  test("Empty paths should give warnings", () => {
+    const rawConfig: Record<string, unknown> = {
+      "checks": [],
+      "id": "foo",
+      "paths": [],
+    };
+    const config: SubProjConfig = {
+      checks: [],
+      id: "Unknown",
+      paths: [],
+    };
+    const overallConfig: CheckGroupConfig = {
+      customServiceName: "",
+      debugInfo: [],
+      subProjects: [],
+    };
+    const expectedWarningCnt = 1;
+    parseProjectPaths(rawConfig, config, overallConfig);
+    expect(config.paths).toEqual([]);
+    expect(overallConfig.debugInfo.length).toEqual(expectedWarningCnt);
+  });
+
+  test("Parses correct paths", () => {
+    const rawConfig: Record<string, unknown> = {
+      "checks": [],
+      "id": "foo",
+      "paths": ["**", "docs/**"],
+    };
+    const config: SubProjConfig = {
+      checks: [],
+      id: "Unknown",
+      paths: [],
+    };
+    const overallConfig: CheckGroupConfig = {
+      customServiceName: "",
+      debugInfo: [],
+      subProjects: [],
+    };
+    const expectedWarningCnt = 0;
+    const expectedPathCnt = 2;
+    parseProjectPaths(rawConfig, config, overallConfig);
+    expect(config.paths.length).toEqual(expectedPathCnt);
+    expect(overallConfig.debugInfo.length).toEqual(expectedWarningCnt);
+  });
+
+  test("Empty checks should give warnings", () => {
+    const rawConfig: Record<string, unknown> = {
+      "checks": [],
+      "id": "foo",
+      "paths": [],
+    };
+    const config: SubProjConfig = {
+      checks: [],
+      id: "Unknown",
+      paths: [],
+    };
+    const overallConfig: CheckGroupConfig = {
+      customServiceName: "",
+      debugInfo: [],
+      subProjects: [],
+    };
+    const expectedWarningCnt = 1;
+    parseProjectChecks(rawConfig, config, overallConfig);
+    expect(config.paths).toEqual([]);
+    expect(overallConfig.debugInfo.length).toEqual(expectedWarningCnt);
+  });
+
+  test("Parses correct checks", () => {
+    const rawConfig: Record<string, unknown> = {
+      "checks": ["foo", "bar"],
+      "id": "foo",
+      "paths": [],
+    };
+    const config: SubProjConfig = {
+      checks: [],
+      id: "Unknown",
+      paths: [],
+    };
+    const overallConfig: CheckGroupConfig = {
+      customServiceName: "",
+      debugInfo: [],
+      subProjects: [],
+    };
+    const expectedWarningCnt = 0;
+    const expectedCheckCnt = 2;
+    parseProjectChecks(rawConfig, config, overallConfig);
+    expect(config.checks.length).toEqual(expectedCheckCnt);
+    expect(overallConfig.debugInfo.length).toEqual(expectedWarningCnt);
   });
 
   test("Sanity check with empty config", () => {

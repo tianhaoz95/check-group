@@ -15,19 +15,26 @@
 
   // Add the IDs of extensions you want installed when the container is created.
   "extensions": [
-    "dbaeumer.vscode-eslint",
-    "github.copilot",
-    "streetsidesoftware.code-spell-checker",
-    "docsmsft.docs-authoring-pack",
-    "github.vscode-pull-request-github",
-    "eamodio.gitlens",
-    "yzhang.markdown-all-in-one",
-    "esbenp.prettier-vscode",
-    "gruntfuggly.todo-tree",
-    "visualstudioexptteam.vscodeintellicode",
-    "ms-vscode.wordcount",
-    "orta.vscode-jest"
-  ],
+	"dbaeumer.vscode-eslint",
+	"github.copilot",
+	"streetsidesoftware.code-spell-checker",
+	"docsmsft.docs-authoring-pack",
+	"github.vscode-pull-request-github",
+	"eamodio.gitlens",
+	"yzhang.markdown-all-in-one",
+	"esbenp.prettier-vscode",
+	"gruntfuggly.todo-tree",
+	"visualstudioexptteam.vscodeintellicode",
+	"ms-vscode.wordcount",
+	"orta.vscode-jest",
+	"ms-vscode.vscode-typescript-tslint-plugin",
+	"eg2.vscode-npm-script",
+	"rbbit.typescript-hero",
+	"christian-kohler.path-intellisense",
+	"stringham.move-ts",
+	"pmneo.tsimporter",
+	"gregorbiswanger.json2ts"
+],
 
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
   // "forwardPorts": [],

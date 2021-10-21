@@ -39,7 +39,15 @@ export function parseProjectPaths(
         location: loc,
       });
     });
-    subprojConfig.paths = projPaths;
+    const minPathCnt = 0;
+    if (projPaths.length > minPathCnt) {
+      subprojConfig.paths = projPaths;
+    } else {
+      config.debugInfo.push({
+        configError: true,
+        configErrorMsg: "Paths is empty.",
+      });
+    }
   } else {
     config.debugInfo.push({
       configError: true,
@@ -61,7 +69,15 @@ export function parseProjectChecks(
         id: checkId,
       });
     });
-    subprojConfig.checks = projChecks;
+    const minPathCnt = 0;
+    if (projChecks.length > minPathCnt) {
+      subprojConfig.checks = projChecks;
+    } else {
+      config.debugInfo.push({
+        configError: true,
+        configErrorMsg: "Checks is empty.",
+      });
+    }
   } else {
     config.debugInfo.push({
       configError: true,
