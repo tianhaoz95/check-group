@@ -34,7 +34,11 @@
 	"stringham.move-ts",
 	"pmneo.tsimporter",
 	"gregorbiswanger.json2ts",
-	"emeraldwalk.runonsave"
+	"emeraldwalk.runonsave",
+	"aaron-bond.better-comments",
+	"wayou.vscode-todo-highlight",
+	"redhat.vscode-xml",
+	"codezombiech.gitignore"
 ],
 
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
