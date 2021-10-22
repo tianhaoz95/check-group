@@ -14,7 +14,7 @@
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "publishConfig": {
-    "registry":"https://npm.pkg.github.com"
+    "registry": "https://npm.pkg.github.com"
   },
   "repository": "https://github.com/GitHubSuperpower/check-group",
   "scripts": {
@@ -52,7 +52,7 @@
   "devDependencies": {
     "@types/jest": "^27.0.2",
     "@types/nock": "^11.1.0",
-    "@types/node": "^16.11.0",
+    "@types/node": "^16.11.4",
     "@typescript-eslint/eslint-plugin": "^4.31.0",
     "@typescript-eslint/parser": "^4.31.0",
     "docsify-cli": "^4.4.3",

@@ -5,6 +5,12 @@
 export const DefaultCheckId = "Check Group";
 
 /**
+ * The default dev name that will be display on the list
+ * on the pull request page.
+ */
+export const DefaultDevCheckId = "Check Group (local)";
+
+/**
  * The default path to find the configuration file.
  * This is not customizable for now, but might be in
  * the future upon request.
@@ -23,7 +29,8 @@ export const StartCheckTitle = "Started";
  * service status is "started". The user will see this after
  * clicking on the detail button next to the check.
  */
-export const StartCheckSummary = "The service has started gathering required statuses";
+export const StartCheckSummary =
+  "The service has started gathering required statuses";
 
 /**
  * The message that will be displayed as the details when the

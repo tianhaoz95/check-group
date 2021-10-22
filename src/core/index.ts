@@ -1,4 +1,12 @@
-import { DefaultCheckId, ErrorCheckDetails, ErrorCheckSummary, ErrorCheckTitle, StartCheckDetails, StartCheckSummary, StartCheckTitle } from "../config";
+import {
+  DefaultCheckId,
+  ErrorCheckDetails,
+  ErrorCheckSummary,
+  ErrorCheckTitle,
+  StartCheckDetails,
+  StartCheckSummary,
+  StartCheckTitle,
+} from "../config";
 import {
   extractShaFromCheckRunContext,
   extractShaFromPullRequestContext,
@@ -136,14 +144,18 @@ export class CheckGroup {
       }),
     );
     const checkNames: Record<string, string> = {};
-    response.data.check_runs.forEach((
-      /* eslint-disable */
-      checkRun: any
-      /* eslint-enable */
-    ) => {
-      const conclusion = checkRun.conclusion ? checkRun.conclusion : "pending";
-      checkNames[checkRun.name] = conclusion;
-    });
+    response.data.check_runs.forEach(
+      (
+        /* eslint-disable */
+        checkRun: any,
+        /* eslint-enable */
+      ) => {
+        const conclusion = checkRun.conclusion
+          ? checkRun.conclusion
+          : "pending";
+        checkNames[checkRun.name] = conclusion;
+      },
+    );
     return checkNames;
   }
 
@@ -158,13 +170,15 @@ export class CheckGroup {
       }),
     );
     const filenames: string[] = [];
-    response.data.forEach((
-      /* eslint-disable */
-      pullRequestFile: any
-      /* eslint-enable */
-    ) => {
-      filenames.push(pullRequestFile.filename);
-    });
+    response.data.forEach(
+      (
+        /* eslint-disable */
+        pullRequestFile: any,
+        /* eslint-enable */
+      ) => {
+        filenames.push(pullRequestFile.filename);
+      },
+    );
     return filenames;
   }
 
