@@ -4,9 +4,18 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "start local server",
+      "label": "Start local server",
       "type": "shell",
       "command": "npm run build && npm start",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Format all",
+      "type": "shell",
+      "command": "npm run format",
       "options": {
         "cwd": "${workspaceFolder}"
       },

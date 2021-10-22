@@ -60,7 +60,7 @@ export interface SubProjConfig {
 /**
  * The information to show on the check status detail
  * page to help developers understand the issues.
- * 
+ *
  * TODO(@tianhaoz95): add field for details
  * TODO(@tianhaoz95): rename the field names to be more specific
  * TODO(@tianhaoz95): add a enum field to indicate the type warning/fatal/etc
@@ -70,7 +70,7 @@ export interface DebugInfo {
    * A bit to indicate if there is an error in config
    * parsing phase since this is not considered as a
    * fatal error.
-   * 
+   *
    * ! Deprecate this field as it is not being used.
    */
   configError?: boolean;
