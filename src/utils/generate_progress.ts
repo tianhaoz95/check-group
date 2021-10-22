@@ -103,8 +103,7 @@ export const statusToMark = (
   checksStatusLookup: Record<string, string>,
   config: CheckGroupConfig,
 ): string => {
-  // TODO(@tianhaoz95): come up with better way to deal with dev
-  // and prod discrepancies.
+  // TODO(@tianhaoz95): come up with better way to deal with dev and prod discrepancies.
   if (check === DefaultCheckId || check == config.customServiceName) {
     return "Yep, that's me :cat:";
   }
