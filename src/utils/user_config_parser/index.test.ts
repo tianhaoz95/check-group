@@ -10,20 +10,23 @@ describe("user config parser tests", () => {
 
   test("invalid config returns default config", () => {
     const expectedSubprojectCnt = 0;
-    expect(parseUserConfig({}).subProjects.length).toEqual(expectedSubprojectCnt);
+    expect(parseUserConfig({}).subProjects.length).toEqual(
+      expectedSubprojectCnt,
+    );
   });
 
-  test("missing fields returns default config", () => {
-    const expectedSubprojectCnt = 0;
-    expect(
-      parseUserConfig({
-        "subprojects": [
-          {
-            "id": "partially_broken_project",
-          },
-        ],
-      }).subProjects.length,
-    ).toEqual(expectedSubprojectCnt);
+  test("missing fields returns default config with warning", () => {
+    const expectedSubprojectCnt = 1;
+    const expectedWarningCnt = 2; // Missing fields: checks and paths
+    const parsedUserConfig = parseUserConfig({
+      "subprojects": [
+        {
+          "id": "partially_broken_project",
+        },
+      ],
+    });
+    expect(parsedUserConfig.subProjects.length).toEqual(expectedSubprojectCnt);
+    expect(parsedUserConfig.debugInfo.length).toEqual(expectedWarningCnt);
   });
 
   test("use default service name", () => {
@@ -58,13 +61,15 @@ describe("user config parser tests", () => {
     const expectedServiceName = "custom_name";
     expect(config.subProjects.length).toEqual(expectedSubprojectCnt);
     // eslint-disable-next-line security/detect-object-injection
-    expect(config.subProjects[projectIndexForIdVerification].id).toMatch(expectedProjectName);
+    expect(config.subProjects[projectIndexForIdVerification].id).toMatch(
+      expectedProjectName,
+    );
     expect(
       // eslint-disable-next-line security/detect-object-injection
-      config.subProjects[projectIndexForPathVerification].paths[pathIndexForVerification].location,
-    ).toMatch(
-      expectedProjectPath,
-    );
+      config.subProjects[projectIndexForPathVerification].paths[
+        pathIndexForVerification
+      ].location,
+    ).toMatch(expectedProjectPath);
     expect(config.customServiceName).toMatch(expectedServiceName);
   });
 });

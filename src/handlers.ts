@@ -22,9 +22,8 @@ export const pullRequestEventHandler = async (
   const startTime = new Date().toISOString();
   const sha = extractShaFromPullRequestContext(context);
   const config = await fetchConfig(context);
-  const pullRequestNumber = parsePullRequestNumberFromPullRequestContext(
-    context,
-  );
+  const pullRequestNumber =
+    parsePullRequestNumberFromPullRequestContext(context);
   const core = new CheckGroup(
     pullRequestNumber,
     config,
@@ -41,13 +40,14 @@ export const checkRunEventHandler = async (
   /* eslint-enable @typescript-eslint/no-explicit-any */
 ): Promise<void> => {
   const config = await fetchConfig(context);
-  context.log.info(`Check run event detected with ID ${config.customServiceName}`);
+  context.log.info(
+    `Check run event detected with ID ${config.customServiceName}`,
+  );
   if (isTriggeredBySelf(context, config)) {
     return;
   }
-  const pullRequests: PullRequestData[] = extractPullRequestsFromCheckRunContext(
-    context,
-  );
+  const pullRequests: PullRequestData[] =
+    extractPullRequestsFromCheckRunContext(context);
   const startTime = new Date().toISOString();
   for (const pullRequest of pullRequests) {
     context.log.info(

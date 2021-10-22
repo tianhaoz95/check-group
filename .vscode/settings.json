@@ -20,22 +20,52 @@
     ]
   },
   "cSpell.words": [
+    "checkgroup",
     "Codacy",
     "Codecov",
-    "TIANHAOZ",
-    "Tianhao",
-    "Zhou",
-    "checkgroup",
+    "dbaeumer",
     "docsify",
+    "docsmsft",
+    "eamodio",
+    "emeraldwalk",
+    "esbenp",
+    "gregorbiswanger",
+    "gruntfuggly",
+    "interrobang",
     "jsdelivr",
+    "kohler",
     "lcov",
     "mockito",
     "octokit",
+    "orta",
+    "pmneo",
     "prismjs",
     "probot",
+    "rbbit",
+    "runonsave",
     "smee",
     "socio",
-    "subprojects"
+    "stringham",
+    "subproj",
+    "subproject",
+    "subprojects",
+    "subprojs",
+    "Tianhao",
+    "TIANHAOZ",
+    "tsimporter",
+    "visualstudioexptteam",
+    "vscodeintellicode",
+    "wayou",
+    "wordcount",
+    "yzhang",
+    "Zhou"
   ],
-  "editor.tabSize": 2
+  "editor.tabSize": 2,
+  "markdownlint.config": {
+    "MD028": false,
+    "MD025": {
+      "front_matter_title": ""
+    }
+  },
+  "jest.jestCommandLine": "jest"
 }

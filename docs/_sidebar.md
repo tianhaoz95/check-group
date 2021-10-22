@@ -1,4 +1,5 @@
 - [Home](/)
+- [Details](details.md)
 - [Development](development.md)
 - [Privacy Policy](privacy.md)
 - [Code of Conduct](code.md)
