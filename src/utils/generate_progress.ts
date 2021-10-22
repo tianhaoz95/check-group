@@ -161,7 +161,7 @@ export const generateProgressDetails = (
   const minimumWarningCnt = 0;
   /* eslint-enable security/detect-object-injection */
   if (config.debugInfo.length > minimumWarningCnt) {
-    progress += "Found following issues:\n\n";
+    progress += "## Found following issues\n\n";
     // TODO(@tianhaoz95): add the simplified debug info.
     for (const debugInfo of config.debugInfo) {
       progress += `* ${debugInfo.configErrorMsg}\n`;

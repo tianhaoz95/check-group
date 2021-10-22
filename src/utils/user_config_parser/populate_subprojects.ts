@@ -51,7 +51,7 @@ export function parseProjectPaths(
   } else {
     config.debugInfo.push({
       configError: true,
-      configErrorMsg: `Essential fields missing from config for project ${subprojConfig.id}: paths`,
+      configErrorMsg: `:warning: Essential fields missing from config for project ${subprojConfig.id}: paths`,
     });
   }
 }
@@ -81,7 +81,7 @@ export function parseProjectChecks(
   } else {
     config.debugInfo.push({
       configError: true,
-      configErrorMsg: `Essential fields missing from config for project ${subprojConfig.id}: checks`,
+      configErrorMsg: `:warning: Essential fields missing from config for project ${subprojConfig.id}: checks`,
     });
   }
 }
