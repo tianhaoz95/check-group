@@ -1,0 +1,7 @@
+custom_service_name: "CI Summary"
+subprojects:
+  - id: common
+    paths:
+      - "**"
+    checks:
+      - "WIP"
