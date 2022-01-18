@@ -41,7 +41,7 @@
     "@sentry/tracing": "^6.16.0",
     "@types/minimatch": "^3.0.5",
     "@types/prettyjson": "0.0.30",
-    "dotenv": "^11.0.0",
+    "dotenv": "^14.2.0",
     "http-status-codes": "^2.2.0",
     "minimatch": "^3.0.4",
     "prettier": "^2.5.1",
