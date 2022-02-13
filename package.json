@@ -61,7 +61,7 @@
     "eslint-plugin-sort-keys-fix": "^1.1.2",
     "eslint-plugin-typescript": "^0.14.0",
     "jest": "^27.4.7",
-    "nock": "^13.2.2",
+    "nock": "^13.2.4",
     "nodemon": "^2.0.15",
     "remark": "^14.0.2",
     "remark-cli": "^10.0.1",
