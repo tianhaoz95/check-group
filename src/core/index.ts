@@ -138,13 +138,15 @@ export class CheckGroup {
    */
   async getPostedChecks(sha: string): Promise<Record<string, string>> {
     this.context.log.info(`Fetch posted check runs for ${sha}`);
-    const response = await this.context.octokit.checks.listForRef(
+    const checkRuns = await this.context.octokit.paginate(
+      this.context.octokit.checks.listForRef,
       this.context.repo({
         ref: sha,
       }),
+      (response) => response.data.check_runs,
     );
     const checkNames: Record<string, string> = {};
-    response.data.check_runs.forEach(
+    checkRuns.forEach(
       (
         /* eslint-disable */
         checkRun: any,
@@ -164,13 +166,15 @@ export class CheckGroup {
    * a pull request.
    */
   async files(): Promise<string[]> {
-    const response = await this.context.octokit.pulls.listFiles(
+    const pullRequestFiles = await this.context.octokit.paginate(
+      this.context.octokit.pulls.listFiles,
       this.context.repo({
         "pull_number": this.pullRequestNumber,
       }),
+      (response) => response.data,
     );
     const filenames: string[] = [];
-    response.data.forEach(
+    pullRequestFiles.forEach(
       (
         /* eslint-disable */
         pullRequestFile: any,
