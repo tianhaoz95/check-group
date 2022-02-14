@@ -33,6 +33,7 @@ import { createStatus } from "./create_status";
 import { extractPullRequestsFromCheckRunContext } from "./pull_getter";
 import { fetchConfig } from "./config_getter";
 import { matchFilenamesToSubprojects } from "../utils/subproj_matching";
+import prettyjson from "prettyjson";
 import { satisfyExpectedChecks } from "../utils/satisfy_expected_checks";
 
 /**
@@ -116,8 +117,9 @@ export class CheckGroup {
           generateProgressDetails(subprojs, postedChecks, this.config),
         );
       }
-    } catch {
-      this.context.log.info("The app crashed.");
+    } catch (err) {
+      this.context.log.error("The app crashed.");
+      this.context.log.error(prettyjson.render(err));
       // TODO(@tianhaoz95): Add a better error message. Consider using
       // markdown import suggested by
       // https://stackoverflow.com/questions/44678315/how-to-import-markdown-md-file-in-typescript
@@ -138,26 +140,34 @@ export class CheckGroup {
    */
   async getPostedChecks(sha: string): Promise<Record<string, string>> {
     this.context.log.info(`Fetch posted check runs for ${sha}`);
-    const checkRuns = await this.context.octokit.paginate(
-      this.context.octokit.checks.listForRef,
+    /**
+     * For some reason, directly await the response result in a null
+     * data. It could be that something I did was wrong, so leave a
+     * note here to avoid future confusion.
+     */
+    const responses = this.context.octokit.paginate.iterator(
+      this.context.octokit.rest.checks.listForRef,
       this.context.repo({
         ref: sha,
       }),
-      (response) => response.data.check_runs,
     );
     const checkNames: Record<string, string> = {};
-    checkRuns.forEach(
-      (
-        /* eslint-disable */
-        checkRun: any,
-        /* eslint-enable */
-      ) => {
-        const conclusion = checkRun.conclusion
-          ? checkRun.conclusion
-          : "pending";
-        checkNames[checkRun.name] = conclusion;
-      },
-    );
+    for await (const response of responses) {
+      const checkRuns = response.data;
+      this.context.log.info(`Fetched ${checkRuns.length} checks in the page.`);
+      checkRuns.forEach(
+        (
+          /* eslint-disable */
+          checkRun: any,
+          /* eslint-enable */
+        ) => {
+          const conclusion = checkRun.conclusion
+            ? checkRun.conclusion
+            : "pending";
+          checkNames[checkRun.name] = conclusion;
+        },
+      );
+    }
     return checkNames;
   }
 
