@@ -8,4 +8,4 @@ jobs:
         uses: hmarr/auto-approve-action@v2.1.0
         if: github.actor == 'dependabot[bot]'
         with:
-          github-token: "${{ secrets.TIANHAOZ_GITHUB_TOKEN }}"
+          github-token: "${{ secrets.GITHUB_TOKEN }}"
