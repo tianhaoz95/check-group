@@ -7,3 +7,6 @@ coverage
 lib
 
 .vercel
+
+# Locally generated artifacts
+/tmp
