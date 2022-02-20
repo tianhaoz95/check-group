@@ -17,6 +17,9 @@ Sentry.init({
   tracesSampleRate: 1.0,
 });
 
+/**
+ * Top level Probot app.
+ */
 export = (app: Probot): void => {
   app.on("pull_request", async (context: Context<"pull_request">) => {
     try {

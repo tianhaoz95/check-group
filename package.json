@@ -19,6 +19,7 @@
   "repository": "https://github.com/tianhaoz95/check-group",
   "scripts": {
     "build": "tsc",
+    "build:dev-docs": "typedoc",
     "start": "probot run ./lib/index.js",
     "start:watch": "tsc && (tsc -w --preserveWatchOutput & nodemon)",
     "start:docs": "docsify serve docs",
