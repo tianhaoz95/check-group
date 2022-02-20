@@ -23,5 +23,5 @@ jobs:
         run: npm run deploy:dev-docs
         if: >-
           github.event_name == 'push'
-        with:
+        env:
           GITHUB_TOKEN: ${{ secrets.DEV_DOC_DEPLOY_TOKEN }}
