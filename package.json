@@ -34,7 +34,7 @@
     "eslint:format": "eslint --fix src test --ext .ts",
     "format": "npm run prettier:format && npm run eslint:format",
     "vercel-dev": "vercel dev",
-    "deploy:dev-docs": "gh-pages -d tmp/dev-docs -r https://github.com/GitHubSuperpower/check-group-dev-doc.git"
+    "deploy:dev-docs": "gh-pages -d tmp/dev-docs -r https://github.com/GitHubSuperpower/check-group-dev-doc.git -u \"Tianhao Zhou <tianhaoz@umich.edu>\""
   },
   "dependencies": {
     "@octokit/rest": "^18.12.0",
