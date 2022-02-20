@@ -76,6 +76,7 @@
       "src/config.ts",
       "src/types.ts"
     ],
-    "out": "tmp/dev-docs"
+    "out": "tmp/dev-docs",
+    "readme": "DEVDOCS.md"
   }
 }
