@@ -1,3 +1,7 @@
+/**
+ * The entrypoint for the Probot app.
+ * @module
+ */
 import * as Sentry from "@sentry/node";
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Context, Probot } from "probot";
@@ -20,7 +24,7 @@ Sentry.init({
 /**
  * Top level Probot app.
  */
-export = (app: Probot): void => {
+const checkGroupApp = (app: Probot): void => {
   app.on("pull_request", async (context: Context<"pull_request">) => {
     try {
       await pullRequestEventHandler(context);
@@ -39,3 +43,5 @@ export = (app: Probot): void => {
     }
   });
 };
+
+export default checkGroupApp;
