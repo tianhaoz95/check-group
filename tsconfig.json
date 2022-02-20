@@ -69,6 +69,11 @@
     "pretty": false,
     "skipLibCheck": true
   },
+  /* This is used by TypeDoc to auto generate documentations. */
   "include": ["src/"],
-  "compileOnSave": false
+  "compileOnSave": false,
+  "typedocOptions": {
+    "entryPoints": ["src/index.ts"],
+    "out": "tmp/dev-docs"
+  }
 }
