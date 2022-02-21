@@ -126,7 +126,7 @@ Note: since I don't use GitHub Enterprise, the steps above might not fully refle
 ## Quick links
 
 - [Repository for testing](https://github.com/tianhaoz95/check-group-test)
-- [Repository for deploying to Vercel](https://github.com/tianhaoz95/check-group/tree/master)
+- [Documentation for Developers](https://githubsuperpower.github.io/check-group-dev-doc)
 
 ## Help us host the service
 
