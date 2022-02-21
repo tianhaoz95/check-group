@@ -1,3 +1,8 @@
+/**
+ * The user config parser utilities
+ * @module UserConfigParserUtils
+ */
+
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { CheckGroupConfig } from "../../types";
 /* eslint-enable @typescript-eslint/no-unused-vars */

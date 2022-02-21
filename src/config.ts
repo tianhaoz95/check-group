@@ -1,6 +1,6 @@
 /**
  * Project level configurations
- * @module
+ * @module Config
  */
 
 /**

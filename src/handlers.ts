@@ -1,6 +1,6 @@
 /**
  * GitHub webhook event handlers
- * @module
+ * @module Handlers
  */
 
 import {

@@ -1,6 +1,6 @@
 /**
  * The entrypoint for the Probot app.
- * @module
+ * @module CheckGroupApp
  */
 import * as Sentry from "@sentry/node";
 /* eslint-disable @typescript-eslint/no-unused-vars */
