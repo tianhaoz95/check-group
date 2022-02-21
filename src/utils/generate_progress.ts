@@ -1,3 +1,7 @@
+/**
+ * @module GenerateProgressReport
+ */
+
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { CheckGroupConfig, ProgressReport, SubProjConfig } from "../types";
 /* eslint-enable @typescript-eslint/no-unused-vars */

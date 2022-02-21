@@ -1,3 +1,7 @@
+/**
+ * @module Core
+ */
+
 import {
   DefaultCheckId,
   ErrorCheckDetails,

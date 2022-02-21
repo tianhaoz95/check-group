@@ -74,7 +74,18 @@
       "src/index.ts",
       "src/handlers.ts",
       "src/config.ts",
-      "src/types.ts"
+      "src/types.ts",
+      // Core modules
+      "src/core/index.ts",
+      // Utilities
+      "src/utils/collect_expected_checks.ts",
+      "src/utils/generate_progress.ts",
+      "src/utils/satisfy_expected_checks.ts",
+      "src/utils/subproj_matching.ts",
+      "src/utils/user_config_parser/index.ts",
+      "src/utils/user_config_parser/default_config.ts",
+      "src/utils/user_config_parser/populate_custom_service_name.ts",
+      "src/utils/user_config_parser/populate_subprojects.ts"
     ],
     "out": "tmp/dev-docs",
     "readme": "DEVDOCS.md"

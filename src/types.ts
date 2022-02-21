@@ -1,6 +1,6 @@
 /**
  * Check Group data types
- * @module
+ * @module CheckGroupTypes
  */
 
 /**
