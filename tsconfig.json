@@ -78,10 +78,7 @@
       // Core modules
       "src/core/index.ts",
       // Utilities
-      "src/utils/collect_expected_checks.ts",
-      "src/utils/generate_progress.ts",
-      "src/utils/satisfy_expected_checks.ts",
-      "src/utils/subproj_matching.ts",
+      "src/utils/index.ts",
       "src/utils/user_config_parser/index.ts",
       "src/utils/user_config_parser/default_config.ts",
       "src/utils/user_config_parser/populate_custom_service_name.ts",
