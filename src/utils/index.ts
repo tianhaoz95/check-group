@@ -17,6 +17,7 @@ import {
 } from "./generate_progress";
 import { collectExpectedChecks } from "./collect_expected_checks";
 import { matchFilenamesToSubprojects } from "./subproj_matching";
+import { parseUserConfig } from "./user_config_parser";
 import { satisfyExpectedChecks } from "./satisfy_expected_checks";
 
 export {
@@ -27,5 +28,6 @@ export {
   generateProgressTitle,
   generateSuccessTitle,
   matchFilenamesToSubprojects,
+  parseUserConfig,
   satisfyExpectedChecks,
 };
