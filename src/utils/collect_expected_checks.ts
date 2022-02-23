@@ -1,7 +1,3 @@
-/**
- * @module CollectExpectedChecks
- */
-
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { SubProjConfig } from "../types";
 /* eslint-enable @typescript-eslint/no-unused-vars */
