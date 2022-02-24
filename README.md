@@ -1,3 +1,7 @@
+# Check Group
+
+> :warning: **Check Group is now hosted on paid service to ensure better up time**: Check out the details [here](https://github.com/tianhaoz95/check-group/issues/769) and please consider [sponsoring the project](https://www.buymeacoffee.com/jacksonzhou666)!
+
 ![logo banner](https://github.com/tianhaoz95/check-group/raw/master/docs/assets/logo/banner_rounded.png)
 
 Groups CI checks based on the sub-projects for monorepo projects.
@@ -10,7 +14,7 @@ For the situation above, there is no easy way to guard the main branch with prot
 
 With **Check Group**, we can add one more CI check that is a combination of CI checks based on sub-projects of interests. The protected branch rule can depend only on the combined check.
 
-To fit the example above into the usecase, we can use the following configuration to tell Check Group how to collect required checks:
+To fit the example above into the use case, we can use the following configuration to tell Check Group how to collect required checks:
 
 ```yml
 subprojects:
@@ -119,7 +123,7 @@ Note: since I don't use GitHub Enterprise, the steps above might not fully refle
 ## Quick links
 
 - [Repository for testing](https://github.com/tianhaoz95/check-group-test)
-- [Repository for deploying to Vercel](https://github.com/tianhaoz95/check-group/tree/master)
+- [Documentation for Developers](https://githubsuperpower.github.io/check-group-dev-doc)
 
 ## Help us host the service
 

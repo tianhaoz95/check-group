@@ -1,4 +1,9 @@
 /**
+ * Project level configurations
+ * @module Config
+ */
+
+/**
  * The default name that will be display on the list
  * on the pull request page.
  */

@@ -7,7 +7,7 @@ import { ConfigPath } from "../config";
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Context } from "probot";
 /* eslint-enable @typescript-eslint/no-unused-vars */
-import { parseUserConfig } from "../utils/user_config_parser";
+import { parseUserConfig } from "../utils";
 
 /**
  * Fetches the app configuration from the user's repository.

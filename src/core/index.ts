@@ -1,3 +1,7 @@
+/**
+ * @module Core
+ */
+
 import {
   DefaultCheckId,
   ErrorCheckDetails,
@@ -17,7 +21,7 @@ import {
   generateProgressSummary,
   generateProgressTitle,
   generateSuccessTitle,
-} from "../utils/generate_progress";
+} from "../utils";
 import {
   parsePullRequestNumberFromPullRequestContext,
   parsePullRequestNumbersFromCheckRunContext,
@@ -28,12 +32,12 @@ import type { CheckGroupConfig } from "../types";
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import type { Context } from "probot";
 /* eslint-enable @typescript-eslint/no-unused-vars */
-import { collectExpectedChecks } from "../utils/collect_expected_checks";
+import { collectExpectedChecks } from "../utils";
 import { createStatus } from "./create_status";
 import { extractPullRequestsFromCheckRunContext } from "./pull_getter";
 import { fetchConfig } from "./config_getter";
-import { matchFilenamesToSubprojects } from "../utils/subproj_matching";
-import { satisfyExpectedChecks } from "../utils/satisfy_expected_checks";
+import { matchFilenamesToSubprojects } from "../utils";
+import { satisfyExpectedChecks } from "../utils";
 
 /**
  * The orchestration class.

@@ -1,3 +1,8 @@
+/**
+ * GitHub webhook event handlers
+ * @module Handlers
+ */
+
 import {
   CheckGroup,
   extractPullRequestsFromCheckRunContext,

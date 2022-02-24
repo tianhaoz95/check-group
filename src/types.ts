@@ -1,4 +1,9 @@
 /**
+ * Check Group data types
+ * @module CheckGroupTypes
+ */
+
+/**
  * The status of the current running checks
  * which will then be converted to the report
  * posted on the check.

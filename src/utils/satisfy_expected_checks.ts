@@ -6,10 +6,10 @@ import { CheckResult, SubProjConfig } from "../types";
  * Checks if all the sub-project requirements are satisfied.
  *
  * @param subProjs The sub-projects a certain pull request
- * mateches.
+ * matches.
  *
  * @param checksStatusLookup The checks that has already
- * posted progesses. The key is the check ID and the value
+ * posted progresses. The key is the check ID and the value
  * is the current check status.
  *
  * @returns The current status of checks fulfillment.

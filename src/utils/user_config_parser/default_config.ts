@@ -1,3 +1,7 @@
+/**
+ * @module DefaultConfigGetter
+ */
+
 import { CheckGroupConfig } from "../../types";
 
 /**

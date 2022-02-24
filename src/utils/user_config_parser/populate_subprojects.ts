@@ -1,3 +1,7 @@
+/**
+ * @module PopulateSubProjects
+ */
+
 import {
   CheckGroupConfig,
   SubProjCheck,

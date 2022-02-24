@@ -1,3 +1,7 @@
+/**
+ * @module PopulateCustomServiceName
+ */
+
 import { CheckGroupConfig } from "../../types";
 import { DefaultCheckId } from "../../config";
 
