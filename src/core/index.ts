@@ -142,7 +142,6 @@ export class CheckGroup {
    */
   async getPostedChecks(sha: string): Promise<Record<string, string>> {
     this.context.log.info(`Fetch posted check runs for ${sha}`);
-
     const checkRuns = await this.context.octokit.paginate(
       this.context.octokit.checks.listForRef,
       this.context.repo({
