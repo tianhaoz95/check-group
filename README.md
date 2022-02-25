@@ -1,6 +1,6 @@
 # Check Group
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 > :warning: **Check Group is now hosted on paid service to ensure better up time**: Check out the details [here](https://github.com/tianhaoz95/check-group/issues/769) and please consider [sponsoring the project](https://www.buymeacoffee.com/jacksonzhou666)!
@@ -150,6 +150,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   <tr>
     <td align="center"><a href="https://tianhaoz95.github.io"><img src="https://avatars.githubusercontent.com/u/16887772?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Tianhao Zhou</b></sub></a><br /><a href="https://github.com/tianhaoz95/check-group/commits?author=tianhaoz95" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/jtbeach"><img src="https://avatars.githubusercontent.com/u/12853460?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Joel Beach</b></sub></a><br /><a href="https://github.com/tianhaoz95/check-group/commits?author=jtbeach" title="Code">💻</a> <a href="#ideas-jtbeach" title="Ideas, Planning, & Feedback">🤔</a></td>
+    <td align="center"><a href="https://github.com/kevinheins"><img src="https://avatars.githubusercontent.com/u/6421447?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Kevin Heins</b></sub></a><br /><a href="#ideas-kevinheins" title="Ideas, Planning, & Feedback">🤔</a></td>
   </tr>
 </table>
 
