@@ -33,6 +33,16 @@
       "contributions": [
         "ideas"
       ]
+    },
+    {
+      "login": "paulijones",
+      "name": "Paul Jones",
+      "avatar_url": "https://avatars.githubusercontent.com/u/30155889?v=4",
+      "profile": "https://www.linkedin.com/in/paul-jones-b61011143/",
+      "contributions": [
+        "bug",
+        "ideas"
+      ]
     }
   ],
   "contributorsPerLine": 7,
