@@ -43,6 +43,15 @@
         "bug",
         "ideas"
       ]
+    },
+    {
+      "login": "Thatkookooguy",
+      "name": "Neil Kalman",
+      "avatar_url": "https://avatars.githubusercontent.com/u/10427304?v=4",
+      "profile": "http://thatkookooguy.kibibit.io",
+      "contributions": [
+        "bug"
+      ]
     }
   ],
   "contributorsPerLine": 7,
