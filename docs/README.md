@@ -124,6 +124,7 @@ Note: since I don't use GitHub Enterprise, the steps above might not fully refle
 
 - [Repository for testing](https://github.com/tianhaoz95/check-group-test)
 - [Documentation for Developers](https://githubsuperpower.github.io/check-group-dev-doc)
+- [WIP tasks](https://github.com/tianhaoz95/check-group/issues?q=is%3Aopen+is%3Aissue+label%3A%22work+in+progress%22)
 
 ## Help us host the service
 
