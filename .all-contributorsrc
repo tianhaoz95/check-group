@@ -1,0 +1,24 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "tianhaoz95",
+      "name": "Tianhao Zhou",
+      "avatar_url": "https://avatars.githubusercontent.com/u/16887772?v=4",
+      "profile": "https://tianhaoz95.github.io",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "check-group",
+  "projectOwner": "tianhaoz95",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
