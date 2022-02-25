@@ -24,6 +24,15 @@
         "code",
         "ideas"
       ]
+    },
+    {
+      "login": "kevinheins",
+      "name": "Kevin Heins",
+      "avatar_url": "https://avatars.githubusercontent.com/u/6421447?v=4",
+      "profile": "https://github.com/kevinheins",
+      "contributions": [
+        "ideas"
+      ]
     }
   ],
   "contributorsPerLine": 7,
