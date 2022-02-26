@@ -17,9 +17,35 @@ TODO(@tianhaoz95): add detailed instructions.
 
 ### Unit tests and integration tests
 
+Both unit tests and integration tests run with the following command:
+
 ```bash
 npm test
 ```
+
+#### Unit tests
+
+Unit tests only applies to the implementations within `src/utils` which does not
+rely on mocked GitHub API response for testing.
+
+Since setting up `nock` for GitHub APIs is a complicated process and there is
+not many benefits in testing those utility functions with a mocked endpoint, a
+cut was made to test those implementations separately.
+
+The unit tests locate with the files that they are testing, for example, the
+unit tests for `src/utils/generate_progress.ts` will be in
+`src/utils/generate_progress.test.ts`.
+
+#### Integration tests
+
+The integration tests will mock the end to end flow with mocked triggering
+GitHub events and mocked GitHub API responses.
+
+The integration tests are close to the actual behavior of the app except that it
+will not be able to test how robust the app is when the GitHub API is flaky or
+what happens when there is too much traffic.
+
+The integrations tests are in the top level `test` folder.
 
 ### E2E testing
 
