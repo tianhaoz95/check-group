@@ -47,7 +47,7 @@
     "dotenv": "^16.0.0",
     "http-status-codes": "^2.2.0",
     "minimatch": "^5.0.1",
-    "prettier": "^2.6.0",
+    "prettier": "^2.6.1",
     "prettyjson": "^1.2.5",
     "probot": "^12.2.2",
     "vercel": "^24.0.1"
