@@ -49,7 +49,7 @@
     "minimatch": "^5.1.0",
     "prettier": "^2.6.2",
     "prettyjson": "^1.2.5",
-    "probot": "^12.2.3",
+    "probot": "^12.2.4",
     "vercel": "^25.0.0"
   },
   "devDependencies": {
