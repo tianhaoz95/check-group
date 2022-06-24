@@ -68,7 +68,7 @@
     "http-server": "^14.1.1",
     "jest": "^27.5.1",
     "nock": "^13.2.7",
-    "nodemon": "^2.0.16",
+    "nodemon": "^2.0.18",
     "remark": "^14.0.2",
     "remark-cli": "^10.0.1",
     "remark-lint": "^9.1.1",
