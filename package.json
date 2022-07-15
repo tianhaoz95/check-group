@@ -38,7 +38,7 @@
   },
   "dependencies": {
     "@octokit/rest": "^19.0.3",
-    "@octokit/types": "^6.38.2",
+    "@octokit/types": "^6.40.0",
     "@octokit/webhooks": "^10.0.7",
     "@sentry/node": "^7.4.1",
     "@sentry/tracing": "^7.6.0",
