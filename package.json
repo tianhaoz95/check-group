@@ -56,7 +56,7 @@
     "@types/jest": "^27.4.1",
     "@types/nock": "^11.1.0",
     "@types/node": "^18.7.16",
-    "@typescript-eslint/eslint-plugin": "^5.36.2",
+    "@typescript-eslint/eslint-plugin": "^5.37.0",
     "@typescript-eslint/parser": "^5.36.2",
     "all-contributors-cli": "^6.20.4",
     "docsify-cli": "^4.4.4",
