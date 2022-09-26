@@ -58,7 +58,7 @@
     "@types/node": "^18.7.19",
     "@typescript-eslint/eslint-plugin": "^5.38.0",
     "@typescript-eslint/parser": "^5.38.0",
-    "all-contributors-cli": "^6.20.4",
+    "all-contributors-cli": "^6.20.5",
     "docsify-cli": "^4.4.4",
     "eslint": "^8.24.0",
     "eslint-plugin-security": "^1.5.0",
