@@ -52,6 +52,15 @@
       "contributions": [
         "bug"
       ]
+    },
+    {
+      "login": "geekflyer",
+      "name": "Christian Theilemann",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1221897?v=4",
+      "profile": "https://www.linkedin.com/in/christian-theilemann-58339351/",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
@@ -59,5 +68,6 @@
   "projectOwner": "tianhaoz95",
   "repoType": "github",
   "repoHost": "https://github.com",
-  "skipCi": false
+  "skipCi": false,
+  "commitConvention": "angular"
 }
