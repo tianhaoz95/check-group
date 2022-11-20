@@ -97,7 +97,7 @@ describe("generate progress tests", () => {
       checksStatusLookup,
       config,
     );
-    expect(progress).toContain(":heavy_check_mark:");
+    expect(progress).toContain(":white_check_mark:");
   });
 
   test("should include correct marks", () => {
@@ -110,7 +110,7 @@ describe("generate progress tests", () => {
       checksStatusLookupWithFailure,
       config,
     );
-    expect(progress).toContain(":heavy_check_mark:");
+    expect(progress).toContain(":white_check_mark:");
     expect(progress).toContain(":x:");
   });
 
@@ -123,7 +123,7 @@ describe("generate progress tests", () => {
       checksStatusLookupWithMissing,
       config,
     );
-    expect(progress).toContain(":heavy_check_mark:");
+    expect(progress).toContain(":white_check_mark:");
     expect(progress).toContain(":hourglass:");
   });
 

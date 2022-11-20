@@ -110,7 +110,7 @@ export const statusToMark = (
   if (check in checksStatusLookup) {
     /* eslint-disable security/detect-object-injection */
     if (checksStatusLookup[check] == "success") {
-      return ":heavy_check_mark:";
+      return ":white_check_mark:";
     }
     if (checksStatusLookup[check] == "failure") {
       return ":x:";
