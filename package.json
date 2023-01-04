@@ -41,7 +41,7 @@
     "@octokit/types": "^8.0.0",
     "@octokit/webhooks": "^10.4.0",
     "@sentry/node": "^7.28.1",
-    "@sentry/tracing": "^7.28.1",
+    "@sentry/tracing": "^7.29.0",
     "@types/minimatch": "^5.1.2",
     "@types/prettyjson": "0.0.30",
     "dotenv": "^16.0.3",
