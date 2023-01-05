@@ -39,7 +39,7 @@
   "dependencies": {
     "@octokit/rest": "^19.0.5",
     "@octokit/types": "^8.0.0",
-    "@octokit/webhooks": "^10.4.0",
+    "@octokit/webhooks": "^10.5.0",
     "@sentry/node": "^7.29.0",
     "@sentry/tracing": "^7.29.0",
     "@types/minimatch": "^5.1.2",
