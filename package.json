@@ -76,7 +76,7 @@
     "smee-client": "^1.2.3",
     "ts-jest": "^27.1.4",
     "ts-mockito": "^2.6.1",
-    "typedoc": "^0.23.23",
+    "typedoc": "^0.23.24",
     "typescript": "^4.8.4"
   },
   "jest": {
