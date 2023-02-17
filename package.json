@@ -50,7 +50,7 @@
     "prettier": "^2.8.4",
     "prettyjson": "^1.2.5",
     "probot": "^12.3.0",
-    "vercel": "^28.15.6"
+    "vercel": "^28.16.2"
   },
   "devDependencies": {
     "@types/jest": "^27.4.1",
