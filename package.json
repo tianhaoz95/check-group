@@ -46,7 +46,7 @@
     "@types/prettyjson": "0.0.30",
     "dotenv": "^16.0.3",
     "http-status-codes": "^2.2.0",
-    "minimatch": "^7.4.2",
+    "minimatch": "^7.4.3",
     "prettier": "^2.8.6",
     "prettyjson": "^1.2.5",
     "probot": "^12.3.0",
