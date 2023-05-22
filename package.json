@@ -37,7 +37,7 @@
     "deploy:dev-docs": "gh-pages -d tmp/dev-docs -r https://tianhaoz95:$GITHUB_TOKEN@github.com/GitHubSuperpower/check-group-dev-doc.git -u \"Tianhao Zhou <tianhaoz@umich.edu>\""
   },
   "dependencies": {
-    "@octokit/rest": "^19.0.8",
+    "@octokit/rest": "^19.0.11",
     "@octokit/types": "^9.2.3",
     "@octokit/webhooks": "^11.0.0",
     "@sentry/node": "^7.52.1",
