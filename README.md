@@ -18,6 +18,8 @@ What are changing:
 * There will not be hosted services.
 * There won't be new features planned.
 
+---
+
 > :warning: ~~**Check Group is now hosted on paid service to ensure better up time**: Check out the details [here](https://github.com/tianhaoz95/check-group/issues/769) and please consider [sponsoring the project](https://www.buymeacoffee.com/jacksonzhou666)!~~
 
 ![logo banner](https://github.com/tianhaoz95/check-group/raw/master/docs/assets/logo/banner_rounded.png)
