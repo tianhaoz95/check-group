@@ -3,7 +3,26 @@
 [![All Contributors](https://img.shields.io/badge/all_contributors-6-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
-> :warning: **Check Group is now hosted on paid service to ensure better up time**: Check out the details [here](https://github.com/tianhaoz95/check-group/issues/769) and please consider [sponsoring the project](https://www.buymeacoffee.com/jacksonzhou666)!
+## :warning: Sunset Notice :warning:
+
+TODO(@tianhaoz95): add future plans and migration guide.
+
+What are not going to change:
+
+* The  project can still be self-hosted
+([auto-push to Heroku](./sunset/deploy-to-heroku.yml) or as a GitHub action, see
+https://probot.github.io/docs/deployment/#github-actions for details).
+* I will still maintain the project health including getting dependencies
+up-to-date and merging code contributions.
+
+What are changing:
+
+* There will not be hosted services.
+* There won't be new features planned.
+
+---
+
+> :warning: ~~**Check Group is now hosted on paid service to ensure better up time**: Check out the details [here](https://github.com/tianhaoz95/check-group/issues/769) and please consider [sponsoring the project](https://www.buymeacoffee.com/jacksonzhou666)!~~
 
 ![logo banner](https://github.com/tianhaoz95/check-group/raw/master/docs/assets/logo/banner_rounded.png)
 
