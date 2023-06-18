@@ -9,7 +9,7 @@ TODO(@tianhaoz95): add future plans and migration guide.
 
 What are not going to change:
 
-* The  project can still be self-hosted.
+* The  project can still be self-hosted ([auto-push to Heroku](./sunset/deploy-to-heroku.yml)).
 * I will still maintain the project health including getting dependencies
 up-to-date and merging code contributions.
 
