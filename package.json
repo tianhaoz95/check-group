@@ -64,7 +64,7 @@
     "eslint-plugin-security": "^1.7.1",
     "eslint-plugin-sort-keys-fix": "^1.1.2",
     "eslint-plugin-typescript": "^0.14.0",
-    "gh-pages": "^5.0.0",
+    "gh-pages": "^6.0.0",
     "http-server": "^14.1.1",
     "jest": "^27.5.1",
     "nock": "^13.3.2",
