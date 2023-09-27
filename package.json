@@ -60,7 +60,7 @@
     "@typescript-eslint/parser": "^6.7.3",
     "all-contributors-cli": "^6.26.1",
     "docsify-cli": "^4.4.4",
-    "eslint": "^8.49.0",
+    "eslint": "^8.50.0",
     "eslint-plugin-security": "^1.7.1",
     "eslint-plugin-sort-keys-fix": "^1.1.2",
     "eslint-plugin-typescript": "^0.14.0",
