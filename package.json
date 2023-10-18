@@ -43,7 +43,7 @@
     "@sentry/node": "^7.74.1",
     "@sentry/tracing": "^7.74.1",
     "@types/minimatch": "^5.1.2",
-    "@types/prettyjson": "0.0.31",
+    "@types/prettyjson": "0.0.32",
     "dotenv": "^16.3.1",
     "http-status-codes": "^2.3.0",
     "minimatch": "^7.4.3",
