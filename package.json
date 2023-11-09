@@ -40,7 +40,7 @@
     "@octokit/rest": "^20.0.2",
     "@octokit/types": "^12.2.0",
     "@octokit/webhooks": "^12.0.3",
-    "@sentry/node": "^7.76.0",
+    "@sentry/node": "^7.80.0",
     "@sentry/tracing": "^7.79.0",
     "@types/minimatch": "^5.1.2",
     "@types/prettyjson": "0.0.33",
