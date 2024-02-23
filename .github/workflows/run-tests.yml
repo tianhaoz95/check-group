@@ -25,7 +25,7 @@ jobs:
           project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
           coverage-reports: coverage/lcov.info
       - name: Report coverage to Codecov
-        uses: codecov/codecov-action@v4.0.1
+        uses: codecov/codecov-action@v4.0.2
         if: >-
           github.actor != 'dependabot[bot]' &&
           github.actor != 'dependabot-preview[bot]'
